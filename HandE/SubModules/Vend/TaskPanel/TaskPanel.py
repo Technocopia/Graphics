@@ -1,25 +1,11 @@
-#***************************************************************************
-#*																		 *
-#*   Copyright (c) 2011, 2012											  *  
-#*   Jose Luis Cercos Pita <jlcercos@gmail.com>							*  
-#*																		 *
-#*   This program is free software; you can redistribute it and/or modify  *
-#*   it under the terms of the GNU Lesser General Public License (LGPL)	*
-#*   as published by the Free Software Foundation; either version 2 of	 *
-#*   the License, or (at your option) any later version.				   *
-#*   for detail see the LICENCE text file.								 *
-#*																		 *
-#*   This program is distributed in the hope that it will be useful,	   *
-#*   but WITHOUT ANY WARRANTY; without even the implied warranty of		*
-#*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the		 *
-#*   GNU Library General Public License for more details.				  *
-#*																		 *
-#*   You should have received a copy of the GNU Library General Public	 *
-#*   License along with this program; if not, write to the Free Software   *
-#*   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
-#*   USA																   *
-#*																		 *
-#***************************************************************************
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'TaskPanel.ui'
+#
+# Created: Fri Apr  5 12:43:45 2013
+#      by: PyQt4 UI code generator 4.9.3
+#
+# WARNING! All changes made in this file will be lost!
 
 # FreeCAD modules
 import FreeCAD as App
@@ -28,90 +14,52 @@ import FreeCADGui as Gui
 from PyQt4 import QtGui,QtCore
 # Module
 
-class TaskPanel:
-        def __init__(self):
-                QDialog.__init__(self)
-                self.ui = Ui_ImageDialog()
-                self.ui.setupUi(self)
-                import sys
-                sys.path.append('/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Vend/TaskPanel')
-                self.ui =  "/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Vend/TaskPanel/TaskPanel.ui"
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
 
-        def accept(pushButton):
-                #self.ui.label.text = "test"
-                form.label.text = "test"
-                ##path = Paths.modulePath() + "/resources/examples/"
-                ##if(self.form.ship.currentIndex() == 0):	 # s60 from Iowa University
-                        ##App.open(path + "s60.fcstd")
-                ##elif(self.form.ship.currentIndex() == 1):   # Wigley canonical ship
-                        ##App.open(path + "wigley.fcstd")
-                ##elif(self.form.ship.currentIndex() == 2):   # s60 (Katamaran)
-                        ##App.open(path + "s60_katamaran.fcstd")
-                ##elif(self.form.ship.currentIndex() == 3):   # Wigley (Katamaran)
-                        ##App.open(path + "wigley_katamaran.fcstd")
-                ##return True
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.resize(400, 577)
+        self.verticalLayoutWidget = QtGui.QWidget(Dialog)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 10, 381, 61))
+        self.verticalLayoutWidget.setObjectName(_fromUtf8("verticalLayoutWidget"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.Label = QtGui.QLabel(self.verticalLayoutWidget)
+        self.Label.setObjectName(_fromUtf8("Label"))
+        self.verticalLayout.addWidget(self.Label)
+        self.horizontalLayoutWidget = QtGui.QWidget(Dialog)
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 250, 381, 171))
+        self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.pushButton_3 = QtGui.QPushButton(self.horizontalLayoutWidget)
+        self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+        self.horizontalLayout.addWidget(self.pushButton_3)
+        self.pushButton = QtGui.QPushButton(self.horizontalLayoutWidget)
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.verticalLayoutWidget_2 = QtGui.QWidget(Dialog)
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(10, 90, 381, 121))
+        self.verticalLayoutWidget_2.setObjectName(_fromUtf8("verticalLayoutWidget_2"))
+        self.verticalLayout_2 = QtGui.QVBoxLayout(self.verticalLayoutWidget_2)
+        self.verticalLayout_2.setMargin(0)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        self.textEdit = QtGui.QTextEdit(self.verticalLayoutWidget_2)
+        self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        self.verticalLayout_2.addWidget(self.textEdit)
 
-        #def reject(self):
-                ##return True
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        #def clicked(self, index):
-                #pass
+    def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.Label.setText(QtGui.QApplication.translate("Dialog", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_3.setText(QtGui.QApplication.translate("Dialog", "PushButton", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("Dialog", "PushButton", None, QtGui.QApplication.UnicodeUTF8))
 
-        #def open(self):
-                #pass
-
-        #def needsFullSpace(self):
-                #return True
-
-        #def isAllowedAlterSelection(self):
-                #return False
-
-        #def isAllowedAlterView(self):
-                #return True
-
-        #def isAllowedAlterDocument(self):
-                #return False
-
-        #def helpRequested(self):
-                #pass
-
-        def setupUi(self):
-                mw = self.getMainWindow()
-                form = mw.findChild(QtGui.QWidget, "TaskPanel")
-                form.label = form.findChild(QtGui.QLabel, "Label")
-                #form.mainLogo = form.findChild(QtGui.QLabel, "MainLogo")
-                #iconPath = Paths.iconsPath() + "/Ico.xpm"
-                #form.mainLogo.setPixmap(QtGui.QPixmap(iconPath))
-                self.form = form
-                self.retranslateUi()
-
-        def getMainWindow(self):
-                "returns the main window"
-                # using QtGui.qApp.activeWindow() isn't very reliable because if another
-                # widget than the mainwindow is active (e.g. a dialog) the wrong widget is
-                # returned
-                toplevel = QtGui.qApp.topLevelWidgets()
-                for i in toplevel:
-                        if i.metaObject().className() == "Gui::MainWindow":
-                                return i
-                raise Exception("No main window found")
-
-        def retranslateUi(self):
-                """ Set user interface locale strings.
-                """
-                self.form.setWindowTitle(QtGui.QApplication.translate("vend_load","Load example ship",
-                                                                 None,QtGui.QApplication.UnicodeUTF8))
-                self.form.findChild(QtGui.QLabel, "Label").setTitle(QtGui.QApplication.translate("vend_load",
-                                                                 "Select ship example geometry",
-                                                                 None,QtGui.QApplication.UnicodeUTF8))
-                self.form.findChild(QtGui.QTextEdit, "text").setTitle(QtGui.QApplication.translate("vend_load",
-                                                                  "Select ship example geometry",
-                                                                  None,QtGui.QApplication.UnicodeUTF8))
-
-def createTask():
-        panel = TaskPanel()
-        Gui.Control.showDialog(panel)
-        if panel.setupUi():
-                Gui.Control.closeDialog(panel)
-                return None
-	return panel

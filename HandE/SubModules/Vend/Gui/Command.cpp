@@ -54,11 +54,24 @@ CmdVendTest::CmdVendTest()
 
 void CmdVendTest::activated(int iMsg)
 {
-    Base::Console().Message("Hello, World!\n");
+//    Base::Console().Message("Hello, World!\n");
+//    Base::Interpreter().runString("import sys");
+//    Base::Interpreter().runString("sys.path.insert(0, '/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Vend/TaskPanel')");
+//    Base::Interpreter().runString("import TaskPanel");
+//    Base::Interpreter().runString("TaskPanel.createTask()");
     Base::Interpreter().runString("import sys");
     Base::Interpreter().runString("sys.path.insert(0, '/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Vend/TaskPanel')");
+    Base::Interpreter().runString("from PyQt4 import QtGui");
     Base::Interpreter().runString("import TaskPanel");
-    Base::Interpreter().runString("TaskPanel.createTask()");
+    Base::Interpreter().runString("d = QtGui.QWidget()");
+    Base::Interpreter().runString("d.ui = TaskPanel.Ui_Dialog()");
+    Base::Interpreter().runString("d.ui.setupUi(d)");
+    Base::Interpreter().runString("d.show()");
+
+
+
+
+
 }
 
 void CreateVendCommands(void)
