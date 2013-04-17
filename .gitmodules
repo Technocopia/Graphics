@@ -1,5 +1,3 @@
 [submodule "free-cad"]
 	path = third-party/free-cad
 	url = git://free-cad.git.sourceforge.net/gitroot/free-cad/free-cad
-  path = HandE/3DPrint/NeuronRobotics/Slic3r
-  url = git://github.com/alexrj/Slic3r
