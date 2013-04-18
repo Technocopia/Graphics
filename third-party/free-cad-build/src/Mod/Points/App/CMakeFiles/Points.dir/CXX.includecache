@@ -352,16 +352,6 @@ Writer.h
 Vector3D.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Base/Vector3D.h
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Base/Sequencer.h
-vector
--
-memory
--
-CXX/Extensions.hxx
--
-Exception.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Base/Exception.h
-
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Base/Stream.h
 stdint.h
 -
@@ -462,14 +452,6 @@ CXX/Python2/Exception.hxx
 CXX/Python3/Exception.hxx
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/CXX/Python3/Exception.hxx
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Extensions.hxx
-CXX/WrapPython.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/CXX/WrapPython.h
-CXX/Python2/Extensions.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/CXX/Python2/Extensions.hxx
-CXX/Python3/Extensions.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/CXX/Python3/Extensions.hxx
-
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/IndirectPythonInterface.hxx
 CXX/WrapPython.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/CXX/WrapPython.h
@@ -488,8 +470,6 @@ CXX/Python3/Objects.hxx
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/Config.hxx
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CxxDebug.hxx
-
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/Exception.hxx
 CXX/WrapPython.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/WrapPython.h
@@ -503,40 +483,6 @@ string
 -
 iostream
 -
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/ExtensionModule.hxx
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/ExtensionOldType.hxx
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/ExtensionType.hxx
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/ExtensionTypeBase.hxx
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/Extensions.hxx
-CXX/WrapPython.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/WrapPython.h
-CXX/Version.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Version.hxx
-CXX/Python2/Config.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/Config.hxx
-CXX/Python2/CxxDebug.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/CxxDebug.hxx
-CXX/Python2/Objects.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/Objects.hxx
-vector
--
-map
--
-CXX/Python2/ExtensionModule.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/ExtensionModule.hxx
-CXX/Python2/PythonType.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/PythonType.hxx
-CXX/Python2/ExtensionTypeBase.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/ExtensionTypeBase.hxx
-CXX/Python2/ExtensionOldType.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/ExtensionOldType.hxx
-CXX/Python2/ExtensionType.hxx
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/CXX/Python2/ExtensionType.hxx
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/IndirectPythonInterface.hxx
 CXX/WrapPython.h
@@ -563,8 +509,6 @@ utility
 -
 typeinfo
 -
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Python2/PythonType.hxx
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/CXX/Version.hxx
 
@@ -624,22 +568,6 @@ PointsAlgos.h
 FeaturePointsImportAscii.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/FeaturePointsImportAscii.h
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/FeaturePointsImportAscii.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PreCompiled.h
-Base/Console.h
--
-Base/Exception.h
--
-Base/FileInfo.h
--
-PointsAlgos.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsAlgos.h
-Points.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/Points.h
-FeaturePointsImportAscii.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/FeaturePointsImportAscii.h
-
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/FeaturePointsImportAscii.h
 PointsFeature.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsFeature.h
@@ -688,49 +616,9 @@ App/PropertyStandard.h
 App/PropertyGeo.h
 -
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsAlgos.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PreCompiled.h
-unistd.h
--
-sstream
--
-PointsAlgos.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsAlgos.h
 Points.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/Points.h
-Base/Exception.h
--
-Base/FileInfo.h
--
-Base/Console.h
--
-Base/Sequencer.h
--
-Base/Stream.h
--
-boost/regex.hpp
--
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsAlgos.h
-Points.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/Points.h
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsFeature.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PreCompiled.h
-vector
--
-Base/Console.h
--
-Base/Exception.h
--
-Base/Stream.h
--
-Base/Writer.h
--
-PointsFeature.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsFeature.h
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsFeature.h
 App/GeoFeature.h
@@ -745,24 +633,6 @@ Points.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/Points.h
 PropertyPointKernel.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PropertyPointKernel.h
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsGrid.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PreCompiled.h
-algorithm
--
-PointsGrid.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsGrid.h
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsGrid.h
-set
--
-Points.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/Points.h
-Base/Vector3D.h
--
-Base/BoundBox.h
--
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsPyImp.cpp
 PreCompiled.h
@@ -779,10 +649,6 @@ PointsPy.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsPy.h
 PointsPy.cpp
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PointsPy.cpp
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PreCompiled.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PreCompiled.h
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Points/App/PreCompiled.h
 FCConfig.h

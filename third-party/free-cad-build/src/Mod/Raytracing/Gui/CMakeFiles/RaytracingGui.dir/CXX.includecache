@@ -616,12 +616,6 @@ App/Document.h
 Tree.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/Tree.h
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/EditorView.h
-MDIView.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/MDIView.h
-Window.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/Window.h
-
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/FileDialog.h
 QFileDialog
 -
@@ -908,12 +902,6 @@ QMainWindow
 QMdiArea
 -
 QWorkspace
--
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/MenuManager.h
-string
--
-QStringList
 -
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/PrefWidgets.h
@@ -1234,10 +1222,6 @@ QValidator
 QSpinBox
 -
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/SyntaxHighlighter.h
-QSyntaxHighlighter
--
-
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/TaskView/TaskWatcher.h
 map
 -
@@ -1252,22 +1236,6 @@ Gui/iisTaskPanel/include/iisTaskPanel
 Gui/Selection.h
 -
 Gui/SelectionFilter.h
--
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/TextEdit.h
-QListWidget
--
-QPlainTextEdit
--
-View.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/View.h
-Window.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/Window.h
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/ToolBarManager.h
-string
--
-QStringList
 -
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Gui/Tree.h
@@ -1468,12 +1436,6 @@ TopTools_ListOfShape.hxx
 App/ComplexGeoData.h
 -
 
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/App/PovTools.h
-gp_Vec.hxx
--
-vector
--
-
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/App/RayFeature.h
 App/DocumentObject.h
 -
@@ -1521,44 +1483,6 @@ Workbench.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/Workbench.h
 qrc_Raytracing.cpp
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/qrc_Raytracing.cpp
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/AppRaytracingGuiPy.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PreCompiled.h
-gp_Vec.hxx
--
-QFileInfo
--
-Inventor/SoInput.h
--
-Inventor/nodes/SoNode.h
--
-Inventor/nodes/SoOrthographicCamera.h
--
-vector
--
-Inventor/nodes/SoPerspectiveCamera.h
--
-Base/PyObjectBase.h
--
-Base/Interpreter.h
--
-Gui/Application.h
--
-Gui/EditorView.h
--
-Gui/TextEdit.h
--
-Gui/MainWindow.h
--
-Gui/MainWindow.h
--
-Gui/View.h
--
-Mod/Raytracing/App/PovTools.h
--
-PovrayHighlighter.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PovrayHighlighter.h
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/Command.cpp
 PreCompiled.h
@@ -1645,22 +1569,6 @@ ui_DlgSettingsRay.h
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/ui_DlgSettingsRay.h
 Gui/PropertyPage.h
 -
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PovrayHighlighter.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PreCompiled.h
-QRegExp
--
-PovrayHighlighter.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PovrayHighlighter.h
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PovrayHighlighter.h
-Gui/SyntaxHighlighter.h
--
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PreCompiled.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PreCompiled.h
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PreCompiled.h
 FCConfig.h
@@ -1796,18 +1704,6 @@ Python.h
 Gui/Qt4All.h
 -
 Gui/InventorAll.h
--
-
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/Workbench.cpp
-PreCompiled.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/PreCompiled.h
-qobject.h
--
-Workbench.h
-/home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/Workbench.h
-Gui/ToolBarManager.h
--
-Gui/MenuManager.h
 -
 
 /home/hpham/the-technocopia-project/third-party/free-cad/src/Mod/Raytracing/Gui/Workbench.h
@@ -5776,10 +5672,6 @@ qdatetime.h
 qdir.h
 /usr/include/qt4/QtCore/qdir.h
 
-/usr/include/qt4/QtCore/QFileInfo
-qfileinfo.h
-/usr/include/qt4/QtCore/qfileinfo.h
-
 /usr/include/qt4/QtCore/QHash
 qhash.h
 /usr/include/qt4/QtCore/qhash.h
@@ -5823,10 +5715,6 @@ qpointer.h
 /usr/include/qt4/QtCore/QProcess
 qprocess.h
 /usr/include/qt4/QtCore/qprocess.h
-
-/usr/include/qt4/QtCore/QRegExp
-qregexp.h
-/usr/include/qt4/QtCore/qregexp.h
 
 /usr/include/qt4/QtCore/QScopedPointer
 qscopedpointer.h
