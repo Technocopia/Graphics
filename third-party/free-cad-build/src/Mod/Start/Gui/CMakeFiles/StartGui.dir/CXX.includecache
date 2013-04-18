@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hpham/the-technocopia-project/third-party/free-cad-build/src/Mod/Start/Gui/qrc_Start.cxx
+QtCore/qglobal.h
+-
+
+/usr/include/qt4/QtCore/qconfig.h
+
+/usr/include/qt4/QtCore/qfeatures.h
+
+/usr/include/qt4/QtCore/qglobal.h
+stddef.h
+-
+QtCore/qconfig.h
+-
+algorithm
+-
+AvailabilityMacros.h
+-
+utility
+-
+e32def.h
+-
+QtCore/qfeatures.h
+-
+
