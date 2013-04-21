@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="me/test">
+    <file>hat.png</file>
+  </qresource>
+</RCC>
