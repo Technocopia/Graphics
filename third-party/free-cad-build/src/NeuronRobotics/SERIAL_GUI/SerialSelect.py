@@ -39,24 +39,33 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Serial Port Selection", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton.setText(QtGui.QApplication.translate("Dialog", "Select", None, QtGui.QApplication.UnicodeUTF8))
-	import re
-	import subprocess
-	device_re = re.compile("Bus\s+(?P<bus>\d+)\s+Device\s+(?P<device>\d+).+ID\s(?P<id>\w+:\w+)\s(?P<tag>.+)$", re.I)
-	df = subprocess.check_output("ls /dev/ttyACM*", shell=True)
-	count = df.count('dev')
-	index = 0
-	newlist = []
-	while (index < count):
-		endindex = df.index('\n')
-		newlist.append(df[:endindex])
-		df = df[endindex + 1:len(df)]
-		index = index + 1
-	self.comboBox.addItems(newlist)
+	try:
+		import re
+		import subprocess
+		device_re = re.compile("Bus\s+(?P<bus>\d+)\s+Device\s+(?P<device>\d+).+ID\s(?P<id>\w+:\w+)\s(?P<tag>.+)$", re.I)
+		df = subprocess.check_output("ls /dev/ttyACM*", shell=True)
+		count = df.count('dev')
+		index = 0
+		newlist = []
+		while (index < count):
+			endindex = df.index('\n')
+			newlist.append(df[:endindex])
+			df = df[endindex + 1:len(df)]
+			index = index + 1
+		self.comboBox.addItems(newlist)
+	except:
+		newlist = []
+		newlist.append("No device connected!")
+		self.comboBox.addItems(newlist)
 
 
     def on_pushButton_clicked(self):
-	self.pushButton.setText(QtGui.QApplication.translate("Dialog", self.comboBox.currentIndex(), None, QtGui.QApplication.UnicodeUTF8))
-        App.Console.PrintMessage("Terminé\r\n")
-        self.window.hide()
+	return self.comboBox.currentIndex()
 
 import rsrc_rc
+
+class plane():
+    d = QtGui.QWidget()
+    d.ui = Ui_Dialog()
+    d.ui.setupUi(d)
+    d.show()

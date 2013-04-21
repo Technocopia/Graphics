@@ -717,7 +717,11 @@ void StdCmd3DPrint::activated(int iMsg)
     Base::Interpreter().runString("import sys");
     Base::Interpreter().runString("sys.path.append('src/NeuronRobotics/SERIAL_GUI')");
     Base::Interpreter().runString("import SerialSelect");
-    Base::Interpreter().runString("SerialSelect.plane()");
+    Base::Interpreter().runString("from PyQt4 import QtGui");
+    Base::Interpreter().runString("d = QtGui.QWidget()");
+    Base::Interpreter().runString("d.ui = SerialSelect.Ui_Dialog()");
+    Base::Interpreter().runString("d.ui.setupUi(d)");
+    Base::Interpreter().runString("d.show()");
 }
 bool StdCmd3DPrint::isActive(void)
 {
