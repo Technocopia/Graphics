@@ -36,7 +36,6 @@
 # include <Inventor/nodes/SoCamera.h>
 #endif
 #include <algorithm>
-
 #include <Base/Exception.h>
 #include <Base/FileInfo.h>
 #include <Base/Interpreter.h>
@@ -239,12 +238,21 @@ StdCmdExport::StdCmdExport()
 
 void StdCmdExport::activated(int iMsg)
 {
-    if (Gui::Selection().countObjectsOfType(App::DocumentObject::getClassTypeId()) == 0) {
+/*    if (Gui::Selection().countObjectsOfType(App::DocumentObject::getClassTypeId()) == 0) {
         QMessageBox::warning(Gui::getMainWindow(),
             QString::fromUtf8(QT_TR_NOOP("No selection")),
             QString::fromUtf8(QT_TR_NOOP("Please select first the objects you want to export.")));
         return;
-    }
+    }*/
+//above is original Export checking function i commented out.
+
+//taken from select all command///
+    SelectionSingleton& rSel = Selection();
+    App::Document* doc = App::GetApplication().getActiveDocument();
+    std::vector<App::DocumentObject*> objs = doc->getObjectsOfType(App::DocumentObject::getClassTypeId());
+    rSel.setSelection(doc->getName(), objs);
+
+///taken from select all command///
 
     // fill the list of registered endings
     QString formatList;
@@ -703,21 +711,33 @@ StdCmd3DPrint::StdCmd3DPrint()
 
 void StdCmd3DPrint::activated(int iMsg)
 {
-    if (Gui::Selection().countObjectsOfType(App::DocumentObject::getClassTypeId()) == 0) {
+/*    if (Gui::Selection().countObjectsOfType(App::DocumentObject::getClassTypeId()) == 0) {
         QMessageBox::warning(Gui::getMainWindow(),
             QString::fromUtf8(QT_TR_NOOP("No selection")),
             QString::fromUtf8(QT_TR_NOOP("Please select first the objects you want to export.")));
         return;
     }
-    Base::Console().Message("\nCreating temporary STL file...\n");
-    Base::Interpreter().runString("App.ActiveDocument.ActiveObject.Shape.exportStl('src/NeuronRobotics/temp.stl')");
-    Base::Console().Message("Temporary STL file created...\nExecuting Slic3r...\n");
-    system("./src/NeuronRobotics/Slic3r/slic3r.pl --load src/NeuronRobotics/Slic3r/default.ini src/NeuronRobotics/temp.stl");
-    Base::Console().Message("Temporary gcode file created...\nSending to Pronterface...\n");
-    Base::Interpreter().runString("import sys");
-    Base::Interpreter().runString("sys.path.append('src/NeuronRobotics/SERIAL_GUI')");
-    Base::Interpreter().runString("import SerialSelect");
-    Base::Interpreter().runString("SerialSelect.plane()");
+    else
+    {*/
+	//taken from select all command///
+	    SelectionSingleton& rSel = Selection();
+	    App::Document* doc = App::GetApplication().getActiveDocument();
+	    std::vector<App::DocumentObject*> objs = doc->getObjectsOfType(App::DocumentObject::getClassTypeId());
+	    rSel.setSelection(doc->getName(), objs);
+
+	///taken from select all command///
+
+	    Base::Console().Message("\nCreating temporary STL file...\n");
+	    Base::Interpreter().runString("App.ActiveDocument.ActiveObject.Shape.exportStl('src/NeuronRobotics/SERIAL_GUI/exported/temp.stl')");
+	    Base::Console().Message("Temporary STL file created...\nExecuting Slic3r...\n");
+/*	    system("./src/NeuronRobotics/Slic3r/slic3r.pl --load src/NeuronRobotics/Slic3r/default.ini src/NeuronRobotics/SERIAL_GUI/exported/temp.stl");
+	    Base::Console().Message("Temporary gcode file created...\nSending to Pronterface...\n");*/
+	    Base::Interpreter().runString("import sys");
+	    Base::Interpreter().runString("sys.path.append('src/NeuronRobotics/SERIAL_GUI')");
+	    Base::Interpreter().runString("import SerialSelect");
+	    Base::Interpreter().runString("SerialSelect.plane()");
+//    }
+    
 }
 bool StdCmd3DPrint::isActive(void)
 {
