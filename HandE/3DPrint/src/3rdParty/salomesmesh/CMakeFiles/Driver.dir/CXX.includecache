@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/inc/Driver_Document.h
+Driver_Mesh.h
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/inc/Driver_Mesh.h
+string
+-
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/inc/Driver_Mesh.h
+string
+-
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/inc/Driver_SMDS_Mesh.h
+Driver_Mesh.h
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/inc/Driver_Mesh.h
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/inc/Driver_SMESHDS_Mesh.h
+Driver_Mesh.h
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/inc/Driver_Mesh.h
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_Document.cpp
+Driver_Document.h
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_Document.h
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_Mesh.cpp
+Driver_Mesh.h
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_Mesh.h
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_SMDS_Mesh.cpp
+Driver_SMDS_Mesh.h
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_SMDS_Mesh.h
+
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_SMESHDS_Mesh.cpp
+Driver_SMESHDS_Mesh.h
+/home/hpham/the-technocopia-project/third-party/free-cad/src/3rdParty/salomesmesh/src/Driver/Driver_SMESHDS_Mesh.h
+
