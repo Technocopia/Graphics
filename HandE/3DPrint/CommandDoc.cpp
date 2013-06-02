@@ -702,23 +702,15 @@ StdCmd3DPrint::StdCmd3DPrint()
 {
     sGroup        = QT_TR_NOOP("File");
     sMenuText     = QT_TR_NOOP("&3DPrint...");
-    sToolTipText  = QT_TR_NOOP("3D Print");
+    sToolTipText  = QT_TR_NOOP("Send to 3D Printer");
     sWhatsThis    = "Std_3DPrint";
     sStatusTip    = QT_TR_NOOP("3DPrint");
-    sPixmap       = "document-print";
+    sPixmap       = "Replicator";
     sAccel        = "CTRL+3";
 }
 
 void StdCmd3DPrint::activated(int iMsg)
 {
-/*    if (Gui::Selection().countObjectsOfType(App::DocumentObject::getClassTypeId()) == 0) {
-        QMessageBox::warning(Gui::getMainWindow(),
-            QString::fromUtf8(QT_TR_NOOP("No selection")),
-            QString::fromUtf8(QT_TR_NOOP("Please select first the objects you want to export.")));
-        return;
-    }
-    else
-    {*/
 	//taken from select all command///
 	    SelectionSingleton& rSel = Selection();
 	    App::Document* doc = App::GetApplication().getActiveDocument();
@@ -728,14 +720,12 @@ void StdCmd3DPrint::activated(int iMsg)
 	///taken from select all command///
 
 	    Base::Console().Message("\nCreating temporary STL file...\n");
-	    Base::Interpreter().runString("App.ActiveDocument.ActiveObject.Shape.exportStl('src/NeuronRobotics/SERIAL_GUI/exported/temp.stl')");
-	    Base::Console().Message("Temporary STL file created...\nExecuting Slic3r...\n");
-/*	    system("./src/NeuronRobotics/Slic3r/slic3r.pl --load src/NeuronRobotics/Slic3r/default.ini src/NeuronRobotics/SERIAL_GUI/exported/temp.stl");
-	    Base::Console().Message("Temporary gcode file created...\nSending to Pronterface...\n");*/
+	    Base::Interpreter().runString("App.ActiveDocument.ActiveObject.Shape.exportStl('src/temp.stl')");
+	    Base::Console().Message("Temporary STL file created...\n...\n");
 	    Base::Interpreter().runString("import sys");
 	    Base::Interpreter().runString("sys.path.append('src/NeuronRobotics/SERIAL_GUI')");
-	    Base::Interpreter().runString("import SerialSelect");
-	    Base::Interpreter().runString("SerialSelect.plane()");
+	    Base::Interpreter().runString("import myWidget_Ui");
+	    Base::Interpreter().runString("myWidget_Ui.plane()");
 //    }
     
 }
