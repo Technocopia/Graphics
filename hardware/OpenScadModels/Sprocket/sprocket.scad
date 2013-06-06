@@ -11,7 +11,6 @@ module base()
 	{
 		cylinder(mm(.105),mm(2)/2, mm(2)/2, 0);
 		cylinder(thickness,width/2,width/2,0);
-		
 	}
 		
 }
