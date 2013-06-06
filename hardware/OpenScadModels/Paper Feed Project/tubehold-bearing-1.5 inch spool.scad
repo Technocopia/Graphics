@@ -2,8 +2,8 @@
  function mm(i) = i*25.4; 
     tubediam = mm(1.5); //diameter of the cardboard tube at the center
 	 thickness= mm(.751); // thickness of material
-	 boltwidth = mm(.1631); // desired diameter of bolt holes
-	 bearingdiam = mm(.8125);
+	 boltwidth = mm(.165+.04); // desired diameter of bolt holes
+	 bearingdiam = mm(.8868+.04);
 	 bearingheight = mm(.275);
 
 
