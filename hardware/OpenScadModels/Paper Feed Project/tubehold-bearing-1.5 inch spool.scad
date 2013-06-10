@@ -1,28 +1,29 @@
 
  function mm(i) = i*25.4; 
-    tubediam = mm(1.5); //diameter of the cardboard tube at the center
-	 thickness= mm(.751); // thickness of material
-	 boltwidth = mm(.165+.04); // desired diameter of bolt holes
-	 bearingdiam = mm(.8868+.04);
-	 bearingheight = mm(.275);
+    tubediam = mm(1.5); //diameter of the spool hole
+	 thickness= mm(.5); // thickness of plug
+	 boltwidth = mm(.165+.04); // diameter of bolt holes ( plus an adjustment factor)
+	 bearingdiam = mm(.8868+.04); //diameter of the bearing (plus an adjustment factor)
+	 bearingheight = mm(.275); //thickness of the bearing
 
 
 
-module tubehold(tubediam=mm(2),thickness=mm(.75), boltwidth=mm(.1631),bearingdiam=mm(.8125), bearingheight = mm(.275))
+module tubehold(tubediam=mm(1.5),thickness=mm(.5), boltwidth=mm(.1631),bearingdiam=mm(.8125), bearingheight = mm(.275))
     {
+		topdiam=tubediam*4/3;
 		union()
 		{	
 			difference()
 			{	
-			cylinder(thickness+2, (tubediam-(tubediam/(3.5)))/2, tubediam/2, 0);
+			cylinder(thickness+2, (topdiam-(topdiam/(3.2)))/2, topdiam/2, 0);
 				union()
 					{				
-					translate([-tubediam/5, -tubediam/5, -1])
+					translate([-topdiam/5, -topdiam/5, -1])
 						{
 							cylinder(thickness+4, boltwidth/2, boltwidth/2, 0);
 						}
 					
-					translate([tubediam/5, tubediam/5, -1])
+					translate([topdiam/5, topdiam/5, -1])
 						{
 							cylinder(thickness+4, boltwidth/2, boltwidth/2, 0);
 						}
