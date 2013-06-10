@@ -1,14 +1,12 @@
-
- function mm(i) = i*25.4; 
-    tubediam = mm(1.5); //diameter of the spool hole
-	 thickness= mm(.5); // thickness of plug
-	 boltwidth = mm(.165+.04); // diameter of bolt holes ( plus an adjustment factor)
-	 bearingdiam = mm(.8868+.04); //diameter of the bearing (plus an adjustment factor)
-	 bearingheight = mm(.275); //thickness of the bearing
+	 tubediam = 38.12; //diameter of the spool hole in mm
+	 thickness= 12.7; // thickness of plug in mm
+	 boltwidth = 5+.04; // diameter of bolt holes in mm( plus an adjustment factor)
+	 bearingdiam = 21.9+.04; //diameter of the bearing (plus an adjustment factor)
+	 bearingheight = 7; //thickness of the bearing
 
 
 
-module tubehold(tubediam=mm(1.5),thickness=mm(.5), boltwidth=mm(.1631),bearingdiam=mm(.8125), bearingheight = mm(.275))
+module tubehold(tubediam=38.12,thickness=12.7, boltwidth=5+.04,bearingdiam=21.9+.04, bearingheight = 7)
     {
 		topdiam=tubediam*4/3;
 		union()
