@@ -6,6 +6,7 @@ function mm(i) = i*25.4;
 	 boltdepth = mm(.5); // desired depth of bolts
 	 nutwidth = mm(1/4); //desired width of nuts
 	 nutheight = mm(1/8); //desired height of nuts
+	 roddiam = mm(1/4); // diameter of the rod the spool is hung on
 
 module bolthole(thickness=mm(.25), rolldiam=mm(8), tubediam=mm(2))
 	{
@@ -21,11 +22,27 @@ module bolthole(thickness=mm(.25), rolldiam=mm(8), tubediam=mm(2))
 
 	 
 
-module side(thickness=mm(.25), rolldiam=mm(8), tubediam=mm(2)) 
+module side(thickness=mm(.25), rolldiam=mm(8), tubediam=mm(2),roddiam = mm(1/4)) 
     { 
 			 difference() 
          { 
-         	cube([rolldiam, rolldiam/2-tubediam/2+mm(2), thickness]);
+         		union()
+				{
+			cube([rolldiam, rolldiam/2-tubediam/2+mm(2), thickness]);
+			
+			translate([rolldiam/2, -thickness+2, 0])
+						{
+						cube ([mm(.5), thickness, thickness]);	
+						}
+			translate([rolldiam/2+rolldiam/4, -thickness+2, 0])
+						{
+						cube ([mm(.5), thickness, thickness]);	
+						}
+				translate([rolldiam/4, -thickness+2, 0])
+						{
+						cube ([mm(.5), thickness, thickness]);	
+						}
+				}
 				translate([rolldiam, 0, -1])
 					{
 					rotate([0, 0, 30])
@@ -64,27 +81,29 @@ module side(thickness=mm(.25), rolldiam=mm(8), tubediam=mm(2))
 						{
 							bolthole();
 						}
-				translate([rolldiam/2, boltdepth, -1])
-					rotate([0,0,180])
+										
+				translate([rolldiam/2, rolldiam/2, -1])
 						{
-							bolthole();
+						cylinder(thickness+2, roddiam/2, roddiam/2, 0);
 						}
-				translate([rolldiam/2-tubediam/2+mm(1), rolldiam/2, -1])
-					{
-						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
-					}
-				translate([rolldiam/2-tubediam/2+mm(.5), rolldiam/2, -1])
-					{
-						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
-					}
-				translate([rolldiam/2-tubediam/2+mm(.5), rolldiam/2-mm(.5), -1])
-					{
-						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
-					}
-translate([rolldiam/2-tubediam/2+mm(1), rolldiam/2-mm(.5), -1])
-					{
-						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
-					}
+
+
+//				translate([rolldiam/2-tubediam/2+mm(1), rolldiam/2, -1])
+//					{
+//						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
+//					}
+//				translate([rolldiam/2-tubediam/2+mm(.5), rolldiam/2, -1])
+//					{
+//						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
+//					}
+//				translate([rolldiam/2-tubediam/2+mm(.5), rolldiam/2-mm(.5), -1])
+//					{
+//						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
+//					}
+//				translate([rolldiam/2-tubediam/2+mm(1), rolldiam/2-mm(.5), -1])
+//					{
+//						cylinder(thickness+2, boltwidth/2, boltwidth/2, 0);
+//					}
 
 	 }
 }
