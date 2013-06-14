@@ -15,7 +15,7 @@ module hatguy()
 				difference()
 				{
 					cylinder(mm(.25), mm(1), mm(1), 0);
-					translate([0, mm(3), -1])
+					translate([0, mm(2.95), -1])
 					{
 						cylinder(mm(.25)+2, mm(3), mm(3), 0);
 					}
@@ -109,14 +109,14 @@ module hatguy()
 		
 			translate([-mm(.15/2), mm(.38), -2])
 			{
-				cube([mm(.15), mm(.15), mm(.25)+4]);
+				cube([mm(.2), mm(.2), mm(.25)+4]);
 			}
 		
 			rotate([0, 0, 90])
 			{	
 				translate([-mm(.15/2), mm(.38), -2])
 				{
-					cube([mm(.15), mm(.15), mm(.25)+4]);
+					cube([mm(.2), mm(.2), mm(.25)+4]);
 				}
 			}
 	
@@ -124,7 +124,7 @@ module hatguy()
 			{	
 				translate([-mm(.15/2), mm(.38), -2])
 				{
-					cube([mm(.15), mm(.15), mm(.25)+4]);
+					cube([mm(.2), mm(.2), mm(.25)+4]);
 				}
 			}
 		
@@ -132,7 +132,7 @@ module hatguy()
 			{	
 				translate([-mm(.15/2), mm(.38), -2])
 				{
-					cube([mm(.15), mm(.15), mm(.25)+4]);
+					cube([mm(.2), mm(.2), mm(.25)+4]);
 				}
 			}
 
@@ -140,7 +140,7 @@ module hatguy()
 			{	
 				translate([-mm(.15/2), mm(.38), -2])
 				{
-					cube([mm(.15), mm(.15), mm(.25)+4]);
+					cube([mm(.2), mm(.2), mm(.25)+4]);
 				}
 			}
 
@@ -148,7 +148,7 @@ module hatguy()
 			{	
 				translate([-mm(.15/2), mm(.38), -2])
 				{
-					cube([mm(.15), mm(.15), mm(.25)+4]);
+					cube([mm(.2), mm(.2), mm(.25)+4]);
 				}
 			}	
 
@@ -156,7 +156,7 @@ module hatguy()
 			{	
 				translate([-mm(.15/2), mm(.38), -2])
 				{
-					cube([mm(.15), mm(.15), mm(.25)+4]);
+					cube([mm(.2), mm(.2), mm(.25)+4]);
 				}
 			}
 		
@@ -164,7 +164,7 @@ module hatguy()
 			{	
 				translate([-mm(.15/2), mm(.38), -2])
 				{
-					cube([mm(.15), mm(.15), mm(.25)+4]);
+					cube([mm(.2), mm(.2), mm(.25)+4]);
 				}
 			}
 		}
