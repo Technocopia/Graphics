@@ -1,6 +1,6 @@
-function mm(i) = i*25.4;
+function mm(i) = i*14.7;
 
-$fn=50;
+$fn=100;
 
 
 
@@ -26,7 +26,7 @@ module hatguy()
 				{
 					translate([0, mm(3.1), 0])
 						{
-							cylinder(mm(.25), mm(3.03), mm(3.03), 0);
+							cylinder(mm(.25), mm(3.02), mm(3.02), 0);
 						}
 					translate([0, mm(3.1), -1])
 						{
@@ -178,7 +178,7 @@ difference()
 				{
 					translate([0, mm(3.525), 0])
 						{
-							cylinder(mm(.1), mm(3.53), mm(3.53), 0);
+							cylinder(mm(.1), mm(3.52), mm(3.52), 0);
 						}
 					translate([0, mm(3.2), -1])
 						{
@@ -236,7 +236,7 @@ difference()
 					{
 						cylinder(mm(.1), mm(.3), mm(.3), 0);
 					}	
-			translate([0, mm(3.1), -1])
+			translate([0, mm(3.11), -1])
 					{
 						cylinder(mm(.1)+2, mm(2.6), mm(2.6), 0);
 					}
@@ -248,7 +248,7 @@ difference()
 					{
 						cylinder(mm(.1), mm(.3), mm(.3), 0);
 					}	
-			translate([0, mm(3.1), -1])
+			translate([0, mm(3.11), -1])
 					{
 						cylinder(mm(.1)+2, mm(2.6), mm(2.6), 0);
 					}
