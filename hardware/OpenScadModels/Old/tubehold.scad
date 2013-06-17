@@ -2,8 +2,8 @@ function mm(i) = i*25.4;
     tubediam = mm(2); //diameter of the cardboard tube at the center
 	 thickness= mm(.75); // thickness of material
 	 boltwidth = mm(1/8); // desired diameter of bolt holes
-	
-
+//Adding a few comments
+//And again
 
 module tubehold(tubediam=mm(2),thickness=mm(.75), boltwidth=mm(1/8),) 
     {
