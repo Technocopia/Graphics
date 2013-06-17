@@ -44,14 +44,31 @@ module bolt()
 	cylinder(boltheight+tolerance, (boltdiam+tolerance)/2, (boltdiam+tolerance)/2, 0);
 }
 
+module bodyBolts(boltPlacementZ){
+		translate([boltdist,-boltdist,boltPlacementZ])
+		{
+			bolt();
+		}
+		
+		translate([(thickness-boltdist),-boltdist,boltPlacementZ])
+		{
+			bolt();
+		}
 
+		translate([boltdist,(length+boltdist),boltPlacementZ])
+		{
+			bolt();
+		}
+		
+		translate([(thickness-boltdist),(length+boltdist),boltPlacementZ])
+		{
+			bolt();
+		}
+}
 
-//making the motor
-module toleranceMotor()
-{
+module motorBlock(boltsUp=true){
 	union()
 	{
-
 //basic motor shape
 		translate([-tolerance, -tolerance, -tolerance])
 		{
@@ -72,27 +89,13 @@ module toleranceMotor()
 		}
 
 //body bolts
-		translate([boltdist,-boltdist,(wingsdist-boltheight)])
-		{
-			bolt();
+
+		if(boltsUp==true){
+			bodyBolts(wingsdist+wingsheight);
+		}else{
+			bodyBolts(wingsdist-boltheight);
 		}
 		
-		translate([(thickness-boltdist),-boltdist,(wingsdist-boltheight)])
-		{
-			bolt();
-		}
-
-		translate([boltdist,(length+boltdist),(wingsdist-boltheight)])
-		{
-			bolt();
-		}
-		
-		translate([(thickness-boltdist),(length+boltdist),(wingsdist-boltheight)])
-		{
-			bolt();
-		}
-
-
 //cylinder bolts
 		translate([thickness/2,cylinderdist-cylboltdist,(height+cylinderheight)])
 		{
@@ -119,13 +122,22 @@ module toleranceMotor()
 		{
 			cube([hubwidth+tolerance,hublength+tolerance,hubheight+tolerance]);
 		}
-
-
 	}
 }
 
 
-toleranceMotor();
+
+//making the motor
+module toleranceMotor(boltsUp=true,hornCentered=false)
+{
+	motorBlock(boltsUp);
+
+}
+
+
+toleranceMotor(true);
+
+
 
 
 
