@@ -6,7 +6,7 @@ $fn = 60;
 module sprocket(teeth=20, roller=3, pitch=17, thickness=3, tolerance=0.2){
 	//$fs=0.5;
 	radius=roller/2; //We need radius in our calculations, not diameter
-	distance_from_center=pitch/(2*sin(180/teeth));
+	distance_from_center=pitch/(sin(180/teeth));
 	 echo(distance_from_center); //this just displays the angle below the window
 
 	angle=(360/teeth); 
@@ -21,12 +21,12 @@ difference(){
 				intersection(){
 					rotate(a=[0,0,angle*(tooth+0.5)]){
 						translate([distance_from_center/2,0,0]){
-							cylinder(r=(pitch-radius-tolerance*2)/2,h=thickness);
+							cylinder(r=(pitch-radius-tolerance*2),h=thickness);
 						}
 					}
 					rotate(a=[0,0,angle*(tooth-0.5)]){
 						translate([distance_from_center/2,0,0]){
-							cylinder(r=(pitch-radius-tolerance*2)/2,h=thickness);
+							cylinder(r=(pitch-radius-tolerance*2),h=thickness);
 						}
 					}
 				}
@@ -35,7 +35,7 @@ difference(){
 		for(tooth=[1:teeth]){
 			rotate(a=[0,0,angle*(tooth+0.5)]){
 				translate([distance_from_center/2,0,-1]){
-					cylinder(r=radius/2+tolerance,h=thickness+2);
+					cylinder(r=radius+tolerance,h=thickness+2);
 					}
 				}
 			}
@@ -45,8 +45,8 @@ translate([0,0,thickness/2])
 		{
 		difference()
 			{	
-			cylinder(thickness, pitch_circle/2+radius, pitch_circle/2+radius);
-			cylinder(thickness, pitch_circle/2+radius, (pitch_circle/2+radius)/2);
+			cylinder(thickness, pitch_circle/2+radius*2, pitch_circle/2+radius*2);
+			cylinder(thickness, pitch_circle/2+radius*2, (pitch_circle/2+radius*2)/2);
 			}
 		}
 
