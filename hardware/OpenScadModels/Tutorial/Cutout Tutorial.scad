@@ -16,7 +16,7 @@
 
 //Put all use commands at the very top of the document, with variables, constants, etc
 
-use <../Motors With Built-In Tolerances/tolerance motor-- comprehensive.scad>
+use <../Parts/Subtractive Parts/Servo Motor/Motors With Built-In Tolerances/tolerance motor-- comprehensive.scad>
 
 //You can then call modules from the .scad file you have pulled in. They behave exactly like modules usually do and you can even feed in variables. (the motor we pulled in is here displayed in green, check out how you can change the values to true or false to center it in different ways and change the orientation of the screws)
 
@@ -82,7 +82,7 @@ module test2()
 
 //Again, the "../" indicates going up one folder from the folder in which your file (in this case, "motor cutout test" is stored. After you are up to a folder that can branch back down the location of your desired STL, just start using folder names.
 
-		import("../Motors With Built-In Tolerances/Older versions/tolerance motor-- screws up.stl");
+		import("../Parts/Subtractive Parts/Servo Motor/Motors With Built-In Tolerances/Older versions/tolerance motor-- screws up.stl");
 
 	}
 }
@@ -101,7 +101,7 @@ translate([39,-50,45])
 translate([-10,-90,-47])
 {
 	color("Blue")
-	import("../Motors With Built-In Tolerances/Older versions/tolerance motor-- screws up.stl");
+	import("../Parts/Subtractive Parts/Servo Motor/Motors With Built-In Tolerances/Older versions/tolerance motor-- screws up.stl");
 
 }
 
