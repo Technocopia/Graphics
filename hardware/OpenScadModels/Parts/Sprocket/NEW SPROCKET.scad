@@ -35,7 +35,7 @@ difference(){
 		for(tooth=[1:teeth]){
 			rotate(a=[0,0,angle*(tooth+0.5)]){
 				translate([distance_from_center/2,0,-1]){
-					cylinder(r=radius+tolerance,h=thickness+2);
+					cylinder(r=radius+tolerance*2,h=thickness+2);
 					}
 				}
 			}
@@ -56,11 +56,11 @@ translate([0,0,thickness/2])
 }
 
 module sprocketNum25(teeth=20){
-	sprocket(teeth,mm( .130),mm(1/4),mm(.11/2)-0.2,0.1);
+	sprocket(teeth,mm( .130),mm(1/4),mm(.11/2)-0.2,0.2);
 }
 
 module sprocketNum35(teeth=20){
-	sprocket(teeth,mm( .2),mm(3/8),mm(.168)-0.2,0.1);
+	sprocket(teeth,mm( .2),mm(3/8),mm(.168)-0.2,0.2);
 }
 
 module viewer(){
