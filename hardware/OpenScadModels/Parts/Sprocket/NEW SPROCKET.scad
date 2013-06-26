@@ -56,7 +56,7 @@ translate([0,0,thickness/2])
 }
 
 module sprocketNum25(teeth=20){
-	sprocket(teeth,mm( .130),mm(1/4),mm(.11/2)-0.2,0.2);
+	sprocket(teeth,mm( .130),mm(1/4),mm(.11)-0.2,0.2);
 }
 
 module sprocketNum35(teeth=20){
