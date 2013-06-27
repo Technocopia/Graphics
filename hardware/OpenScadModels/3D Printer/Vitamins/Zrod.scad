@@ -1,12 +1,11 @@
-use<../Parameters.scad>
-
 function ZrodLength()=1000;
-function ZrodDiameter()=40;
+function ZrodDiameter()=20;
+function ZrodRadius()=ZrodDiameter()/2;
 
 module Zrod()
 {
 color("Silver")
-cylinder(ZrodLength(), ZrodDiameter()/2, ZrodDiameter()/2);
+cylinder(ZrodLength(), ZrodRadius(), ZrodRadius());
 }
 
 Zrod();
