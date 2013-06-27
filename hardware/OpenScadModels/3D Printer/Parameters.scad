@@ -30,3 +30,9 @@ function ZrodSpacing()=130;
 function LaserCutTolerance() = .02;
 function 3dPrinterTolerance() = .04;
 
+
+
+
+//the equation used for plastic width, it can of course be changed
+function PlasticWidth()= (ZrodDiameter()/2);
+function SideWidth() = (ZrodDiameter()+PlasticWidth());
