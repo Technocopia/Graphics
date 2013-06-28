@@ -4,9 +4,9 @@ function BallBearingDiam() = 22 + 3dPrinterTolerance();
 function BallBearingHeight() = 7 + 3dPrinterTolerance();
 function BallBearingInnerDiam()=8 + 3dPrinterTolerance();
 
-module BallBearing();
+module BallBearing()
 {
-cylinder(BallBearingHeight(), BallBearingDiam()/2, BallBearingDiam()/2, 0);
+cylinder(BallBearingHeight(), BallBearingDiam()/2, BallBearingDiam()/2);
 }
 
 
