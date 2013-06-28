@@ -1,6 +1,6 @@
 use <parameters.scad>
 use <Vitamins/Zrod.scad>
-use <Vitamins/ZAxisMotors.scad>
+use <Vitamins/ServoMotor.scad>
 use <Vitamins/SmallBolts.scad>
 use <Vitamins/PlasticScrew.scad>
 use <Vitamins/BallBearing.scad>
@@ -10,10 +10,12 @@ use <Vitamins/BallBearing.scad>
 function Top() = false;
 function Bottom() = true;
 
-
+function MotorBracketHeight()= MotorLength()+MotorTolerance()*4+PlasticWidth()*2;
+function BearingBracketHeight()= BallBearingDiam()*1.5;
+function SlotWidth()= PlasticWidth()/2;
 
 //This makes a single clip
-module clip(Height = BoxWidth())
+module clip(Height = MotorBracketHeight())
 {
 	difference()
 	{
@@ -44,24 +46,7 @@ module clip(Height = BoxWidth())
 	//This makes the slot for the clip
 				translate([ZrodDiameter()/2+ZrodDiameter()/4+1,SideWidth()/2-PlasticWidth()/4,-1])
 				{
-					cube([SideWidth()*2-SideWidth()/2+PlasticWidth(),PlasticWidth()/2,Height+2]);
-				}
-
-
-	//These make the boltholes for the clip
-				translate([SideWidth()*2-PlasticWidth()*1.5,-1,Height/3])
-				{
-					rotate([90,0,0])
-					{
-					#SmallBolt();
-					}
-				}
-				translate([SideWidth()*2-PlasticWidth()*1.5,-1,2*Height/3])
-				{
-					rotate([90,0,0])
-					{
-					#SmallBolt();
-					}
+					cube([SideWidth()*2-SideWidth()/2+PlasticWidth(),SlotWidth(),Height+2]);
 				}
 
 
@@ -76,6 +61,47 @@ module clip(Height = BoxWidth())
 }
 
 
+module sidebolts(Height = MotorBracketHeight())
+{
+	union()
+	{
+
+	//These make the boltholes for the clip
+		translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,Height/3])
+		{
+			rotate([90,0,0])
+			{
+				#SmallBolt();
+			}
+		}
+			translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,2*Height/3])
+			{
+				rotate([90,0,0])
+				{
+				#SmallBolt();
+				}
+			}
+		
+	}
+}
+
+module bolts(Height = MotorBracketHeight())
+{
+	union()
+	{
+		sidebolts(Height);
+		translate([0, ZrodSpacing(),0])
+		{
+			mirror([0,1,0])
+			{
+				sidebolts(Height);
+			}
+		}
+	}
+}
+		
+
+
 //This module calls the clips and makes the box between them. If true, it makes the bottom set, and if false it makes the top set (which is shorter)
 module Clips(MotorHeight=true)
 {
@@ -87,19 +113,23 @@ module Clips(MotorHeight=true)
 	//This centers everything
 		translate([0,-ZrodSpacing()/2, 0])
 		{
-			union()
+			difference()
 			{
-	//this draws the clips themselves
-				clip(BoxWidth());
-				translate([0,ZrodSpacing(),0])
+				union()
 				{
-					clip(BoxWidth());
-				}
-				translate([0,ZrodDiameter()/2, 0])
+		//this draws the clips themselves
+					clip(MotorBracketHeight());
+					translate([0,ZrodSpacing(),0])
+					{
+						clip(MotorBracketHeight());
+					}
+						translate([0,ZrodDiameter()/2, 0])
 	//this draws the box between the clips
-				{
-					cube([PlasticWidth(), ZrodSpacing()-ZrodDiameter(),BoxWidth()]);
+					{
+						cube([PlasticWidth(), ZrodSpacing()-ZrodDiameter(),MotorBracketHeight()]);
+					}
 				}
+				bolts(MotorBracketHeight());
 			}
 		}
 
@@ -108,19 +138,25 @@ module Clips(MotorHeight=true)
 	}else{
 		translate([0,-ZrodSpacing()/2, 0])
 		{
-			union()
+			difference()
 			{
-				clip(BallBearingDiam()*2);
-				translate([0,ZrodSpacing(),0])
+				union()
 				{
-					clip(BallBearingDiam()*2);
+		//this draws the clips themselves
+					clip(BearingBracketHeight());
+					translate([0,ZrodSpacing(),0])
+					{
+						clip(BearingBracketHeight());
+					}
+						translate([0,ZrodDiameter()/2, 0])
+	//this draws the box between the clips
+					{
+						cube([PlasticWidth(), ZrodSpacing()-ZrodDiameter(),BearingBracketHeight()]);
+					}
 				}
-				translate([0,ZrodDiameter()/2, 0])
-				{
-					cube([PlasticWidth(), ZrodSpacing()-ZrodDiameter(),BallBearingDiam()*2]);
-				}
+				bolts(BearingBracketHeight());
 			}
-		}
+		}		
 	}
 }
 

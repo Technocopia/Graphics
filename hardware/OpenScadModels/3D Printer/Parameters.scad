@@ -9,7 +9,7 @@ function mm(i) = i*25.4;
 
 
 
-function ZrodSpacing()=130;
+function ZrodSpacing()=66;
 
 
 //parametric of which hotend is being used (printerbot or bucha nozzle)

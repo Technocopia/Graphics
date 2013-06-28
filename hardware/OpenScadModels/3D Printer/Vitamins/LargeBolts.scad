@@ -1,9 +1,9 @@
 use <../Parameters.scad>
 
-function BoltDiameter()= 20 + 3dPrinterTolerance();
-function BoltLength()= 150 + 3dPrinterTolerance();
-function BoltHeadDiameter()= 40 + 3dPrinterTolerance();
-function BoltHeadHeight()= 17 + 3dPrinterTolerance();
+function BoltDiameter()= 7 + 3dPrinterTolerance();
+function BoltLength()= 38 + 3dPrinterTolerance();
+function BoltHeadDiameter()= 13 + 3dPrinterTolerance();
+function BoltHeadHeight()= 8 + 3dPrinterTolerance();
 
 //err on the side of larger tolerances for bolts
 
