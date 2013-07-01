@@ -1,6 +1,8 @@
 use <parameters.scad>
+use <Vitamins/Zrod.scad>
 use <Vitamins/BallBearing.scad>
 use <Vitamins/LargeBolts.scad>
+use <Vitamins/ServoMotor.scad>
 use <Clips.scad>
 
 
@@ -19,7 +21,7 @@ module StructuralBearingMount()
 
 	//this cuts the bolthole out of the mount
 			Clips(Top());
-			translate([BoltHeadHeight()/2+BallBearingHeight()+PlasticWidth()*2,0,BallBearingDiam()])
+			translate([BoltHeadHeight()/2+BallBearingHeight()+PlasticWidth()+ MotorOutcrop(),0,BearingBracketHeight()/2])
 			{
 				rotate([0,90,0])
 				{
@@ -29,11 +31,11 @@ module StructuralBearingMount()
 		}
 
 	//This adds the cylindrical peice, which itself maintains friction against the inside of the bearing allowing the outside to spin
-		translate([PlasticWidth(),0,BallBearingDiam()])
+		translate([PlasticWidth(),0,BearingBracketHeight()/2])
 			rotate([0,90,0])
 			{
 				{
-					cylinder(PlasticWidth(), BallBearingInnerDiam()/2+(BallBearingInnerDiam()+BallBearingDiam())/4, BallBearingDiam()/2);
+					cylinder(MotorOutcrop(), BallBearingInnerDiam()/2+(BallBearingInnerDiam()+BallBearingDiam())/4, BallBearingDiam()/2);
 				}
 			}
 		
