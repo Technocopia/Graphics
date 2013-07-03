@@ -72,7 +72,7 @@ difference(){
 			BearingRecess();
 		}
 	}
-	translate([0,(Bdiam/1.25+((Bdiam/2)+1))/2,-2]){
+	translate([0,-height/2+(Bdiam/2+1),-2]){
 		#hole();
 	}
 }
