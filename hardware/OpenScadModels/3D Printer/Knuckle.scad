@@ -8,10 +8,6 @@ $fn=100;
 height=ZrodSpacing();
 Bdiam=BallBearingDiam();
 
-module BearingHole(){
-
-cylinder(BallBearingHeight()+10,BallBearingInnerDiam()+1,BallBearingInnerDiam()+1);
-}
 
 //this creates the bearing rest.
 module BearingRecess(){
@@ -33,7 +29,7 @@ difference(){
 		}	
 	}
 	translate([0,0,-BallBearingHeight()/2]){
-		BearingHole();
+		cylinder(BallBearingHeight()+10,BallBearingInnerDiam()+1,BallBearingInnerDiam()+1);
 	}
 }
 }
@@ -47,33 +43,29 @@ module KnuckleShaft(){
 	
 difference()	{	
 	rotate([90,0,0]){
-		translate([0,0,-height+Bdiam]){
-			cylinder(height,Bdiam/2,Bdiam/2);
-		}
+		cylinder(height,Bdiam/2,Bdiam/2);
 	}
-	rotate([90,0,0]){
-		translate([-height/2,-height,-height/2-Bdiam-2]){
-			cube([height,height,height+2*Bdiam]);
+	translate([-height/2,-height-2,-height]){
+		#cube([height,height+4,height]);
 		}
-	}
 	translate	([0,height*.4,-Bdiam/12]){
-		hole();
+		#hole();
 	}
 	translate([0,-height*.1,-Bdiam/12]){
-		hole();
-	}
-}
-}
-
-difference(){
-	union(){
-		KnuckleShaft();
-		translate([0,-height/1.9,0]){
-			BearingRecess();
-		}
-	}
-	translate([0,-height/2+(Bdiam/2+1),-2]){
 		#hole();
 	}
 }
-//translate([0,0,20]){
+}
+//this is the assembly of the two modules
+difference(){
+	union(){
+		KnuckleShaft();
+		translate([0,-height-Bdiam/1.8,0]){
+			BearingRecess();
+		}
+	}
+	translate([0,0,-2]){
+		#hole();
+	}
+}
+
