@@ -3,11 +3,12 @@
 
 //THIS IS FOR IF YOU USE OTHER KINDS OF MOTORS, MOTOROUTCROP IS THE DISTANCE FROM THE MOUNTING PLATE TO THE BUISNESS END OF YOUR MOTOR, IF YOU EVER NEED TO SWITCH TO ANOTHER JUST CHANGE THIS VALUE TO THE ACTUAL VALUE
 
-function MotorOutcrop()= MotorCylinderHeight()+(MotorHeight()-(MotorWingsHeight()+MotorWingsDist()));
+function MotorOutcrop()= MotorCylinderHeight()+(MotorHeight()-(MotorWingsHeight()+MotorWingsDist()))-MotorTolerance();
+
 
 //for use when the motor is incorporated into parts
 	//this is distance, the short way, from the edge of the motor to the center of the hub
-function MotorCenterDist()=15; 
+function MotorCenterDist()=(MotorCylinderDiam()/2) + ((MotorLength()-MotorBaseLength())/2-MotorTolerance()*2); 
 
 //basic motor shape
 function MotorHeight()=38;
@@ -43,8 +44,6 @@ function MotorHubDist()=3;
 
 //THIS IS THE TOLERANCE, THIS IS PROBABLY THE ONLY THING YOU WILL NEED TO ADJUST, IF THE HOLES ARE TOO SMALL, RAISE MOTORTOLERANCE(), IF THEY ARE TOO BIG, LOWER MOTORTOLERANCE(). IF THE HOLES DON'T LINE UP, THEN START CHANGING OTHER DIMENSIONS.
 function MotorTolerance()=.75;
-
-
 
 
 
@@ -147,12 +146,12 @@ module ServoMotor(boltsUp=true,hornCentered=false)
 		}
 	}else{
 		if(boltsUp == true){
-			translate([MotorTolerance(),-MotorBaseLength()-MotorTolerance(),(-MotorHeight()+(MotorHeight()-MotorWingsDist()-MotorWingsHeight()-MotorTolerance()*3))])
+			translate([MotorTolerance(),(MotorLength()-MotorBaseLength())/2+MotorTolerance(),(-MotorHeight()+(MotorHeight()-MotorWingsDist()-MotorWingsHeight()-MotorTolerance()*3))])
 			{	
 				MotorBlock(boltsUp);
 			}
 		}else{
-			translate([MotorTolerance(),-MotorBaseLength()-MotorTolerance(),(-MotorHeight()+(MotorHeight()-MotorWingsDist())+MotorTolerance())])
+			translate([MotorTolerance(),(MotorLength()-MotorBaseLength())/2+MotorTolerance(),(-MotorHeight()+(MotorHeight()-MotorWingsDist())+MotorTolerance())])
 			{	
 				MotorBlock(boltsUp);
 			}
@@ -162,7 +161,7 @@ module ServoMotor(boltsUp=true,hornCentered=false)
 }
 
 
-ServoMotor(true,true);
+ServoMotor(true,false);
 
 
 

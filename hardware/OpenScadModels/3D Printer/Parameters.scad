@@ -1,4 +1,5 @@
 use<Vitamins/Zrod.scad>
+use<Vitamins/LinearBearing.scad>
 
 function mm(i) = i*25.4; 
 
@@ -8,8 +9,8 @@ function mm(i) = i*25.4;
 //(bearing diameter is dependent on rod diameter)
 
 
-
-function ZrodSpacing()=66;
+function ZBearingSpacing()= 105;
+function ZrodSpacing()=ZBearingSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
 
 
 //parametric of which hotend is being used (printerbot or bucha nozzle)
