@@ -1,24 +1,24 @@
-//add tolerances
+use <../Parameters.scad>
+ 
+function EncoderWidth()=35 + 3dPrinterTolerance();
+function EncoderHeight()=25 + 3dPrinterTolerance();
+function EncoderThickness()=2 + 3dPrinterTolerance();
 
-function EncoderWidth()=35;
-function EncoderHeight()=25;
-function EncoderThickness()=2;
+function EncoderBoltWidth()=3 + 3dPrinterTolerance();
+function EncoderBoltLength()=20 + 3dPrinterTolerance();
+function EncoderBoltInset()=2.2 + 3dPrinterTolerance()/2;
 
-function EncoderBoltWidth()=3;
-function EncoderBoltLength()=20;
-function EncoderBoltInset()=2.2;
+function EncoderLongBoxWidth()=9 + 3dPrinterTolerance();
 
-function EncoderLongBoxWidth()=9;
+function EncoderShortBoxWidth()=10 + 3dPrinterTolerance();
+function EncoderShortBoxLength()=13.5 + 3dPrinterTolerance();
+function EncoderShortBoxInset()=7 + 3dPrinterTolerance()/2;
 
-function EncoderShortBoxWidth()=10;
-function EncoderShortBoxLength()=13.5;
-function EncoderShortBoxInset()=7;
+function EncoderBoxHeight()=9+EncoderThickness() + 3dPrinterTolerance();
 
-function EncoderBoxHeight()=9+EncoderThickness();
-
-function EncoderChipSide()=4.25;
-function EncoderChipHeight()= 1;
-function EncoderChipOffset()=4;
+function EncoderChipSide()=4.25 + 3dPrinterTolerance();
+function EncoderChipHeight()= 1 + 3dPrinterTolerance();
+function EncoderChipOffset()=4 + 3dPrinterTolerance()/2;
 
 
 

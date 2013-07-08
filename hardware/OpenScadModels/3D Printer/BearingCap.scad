@@ -1,7 +1,5 @@
 use <parameters.scad>
 use <StructuralFeet.scad>
-use <Vitamins/Zrod.scad>
-use <Vitamins/SmallBolts.scad>
 use <Vitamins/PlasticScrew.scad>
 use <Vitamins/BallBearing.scad>
 
@@ -9,7 +7,7 @@ module BearingCap()
 {
 	difference()
 	{
-		translate([0,-EncoderMountWidth()/2,-(BallBearingHeight()+PlasticWidth())])
+		translate([PlasticWidth()/2,-EncoderMountWidth()/2,-(BallBearingHeight()+PlasticWidth())])
 		{
 			difference()
 			{
@@ -18,9 +16,9 @@ module BearingCap()
 				{
 					cube([EncoderShelfWidth()-PlasticWidth()+2,EncoderMountWidth(),BallBearingDiam()]);
 				}
-				translate([-1,PlasticWidth()*2+1,PlasticWidth()])
+				translate([-1,PlasticWidth()*2+1,PlasticWidth()/1.5])
 				{
-					cube([EncoderShelfWidth()-PlasticWidth()*2,EncoderMountWidth()-PlasticWidth()*2,BallBearingDiam()/2-PlasticWidth()*2]);
+					cube([EncoderShelfWidth()-PlasticWidth()*2,EncoderMountWidth()-PlasticWidth()*2,PlasticWidth()]);
 				}
 	//screwhole
 				translate([(EncoderShelfWidth()-PlasticWidth())/2, PlasticWidth(), BallBearingDiam()/2 +PlasticWidth()+2])

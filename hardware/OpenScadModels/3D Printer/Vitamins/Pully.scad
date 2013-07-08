@@ -1,5 +1,7 @@
-function PullyBodyWidth() = 22;
-function PullyDiam() = 30;
+use <../parameters.scad>
+
+function PullyBodyWidth() = 22 + 3dPrinterTolerance();
+function PullyDiam() = 30 + 3dPrinterTolerance();
 
 module Pully()
 {
