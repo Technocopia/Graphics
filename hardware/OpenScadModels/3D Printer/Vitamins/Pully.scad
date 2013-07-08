@@ -1,4 +1,4 @@
-use <../parameters.scad>
+use <../Parameters.scad>
 
 function PullyBodyWidth() = 22 + 3dPrinterTolerance();
 function PullyDiam() = 30 + 3dPrinterTolerance();

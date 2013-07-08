@@ -1,4 +1,4 @@
-use <../parameters.scad>
+use <../Parameters.scad>
 use <../StructuralFeet.scad>
 use <PlasticScrew.scad>
 use <BallBearing.scad>
