@@ -1,4 +1,4 @@
-use <parameters.scad>
+use <Parameters.scad>
 use <Vitamins/Zrod.scad>
 use <Vitamins/ServoMotor.scad>
 use <Vitamins/SmallBolts.scad>
@@ -193,14 +193,17 @@ module StructuralFeet()
 
 
 //rotating the module, as it would be rotated for printing
-rotate([0,180,0])
+translate([0,0, MotorBracketHeight()])
 {
-//	StructuralFeet();
+	rotate([0,180,0])
+	{
+		StructuralFeet();
+	}
 }
 
 
 
-StructuralFeet();
+//StructuralFeet();
 
 
 
