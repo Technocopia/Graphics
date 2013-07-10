@@ -17,6 +17,8 @@ function EncoderCutoutLength()= PullyDiam()+PlasticWidth()*2;
 function EncoderMountHeight() = MotorCenterDist()+MotorTolerance()*4+MotorBoltDiam()/2;
 function EncoderMountWidth() = EncoderWidth()+PlasticWidth();
 
+$fn=50;
+
 echo(PlasticWidth());
 
 module wing()
@@ -148,7 +150,7 @@ module StructuralFeet()
 					rotate([90,0,0])
 					
 				{
-					%ServoMotor(true,false);
+					ServoMotor(true,false);
 				}
 }
 				
@@ -174,7 +176,7 @@ module StructuralFeet()
 						{
 						union()
 						{
-							#Encoder();
+							Encoder();
 							translate([-EncoderWidth()/2+(EncoderLongBoxWidth()+EncoderShortBoxWidth())/2-EncoderChipSide()/2,-EncoderHeight()/4+1])
 							{
 								cube([EncoderLongBoxWidth()+EncoderShortBoxWidth(),EncoderHeight(),EncoderHeight()]);
