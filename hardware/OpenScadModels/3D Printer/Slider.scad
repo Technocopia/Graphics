@@ -5,9 +5,12 @@ use <Vitamins/BallBearing.scad>
 use <Vitamins/ZipTie.scad>
 
 function BearingGripDiam()= LinearBearingDiam()+PlasticWidth()*2;
-function SliderHeight()= LinearBearingHeight()+PlasticWidth();
+function SliderHeight()= LinearBearingHeight()+PlasticWidth()*2;
 function GripWidth()= PlasticWidth();
 function FlareLength()= (ZBearingSpacing()-ZrodSpacing())/2;
+
+$fn=100;
+
 module LinearBearingGrip()
 {
 	difference()
@@ -19,7 +22,7 @@ module LinearBearingGrip()
 		}
 		translate([0,0,-1])
 		{
-			cylinder(SliderHeight()+1, LinearBearingDiam()/2.2, LinearBearingDiam()/2.2);
+			cylinder(SliderHeight()+2, LinearBearingDiam()/2.2, LinearBearingDiam()/2.2);
 		}
 		translate([-BearingGripDiam()/2,LinearBearingDiam()/6,-1])
 		{
@@ -49,12 +52,12 @@ module SliderBase()
 
 module Flare()
 {
-	translate([-LinearBearingDiam()/2-FlareLength()-PlasticWidth()/2,PlasticWidth()/2-GripWidth(),-SliderHeight()/4])
+	translate([-LinearBearingDiam()/2-FlareLength()-PlasticWidth()/2,-GripWidth(),0])
 		{
 			difference()
 			{
-				cube([FlareLength(),GripWidth()*2,SliderHeight()*1.5]);
-				translate([PlasticWidth()*1.5,-BallBearingDiam()/2+PlasticWidth(),SliderHeight()*3/4])
+				cube([FlareLength(),GripWidth()*2,SliderHeight()]);
+				translate([PlasticWidth()*1.5,-BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()/2+(SliderHeight()-BallBearingDiam())/2-PlasticWidth()])
 				{
 					rotate([0,90,0])
 					{
@@ -65,36 +68,101 @@ module Flare()
 		}
 }
 
+module BearingCap()
+{
+	translate([-(PlasticWidth()+BallBearingHeight())/2-ZBearingSpacing()/2,-PlasticWidth()*2, -PlasticWidth()])
+	{
+		difference()
+		{
+			union()
+			{
+				cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2, SliderHeight()+PlasticWidth()]);
+				translate([0,PlasticWidth()*2,0])
+				{
+					cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2,PlasticWidth()]);
+				}
+				translate([0,PlasticWidth()*2,PlasticWidth()])
+				{
+					cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2,PlasticWidth()*2]);
+				}
+				translate([0,-BallBearingHeight()/2,PlasticWidth()*.75])
+				{
+					cube([BallBearingHeight()+PlasticWidth(), BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()+PlasticWidth()]);
+				}
+
+				translate([0,-PlasticWidth(),BallBearingDiam()/2+PlasticWidth()*1.25])
+				{
+					rotate([0,90,0])
+					{
+						cylinder(BallBearingHeight()+PlasticWidth(), BallBearingDiam()/2+PlasticWidth()/2, BallBearingDiam()/2+PlasticWidth()/2);
+					}
+				}
+			}
+			translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25])
+				{
+					#cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()]);
+				}                                                                                                                                   
+			rotate([0,90,0])
+					{
+						cylinder(BallBearingHeight()+PlasticWidth(), BallBearingDiam()/2-PlasticWidth()/2, BallBearingDiam()/2-PlasticWidth()/2);
+					}
+		}
+	}
+}
+
+BearingCap();
+
+module ZipTieHoles()
+{
+	union()
+	{
+		translate([LinearBearingDiam()-PlasticWidth()/2,-GripWidth()-1,SliderHeight()/4])
+		{
+			ZipTie();
+		}
+		translate([LinearBearingDiam()-PlasticWidth()/2,-GripWidth()-1,SliderHeight()*3/4])
+		{
+			ZipTie();
+		}
+		translate([-LinearBearingDiam()+PlasticWidth()/2,-GripWidth()-1,SliderHeight()/4])
+		{
+			ZipTie();
+		}
+		translate([-LinearBearingDiam()+PlasticWidth()/2,-GripWidth()-1,SliderHeight()*3/4])
+		{
+			ZipTie();
+		}
+	}
+}
 
 
-%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
+
+
+//%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
 
 
 module Slider()
 {
-	union()
+	difference()
 	{
-		difference()
+		union()
 		{
 			SliderBase();
-			translate([LinearBearingDiam(),-GripWidth()-1,SliderHeight()/4])
+			ZipTieHoles();			
+			Flare();
+			mirror([1,0,0])
 			{
-				ZipTie();
-			}
-			translate([LinearBearingDiam(),-GripWidth()-1,SliderHeight()*3/4])
-			{
-				ZipTie();
-			}
-			translate([ZrodSpacing()-LinearBearingDiam(),-GripWidth()-1,SliderHeight()/4])
-			{
-				ZipTie();
-			}
-			translate([ZrodSpacing()-LinearBearingDiam(),-GripWidth()-1,SliderHeight()*3/4])
-			{
-				ZipTie();
+				translate([-ZrodSpacing(),0,0])
+				{
+					Flare();
+				}
 			}
 		}
-		Flare();
+	ZipTieHoles();
+	translate([ZrodSpacing()-ZipTieWidth()/2,0,0])
+	{
+		ZipTieHoles();
+	}
 	}
 }
 

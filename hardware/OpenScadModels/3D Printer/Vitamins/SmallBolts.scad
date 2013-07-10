@@ -2,10 +2,10 @@ use<../Parameters.scad>
 
 //right now this is a little kludged because it's modeling a plastic screw being used as a bolt, so it's got a thicker bit so that it can slide through one side of the grip and then grab onto the other
 
-function OuterDiameter() = 4 + 3dPrinterTolerance();
-function BoltDiameter()= 3 + 3dPrinterTolerance();
+function OuterDiameter() = 4 + 3dPrinterTolerance()*2;
+function BoltDiameter()= 3 + 3dPrinterTolerance()*2;
 function BoltLength()= 22 + 3dPrinterTolerance();
-function BoltHeadDiameter()= 6.7 + 3dPrinterTolerance();
+function BoltHeadDiameter()= 6.7 + 3dPrinterTolerance()*2;
 function BoltHeadHeight()= 2.5 + 3dPrinterTolerance();
 
 //err on the side of larger tolerances for bolts

@@ -11,6 +11,7 @@ function mm(i) = i*25.4;
 
 function ZBearingSpacing()= 105;
 function ZrodSpacing()=ZBearingSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
+echo(ZrodSpacing());
 
 
 //parametric of which hotend is being used (printerbot or bucha nozzle)
@@ -29,7 +30,7 @@ function ZrodSpacing()=ZBearingSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
 
 //tolerances
 function LaserCutTolerance() = .02;
-function 3dPrinterTolerance() = .04;
+function 3dPrinterTolerance() = .06;
 
 
 
