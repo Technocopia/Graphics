@@ -9,8 +9,6 @@ Bdiam=BallBearingDiam();
 
 //function notchlength()=
 function cupOD()= Bdiam/1.25+ScrewDiameter()/2;
-
-//this creates the perpendicular bearing cup.
 module BearingRecess(){
 
 difference(){
@@ -42,7 +40,7 @@ module KnuckleShaft(){
 difference()	{	
 	translate([0,height/2-2,0]){
 		rotate([90,0,0]){
-			cylinder(height,Bdiam/2,Bdiam/2);
+			cylinder(height,BallBearingInnerDiam()/2,BallBearingInnerDiam()/2);
 		}
 	}
 	translate([-height/2,-height/2-4,-height]){
@@ -61,7 +59,7 @@ difference(){
 	union(){
 		KnuckleShaft();
 		translate([0,-height/2-Bdiam/2-BallBearingInnerDiam()/2,0]){
-			BearingRecess();
+			#BearingRecess();
 		}
 	}
 	translate([0,-height/2+ScrewDiameter()/6,-2]){
