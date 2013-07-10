@@ -27,14 +27,14 @@ difference(){
 		}	
 	}
 	translate([0,0,-BallBearingHeight()/2]){
-		cylinder(BallBearingHeight()+10,BallBearingInnerDiam()+1,BallBearingInnerDiam()+1);
+		cylinder(BallBearingHeight()+10,BallBearingInnerDiam()+1,Bdiam/2+1);
 	}
 }
 }
 
 module hole(){
 
-cylinder(ScrewLength(),ScrewDiameter()/2,ScrewDiameter()/2);
+cylinder(ScrewLength()*2,ScrewDiameter()/2,ScrewDiameter()/2);
 }
 
 module KnuckleShaft(){
@@ -49,10 +49,10 @@ difference()	{
 		cube([height,height+4,height]);
 	}
 	translate	([0,-height/4,-Bdiam/2+1]){
-		#hole();
+		hole();
 	}
 	translate([0,height/4,-Bdiam/2+1]){
-		#hole();
+		hole();
 	}
 }
 }
@@ -64,10 +64,10 @@ difference(){
 			BearingRecess();
 		}
 	}
-	translate([0,-height/2+ScrewDiameter()/6,-2]){
-		#hole();
+	translate([0,-height/2+ScrewDiameter()/6,-Bdiam/2+1]){
+		hole();
 	}
-translate([-Bdiam,-height/2-Bdiam/2-BallBearingInnerDiam()/2-Bdiam/2,BallBearingHeight()*1.6]){
+translate([-Bdiam,-height/2-Bdiam/2-BallBearingInnerDiam()/2-Bdiam/2,Bdiam/2]){
 	cube([Bdiam*2,Bdiam+cupOD()/2,Bdiam]);
 }
 }
