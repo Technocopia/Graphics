@@ -1,6 +1,6 @@
 use <../Parameters.scad>
 
-function ScrewDiameter()= 3 + 3dPrinterTolerance();  //USUALLY THREE
+function ScrewDiameter()= 3.6 + 3dPrinterTolerance();  
 function ScrewLength()= 22 + 3dPrinterTolerance();
 function ScrewHeadDiameter()= 6.7 + 3dPrinterTolerance();
 function ScrewHeadHeight()= 2.5 + 3dPrinterTolerance();

@@ -1,4 +1,4 @@
-use <parameters.scad>
+use <Parameters.scad>
 use <Vitamins/Zrod.scad>
 use <Vitamins/LinearBearing.scad>
 use <Vitamins/BallBearing.scad>
@@ -22,7 +22,7 @@ module LinearBearingGrip()
 		}
 		translate([0,0,-1])
 		{
-			cylinder(SliderHeight()+2, LinearBearingDiam()/2.2, LinearBearingDiam()/2.2);
+		cylinder(SliderHeight()+2, LinearBearingDiam()/2.2, LinearBearingDiam()/2.2);
 		}
 		translate([-BearingGripDiam()/2,LinearBearingDiam()/6,-1])
 		{
@@ -100,12 +100,15 @@ module BearingCap()
 			}
 			translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25])
 				{
-					#cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()]);
-				}                                                                                                                                   
-			rotate([0,90,0])
-					{
-						cylinder(BallBearingHeight()+PlasticWidth(), BallBearingDiam()/2-PlasticWidth()/2, BallBearingDiam()/2-PlasticWidth()/2);
-					}
+					cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()]);
+				}
+			translate([-1,-PlasticWidth(),SliderHeight()/2])
+			{                                                                                                                                   
+				rotate([0,90,0])
+				{
+					#cylinder(BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2-PlasticWidth()/6, BallBearingDiam()/2-PlasticWidth()/6);
+				}
+			}
 		}
 	}
 }
