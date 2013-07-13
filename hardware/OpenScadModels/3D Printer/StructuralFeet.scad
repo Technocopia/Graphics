@@ -1,159 +1,212 @@
-use <parameters.scad>
-use <Vitamins/ZAxisMotors.scad>
+use <Parameters.scad>
+use <Vitamins/Zrod.scad>
+use <Vitamins/ServoMotor.scad>
 use <Vitamins/SmallBolts.scad>
 use <Vitamins/PlasticScrew.scad>
+use <Vitamins/Pully.scad>
+use <Vitamins/Encoder.scad>
+use <Vitamins/BallBearing.scad>
+use <Vitamins/SubtractiveBearingCap.scad>
+use <Clips.scad>
 
-PlasticWidth=ZrodDiameter()/2;
-SideWidth = (ZrodDiameter()+PlasticWidth);
+function EncoderShelfWidth() = PlasticWidth()*2+BallBearingHeight()+EncoderThickness();
+function EncoderShelfDistance() = MotorOutcrop()-PlasticWidth()+PullyBodyWidth();
+function EncoderShelfLength() = ZrodSpacing()-SideWidth()+SlotWidth();
+function EncoderShelfOffset() = -ZrodSpacing()/2+PlasticWidth()+SlotWidth()/2;
+function EncoderCutoutLength()= PullyDiam()+PlasticWidth()*2;
+function EncoderMountHeight() = MotorCenterDist()+MotorTolerance()*4+MotorBoltDiam()/2;
+function EncoderMountWidth() = EncoderWidth()+PlasticWidth();
 
+$fn=50;
 
-//this makes the clip that on either side of the device
-module clip()
+echo(PlasticWidth());
+
+module wing()
 {
 	difference()
-	{
-		translate([0,-SideWidth/2,0])
-		{	
-			difference()
-			{
-
-
-	//this makes the basic curved rectangle shape of the clip
-				union()
-				{
-					cube([SideWidth*2,SideWidth,BoxWidth()]);
-					translate([0,SideWidth/2,0])
-					{
-						cylinder(BoxWidth(),SideWidth/2,SideWidth/2);
-					}
-				}
-
-
-	//This makes the holes for the structural rod
-				translate([PlasticWidth+ZrodDiameter()/4,SideWidth/2,-1])
-				{
-					cylinder(BoxWidth()+2, ZrodDiameter()/2, ZrodDiameter()/2);
-				}
-
-
-	//This makes the slot for the clip
-				translate([ZrodDiameter()/2+ZrodDiameter()/4+1,SideWidth/2-PlasticWidth/2,-1])
-				{
-					cube([SideWidth*2-SideWidth/2,PlasticWidth,BoxWidth()+2]);
-				}
-
-
-	//These make the boltholes for the clip
-				translate([SideWidth*2-PlasticWidth*1.5,-1,BoxWidth()/3])
-				{
-					rotate([90,0,0])
-					{
-					#bolt();
-					}
-				}
-				translate([SideWidth*2-PlasticWidth*1.5,-1,2*BoxWidth()/3])
-				{
-					rotate([90,0,0])
-					{
-					#bolt();
-					}
-				}
-
-
-	//This makes the screwholes for the bed mount
-				translate([-PlasticWidth/2,SideWidth/2,-1])
-				{
-					cylinder(BoxWidth()+2, ScrewDiameter()/2, ScrewDiameter()/2);
-				}
-			} 
+	{		
 
 
 	//This makes the wings for the bed mount
-			translate([-SideWidth*2.5-PlasticWidth,SideWidth/2-PlasticWidth/2,0])
+			translate([-SideWidth()*3-PlasticWidth(),-ZrodSpacing()/2-PlasticWidth()/2,0])
 			{
 				union()
 				{	
-					difference()
+//					difference()
+//					{
+						cube([SideWidth()*3,PlasticWidth(), MotorBracketHeight()]);
+
+							//these wings made it hard to figure out scalability
+//						translate([SideWidth()+PlasticWidth()*5,-1,-MotorBracketHeight()/1.5])
+//						{
+//							rotate([0,-45,0])
+//							{
+//								cube([SideWidth()*3+PlasticWidth()*2,PlasticWidth()+2, MotorBracketHeight()*1.5]);
+//							}
+//						}
+//					}
+					translate([0,PlasticWidth()/2,MotorBracketHeight()-ScrewLength()-PlasticWidth()])
 					{
-						cube([SideWidth*2.5,PlasticWidth, BoxWidth()]);
-						translate([BoxWidth()/5,-1,-BoxWidth()/2])
-						{
-							rotate([0,-45,0])
-							{
-								cube([SideWidth*2.5,PlasticWidth+2, BoxWidth()*2]);
-							}
-						}
-					}
-					translate([0,PlasticWidth/2,BoxWidth()-BoxWidth()/5-PlasticWidth])
-					{
-						cylinder(BoxWidth()/5+PlasticWidth, PlasticWidth, PlasticWidth);
+						cylinder(ScrewLength()+PlasticWidth(), PlasticWidth(), PlasticWidth());
 					}
 				}
 			}
-		}
+		
 
 
 	//This makes the screwholes on the wings of the bed mount
-		translate([-SideWidth*2.5-PlasticWidth,0,BoxWidth()-BoxWidth()/5-PlasticWidth-1])
+		translate([-SideWidth()*3-PlasticWidth(),-ZrodSpacing()/2,MotorBracketHeight()-ScrewLength()-PlasticWidth()+2])
 		{
-			cylinder(BoxWidth()/5+PlasticWidth+2, ScrewDiameter()/2, ScrewDiameter()/2);
+			cylinder(ScrewLength()+PlasticWidth(), ScrewDiameter()/2, ScrewDiameter()/2);
 				
 		}
 	}	
 }
 
-
-
-
-//this is the actual module for the finished foot
-module StructuralFeet()
+//This just duplicates the wing into two wings
+module wings()
 {
-	translate([-PlasticWidth/2,-ZrodSpacing()/2,0])
+	union()
+	{
+	wing();
+	translate([0, ZrodSpacing(), 0])
 		{
-		difference()
-		{
-
-
-	//This places the clips at the correct distance apart, adds the center strip, and cuts holes to accomodate the motor
-			union()
-			{
-				clip();
-				translate([0,ZrodSpacing(),0])
-					{
-						clip();
-					}
-				difference()
-				{
-					cube([PlasticWidth,ZrodSpacing(),BoxWidth()]);
-					translate([-1,ZrodSpacing()/2,BoxWidth()/2])
-					{
-						%ZAxisMotor();
-					}
-				}
-			}
-
-		//re-cutting the structural rod holes from before, since there is some overlap
-			translate([PlasticWidth+ZrodDiameter()/4,0,-1])
-			{
-				cylinder(BoxWidth()+2, ZrodDiameter()/2, ZrodDiameter()/2);
-			}
-			translate([PlasticWidth+ZrodDiameter()/4,ZrodSpacing(),-1])
-			{
-				cylinder(BoxWidth()+2, ZrodDiameter()/2, ZrodDiameter()/2);
-			}
-
+		wing();
 		}
 	}
 }
 
 
+module BearingCutout()
+{
+	rotate([0,90,0])
+	{
+		union()
+		{
+			BallBearing();
+			translate([0,0,-EncoderShelfDistance()+BallBearingHeight()/2])
+			{
+				cylinder(EncoderShelfDistance(), BallBearingDiam()/2-PlasticWidth()/2,BallBearingDiam()/2-PlasticWidth()/2);
+			}
+			translate([0,0,BallBearingHeight()/1.5])
+			{
+				cylinder(PlasticWidth()*3, BallBearingDiam()/4,BallBearingDiam()/4);
+			}
+		}				
+	}
+}
+
+module EncoderMount()
+{
+	union()
+	{
+	//this makes the shelf that the encoder/bearing mount sits on
+		difference()
+		{
+			translate([PlasticWidth(),EncoderShelfOffset(),MotorBracketHeight()-PlasticWidth()*3])
+			{
+				cube([EncoderShelfWidth()+EncoderShelfDistance(),EncoderShelfLength(), PlasticWidth()*3])
+;
+			}
+			translate([PlasticWidth()-1,-EncoderCutoutLength()/2,MotorBracketHeight()-PlasticWidth()*3-1])
+			{
+				cube([EncoderShelfDistance()+1,EncoderCutoutLength(), PlasticWidth()*3+2])
+;
+			}
+		}
+		difference()
+		{
+	//this makes the basic shape of the encoder/bearing mount
+			translate([PlasticWidth()+EncoderShelfDistance(),-EncoderMountWidth()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()]) 
+				{
+					cube([EncoderShelfWidth(), EncoderMountWidth(), EncoderMountHeight()]);
+				
+				}
+
+				}
+			}
+		
+
+
+	
+}
+
+
+
+//this is the actual module for the finished foot, it pulls down the clips and adds the wings to make a bed mount, and cuts holes to accomodate the motor
+module StructuralFeet()
+{
+	difference()
+	{
+
+	union()
+	{
+		difference()
+		{
+			Clips(Bottom());
+				translate([0,-MotorThickness()/2,PlasticWidth()])
+				rotate([0,0,90])
+				{
+					rotate([90,0,0])
+					
+				{
+					ServoMotor(true,false);
+				}
+}
+				
+		}
+		wings();
+		difference()
+		{
+			EncoderMount();
+			translate([EncoderShelfDistance()+EncoderShelfWidth(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()-1])
+				{
+					SubtractiveBearingCap();
+				}
+		}
+	}
+			translate([EncoderShelfDistance()+PlasticWidth()*2,0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
+			{
+				BearingCutout();
+				translate([BallBearingHeight()*1.5,0,0])
+				{
+					rotate([0,90,0])
+					{
+						rotate([0,0,90])
+						{
+						union()
+						{
+							Encoder();
+							translate([-EncoderWidth()/2+(EncoderLongBoxWidth()+EncoderShortBoxWidth())/2-EncoderChipSide()/2,-EncoderHeight()/4+1])
+							{
+								cube([EncoderLongBoxWidth()+EncoderShortBoxWidth(),EncoderHeight(),EncoderHeight()]);
+							}
+						}
+						}
+					}}}
+	}
+}
+
+
+
+
+
+
+
 
 //rotating the module, as it would be rotated for printing
-
-rotate([0,180,0])
+translate([0,0, MotorBracketHeight()])
 {
-	StructuralFeet();
+	rotate([0,180,0])
+	{
+		StructuralFeet();
+	}
 }
+
+
+
+//StructuralFeet();
+
 
 
 

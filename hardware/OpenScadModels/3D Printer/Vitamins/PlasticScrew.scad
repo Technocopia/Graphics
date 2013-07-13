@@ -1,9 +1,9 @@
 use <../Parameters.scad>
 
-function ScrewDiameter()= 8 + 3dPrinterTolerance();
-function ScrewLength()= 40 + 3dPrinterTolerance();
-function ScrewHeadDiameter()= 12 + 3dPrinterTolerance();
-function ScrewHeadHeight()= 5 + 3dPrinterTolerance();
+function ScrewDiameter()= 3.6 + 3dPrinterTolerance();  
+function ScrewLength()= 22 + 3dPrinterTolerance();
+function ScrewHeadDiameter()= 6.7 + 3dPrinterTolerance();
+function ScrewHeadHeight()= 2.5 + 3dPrinterTolerance();
 
 //err on the side of smaller tolerances for screws
 
