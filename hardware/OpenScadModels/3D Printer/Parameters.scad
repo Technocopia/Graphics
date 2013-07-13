@@ -1,6 +1,12 @@
 use<Vitamins/Zrod.scad>
-use<Vitamins/LinearBearing.scad>
+//use<Vitamins/LinearBearing.scad>
 
+//tolerances
+function LaserCutTolerance() = .02;
+function 3dPrinterTolerance() = .4;
+
+
+function LinearBearingDiam() = 15 + 3dPrinterTolerance();
 function mm(i) = i*25.4; 
 
 //Build dimensions (x,y,z)-- x, y and z of printable area, NOT of overall device
@@ -26,10 +32,6 @@ echo(ZrodSpacing());
 
 
 
-
-//tolerances
-function LaserCutTolerance() = .02;
-function 3dPrinterTolerance() = .4;
 
 
 
