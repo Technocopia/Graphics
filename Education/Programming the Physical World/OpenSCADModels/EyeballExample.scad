@@ -2,7 +2,7 @@
 module eye(size=100,eyeOrentationX=0,eyeOrentationY=0){
 	cynandarSize = (size/2);
 	innerCynandarSize =  (cynandarSize*.50);
-	rotate([eyeOrentationX,0,eyeOrentationY]){
+	rotate([0,eyeOrentationY,eyeOrentationX]){
 		difference(){
 			sphere(size);
 			translate([size*.95,0,0]){
@@ -17,21 +17,37 @@ module eye(size=100,eyeOrentationX=0,eyeOrentationY=0){
 	}
 }
 
-module eyeBrow(size=100,innerCorner=0,outerCorner=0){
-
-}
-
-
 module eyeLid(size=100,upper=true,angle=0){
+	echo(angle);
+	
+	rotate([0,angle,0]){
+		difference(){
+			difference(){
+				sphere(size*1.1);
+				sphere(size);
+			}
+			if(upper != true){
+				translate([-size*1.1,-size*1.1,0]){
+					cube(size*2.5,size*2.5,size*2.5);
+				}
+			}
+			if(upper == true){
+				translate([-size*1.1,-size*1.1,-size*2.5]){
+					cube(size*2.5,size*2.5,size*2.5);
+				}
+			}		
 
+		}
+	}
 }
 
-module cartoonEye(size=100,innerEyeBrowCorner=0,outerEyeBrowCorner=0,
-upperEyeLidAngle=0,lowerEyeLidAngle=0, eyeOrentationX=0,eyeOrentationY=0){
-	eye(size,eyeOrentationX,eyeOrentationY);
-	eyeBrow(size,innerEyeBrowCorner,outerEyeBrowCorner);
-	eyeLid(size,upper=true,upperAngle);
-	eyeLid(size,upper=false,lowerAngle);
+module cartoonEye(size=100,
+upperEyeLidAngle=10,lowerEyeLidAngle=15, 
+eyeOrentationX=30,eyeOrentationY=0)
+{
+	eye(size,eyeOrentationX,eyeOrentationY);	
+	eyeLid(size=size,upper=true,angle=(((upperEyeLidAngle+5)*-1) + eyeOrentationY));
+	eyeLid(size=size,upper=false,angle=((lowerEyeLidAngle+5) + eyeOrentationY));
 }
 
-cartoonEye(100,10,10,20,20,45,45);
+cartoonEye();
