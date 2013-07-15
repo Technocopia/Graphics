@@ -5,18 +5,19 @@ use <Vitamins/PlasticScrew.scad>
 
 module BearingCap()
 {
+	union()
+	{
 	difference()
 	{
 		union()
 		{
-			cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2, SliderHeight()+PlasticWidth()]);
-			translate([0,PlasticWidth()*2,0])
+			translate([0,0,1])
+			{
+				cube([BallBearingHeight()+PlasticWidth(), PlasticWidth(), SliderHeight()+PlasticWidth()]);
+			}
+			translate([0,PlasticWidth(),1])
 			{
 				cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2,PlasticWidth()]);
-			}
-			translate([0,PlasticWidth()*2,PlasticWidth()])
-			{
-				cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2,PlasticWidth()*2]);
 			}
 			translate([0,-BallBearingHeight()/2,PlasticWidth()*.25])
 			{
@@ -30,9 +31,9 @@ module BearingCap()
 				}
 			}
 		}
-		translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25])
+		translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25+1])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/4+PlasticWidth()*2+1,BallBearingDiam()]);
+				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()]);
 			}
 		translate([-1,-PlasticWidth(),SliderHeight()/2])
 		{                                                                                                                                   
@@ -56,6 +57,11 @@ module BearingCap()
 			}
 		}
 	}
+	translate([0,PlasticWidth()*2,PlasticWidth()])
+			{
+				#cube([BallBearingHeight()+PlasticWidth(), PlasticWidth(),PlasticWidth()*2]);
+			}
+}
 }
 
 BearingCap();

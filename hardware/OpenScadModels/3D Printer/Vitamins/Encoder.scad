@@ -1,8 +1,9 @@
 use <../Parameters.scad>
+use <PlasticScrew.scad>
  
 function EncoderWidth()=35 + 3dPrinterTolerance();
 function EncoderHeight()=25 + 3dPrinterTolerance();
-function EncoderThickness()=2 + 3dPrinterTolerance();
+function EncoderThickness()=3 + 3dPrinterTolerance();
 
 function EncoderBoltWidth()=3 + 3dPrinterTolerance();
 function EncoderBoltLength()=20 + 3dPrinterTolerance();
@@ -46,25 +47,53 @@ module Encoder()
 				cube([EncoderShortBoxWidth(), EncoderShortBoxLength(), EncoderBoxHeight()]);
 			}
 	//screws
-			translate([EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
-			{
-				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-			}
-			translate([EncoderWidth()-EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
-			{
-				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-			}
-			translate([EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
-			{
-				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-			}
-			translate([EncoderWidth()-EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
-			{
-				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-			}
+//			translate([EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
+//			{
+//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+//			}
+//			translate([EncoderWidth()-EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
+//			{
+//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+//			}
+//			translate([EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
+//			{
+//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+//			}
+//			translate([EncoderWidth()-EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
+//			{
+//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+//			}
 		}
 	}
 }
 
 Encoder();
 
+
+
+module EncoderSlot()
+{
+	union()
+	{
+		Encoder();
+		translate([-EncoderWidth()/2, -EncoderHeight()+EncoderChipOffset(), 0])
+		{
+			cube([EncoderWidth(),PlasticWidth()*4, EncoderThickness()]);
+		}
+		translate([-(EncoderLongBoxWidth()+EncoderShortBoxWidth())/2-1,-(EncoderHeight()+PlasticWidth()*4)/2-1,0])
+		{
+			cube([EncoderLongBoxWidth()+EncoderShortBoxWidth()+1,EncoderHeight()+PlasticWidth()*4,EncoderHeight()]);
+		}
+		//screws
+		translate([-EncoderWidth()/2+PlasticWidth()/2,-EncoderChipOffset()-PlasticWidth()-3dPrinterTolerance(),EncoderBoltLength()/2])
+		{
+			#screw();
+		}
+		translate([EncoderWidth()/2-PlasticWidth()/2,-EncoderChipOffset()-PlasticWidth()-3dPrinterTolerance(),EncoderBoltLength()/2])
+		{
+			#screw();
+		}
+	}
+}
+
+%EncoderSlot();
