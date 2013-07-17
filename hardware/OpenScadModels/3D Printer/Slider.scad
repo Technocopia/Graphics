@@ -59,13 +59,10 @@ module Flare()
 			difference()
 			{
 				cube([FlareLength(),GripWidth()*2,SliderHeight()]);
-				translate([PlasticWidth()*1.5,-FlareWidth(),BallBearingDiam()/2+(SliderHeight()-BallBearingDiam())/2-PlasticWidth()])
-				{
-					rotate([0,90,0])
-					{
-						#BallBearing();
-						}
-					}
+					translate([FlareLength()/2-PlasticWidth()/2,0,0])
+	{
+		BearingCap();
+	}
 				}
 		}
 }
@@ -142,7 +139,7 @@ module ZipTieHoles()
 
 
 
-//%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
+%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
 
 
 module Slider()
@@ -167,10 +164,9 @@ module Slider()
 	{
 		ZipTieHoles();
 	}
-		translate([-FlareLength(),-25,0])
-	{
-		#BearingCap();
-	}
+	
+	
+
 	}
 	
 }

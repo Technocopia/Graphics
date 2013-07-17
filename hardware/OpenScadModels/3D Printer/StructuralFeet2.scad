@@ -6,7 +6,7 @@ use <Vitamins/PlasticScrew.scad>
 use <Vitamins/Pully.scad>
 use <Vitamins/Encoder.scad>
 use <Vitamins/BallBearing.scad>
-use <Vitamins/SubtractiveBearingCap.scad>
+use <Vitamins/SubtractiveFootBearingCap.scad>
 use <Clips.scad>
 
 function EncoderShelfWidth() = PlasticWidth()*3+BallBearingHeight()+EncoderThickness();
@@ -117,9 +117,9 @@ module EncoderMount()
 		difference()
 		{
 	//this makes the basic shape of the encoder/bearing mount
-			translate([PlasticWidth()+EncoderShelfDistance(),-EncoderMountWidth()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()]) 
+			translate([PlasticWidth()+EncoderShelfDistance(),-EncoderShelfLength()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()]) 
 			{
-				cube([EncoderShelfWidth(), EncoderMountWidth(), EncoderMountHeight()]);
+				cube([EncoderShelfWidth(), EncoderShelfLength(), EncoderMountHeight()]);
 			}
 		}
 			translate([EncoderShelfWidth()+EncoderShelfDistance()-PlasticWidth()*2,-EncoderMountWidth()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()*4]) 
@@ -153,17 +153,21 @@ module StructuralFeet()
 }
 				
 		}
-		wings();
+			
+wings();
 		difference()
 		{
 			EncoderMount();
-			translate([EncoderShelfDistance()+EncoderShelfWidth(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()-1])
+			translate([PlasticWidth()/2+EncoderShelfDistance()+BallBearingHeight(),0,MotorBracketHeight()-EncoderMountHeight()])
 				{
-					//SubtractiveBearingCap();
+					rotate([180,0,00])
+					{
+						BearingCap();
+					}
 				}
 		}
 	}
-			translate([EncoderShelfDistance()+PlasticWidth()*2,0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
+			translate([EncoderShelfDistance()+PlasticWidth()*2,1,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
 			{
 				BearingCutout();
 				translate([BallBearingHeight()*1.5,0,0])
