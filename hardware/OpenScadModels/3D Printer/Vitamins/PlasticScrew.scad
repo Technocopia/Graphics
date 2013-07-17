@@ -1,4 +1,4 @@
-use <../Parameters.scad>
+use <../Tolerance.scad>
 
 function ScrewDiameter()= 3.6 + 3dPrinterTolerance();  
 function ScrewLength()= 22 + 3dPrinterTolerance();

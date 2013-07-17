@@ -1,4 +1,4 @@
-use <../Parameters.scad>
+use <../Tolerance.scad>
 
 function LinearBearingDiam() = 15 + 3dPrinterTolerance();
 function LinearBearingInnerDiam() = 8.3 + 3dPrinterTolerance();

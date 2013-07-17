@@ -1,3 +1,4 @@
+use <../Tolerance.scad>
 use <../Parameters.scad>
 
 //right now this is a little kludged because it's modeling a plastic screw being used as a bolt, so it's got a thicker bit so that it can slide through one side of the grip and then grab onto the other

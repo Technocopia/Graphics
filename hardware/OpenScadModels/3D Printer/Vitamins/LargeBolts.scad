@@ -1,4 +1,4 @@
-use <../Parameters.scad>
+use <../Tolerance.scad>
 
 function BoltDiameter()= 7 + 3dPrinterTolerance();
 function BoltLength()= 38 + 3dPrinterTolerance();
