@@ -142,7 +142,7 @@ module ZipTieHoles()
 
 
 
-%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
+//%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
 
 
 module Slider()
@@ -167,9 +167,9 @@ module Slider()
 	{
 		ZipTieHoles();
 	}
-		translate([-FlareLength(),FlareWidth(),0])
+		translate([-FlareLength(),-25,0])
 	{
-		BearingCap();
+		#BearingCap();
 	}
 	}
 	
