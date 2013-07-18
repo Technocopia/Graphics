@@ -4,30 +4,33 @@ use <Vitamins/PlasticScrew.scad>
 
 $fn=100;
 
-height=ZrodSpacing();
+height=ZrodSpacing()+BallBearingDiam()/2;
 Bdiam=BallBearingDiam();
 
 function cupOD()= Bdiam/1.25+ScrewDiameter()/2;
 
+module hole(){
+
+cylinder(ScrewLength(),ScrewDiameter()/2,ScrewDiameter()/2);
+}
+
 module BearingRecess(){
 
 difference(){
-	cylinder(BallBearingHeight(),cupOD(),cupOD());  
+	cylinder(BallBearingInnerDiam()/2,cupOD(),cupOD());  
 	translate([0,0,-BallBearingHeight()/2]){
 		cylinder(BallBearingHeight()*4,(Bdiam/2),(Bdiam/2));
 	}
 
-
+	translate([0,-BallBearingDiam()/1.5,-2]){
+				#hole();
+			}
 	translate([0,0,-BallBearingHeight()/2]){
 		cylinder(BallBearingHeight()+10,BallBearingInnerDiam(),BallBearingInnerDiam());
 	}
 }
 }
 
-module hole(){
-
-cylinder(ScrewLength(),ScrewDiameter()/2,ScrewDiameter()/2);
-}
 
 module KnuckleShaft(){
 	
@@ -40,10 +43,10 @@ difference()	{
 	translate([-height/2,-height/2-4,-height]){
 		cube([height,height+4,height]);
 	}
-	translate	([0,-height/5,-Bdiam/2+1]){
-		hole();
+	translate	([0,-height/4,-Bdiam/4]){
+		#hole();
 	}
-	translate([0,height/4,-Bdiam/2+1]){
+	translate([0,height/4,-Bdiam/4]){
 		hole();
 	}
 }
@@ -58,9 +61,6 @@ module Knuckle(){
 			}
 		}
 		translate([0,-height/2,-2]){
-			hole();
-		}
-		translate([0,-height-ScrewDiameter()/2,-2]){
 			hole();
 		}
 	}
