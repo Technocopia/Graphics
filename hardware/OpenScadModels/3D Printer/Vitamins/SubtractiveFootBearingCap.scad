@@ -1,3 +1,4 @@
+use <../Tolerance.scad>
 use <../Parameters.scad>
 use <../Slider.scad>
 use <BallBearing.scad>
@@ -19,46 +20,37 @@ translate([-PlasticWidth()/2-BallBearingHeight()/2,-1-PlasticWidth()*1.25-BallBe
 
 
 
-
-
-
-
-
-
-
-
-
-	union()
+union()
 	{
 	difference()
 	{
 		union()
 		{
-			translate([0,0,1])
+			translate([-3dPrinterTolerance(),0,1])
 			{
-				cube([BallBearingHeight()+PlasticWidth(), PlasticWidth(), SliderHeight()+PlasticWidth()]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, PlasticWidth()+3dPrinterTolerance()*2, SliderHeight()+PlasticWidth()]);
 			}
-			translate([0,PlasticWidth(),1])
+			translate([-3dPrinterTolerance(),PlasticWidth()+3dPrinterTolerance(),1])
 			{
-				cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2,PlasticWidth()]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, PlasticWidth()*2,PlasticWidth()]);
 			}
-			translate([0,-BallBearingHeight()/2,PlasticWidth()*.25])
+			translate([-3dPrinterTolerance(),-BallBearingHeight()/2,PlasticWidth()*.25])
 			{
-				cube([BallBearingHeight()+PlasticWidth(), BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()+PlasticWidth()]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()+PlasticWidth()]);
 			}
-			translate([0,-PlasticWidth(),BallBearingDiam()/2+PlasticWidth()*1.25])
+			translate([-3dPrinterTolerance(),-PlasticWidth(),BallBearingDiam()/2+PlasticWidth()*1.25])
 			{
 				rotate([0,90,0])
 				{
-					cylinder(BallBearingHeight()+PlasticWidth(), BallBearingDiam()/2+PlasticWidth(), BallBearingDiam()/2+PlasticWidth());
+					cylinder(BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, BallBearingDiam()/2+PlasticWidth(), BallBearingDiam()/2+PlasticWidth());
 				}
 			}
 		}
-		translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25+1])
+		translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25+1+3dPrinterTolerance()])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()-PlasticWidth()/4-1]);
+				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()-PlasticWidth()/4-3dPrinterTolerance()-1]);
 			}
-		translate([-1,-BallBearingHeight()/2+PlasticWidth()*2-1,BallBearingDiam()])
+		translate([-1,-BallBearingHeight()/2+PlasticWidth()*2-1+3dPrinterTolerance()*3,BallBearingDiam()])
 			{
 				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()-PlasticWidth()/4-1]);
 			}
@@ -70,15 +62,15 @@ translate([-PlasticWidth()/2-BallBearingHeight()/2,-1-PlasticWidth()*1.25-BallBe
 			}
 		}
 	}
-	translate([0,PlasticWidth()*2,PlasticWidth()])
+	translate([-3dPrinterTolerance(),PlasticWidth()*2-3dPrinterTolerance(),PlasticWidth()-3dPrinterTolerance()])
 			{
-				cube([BallBearingHeight()+PlasticWidth(), PlasticWidth(),PlasticWidth()*2]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, PlasticWidth()+3dPrinterTolerance()*2,PlasticWidth()*2+3dPrinterTolerance()*2]);
 			}
 			translate([PlasticWidth()/2,-BallBearingDiam()/2+PlasticWidth(),SliderHeight()/2])
 		{
 			rotate([0,90,0])
 			{
-				#BallBearing();
+				BallBearing();
 			}
 		}
 translate([PlasticWidth()/2+ScrewHeadDiameter()/2,-1, SliderHeight()+PlasticWidth()/4])
@@ -92,6 +84,7 @@ translate([PlasticWidth()/2+ScrewHeadDiameter()/2,-1, SliderHeight()+PlasticWidt
 				}
 			}
 		}
+
 }
 }
 }
