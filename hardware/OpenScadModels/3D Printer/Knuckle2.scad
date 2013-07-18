@@ -1,4 +1,5 @@
 use <Parameters.scad>
+use <Tolerance.scad>
 use <Vitamins/BallBearing.scad>
 use <Vitamins/PlasticScrew.scad>
 
@@ -23,7 +24,7 @@ difference(){
 	}
 
 	translate([0,-BallBearingDiam()/1.5,-2]){
-				#hole();
+				hole();
 			}
 	translate([0,0,-BallBearingHeight()/2]){
 		cylinder(BallBearingHeight()+10,BallBearingInnerDiam(),BallBearingInnerDiam());
@@ -44,7 +45,7 @@ difference()	{
 		cube([height,height+4,height]);
 	}
 	translate	([0,-height/4,-Bdiam/4]){
-		#hole();
+		hole();
 	}
 	translate([0,height/4,-Bdiam/4]){
 		hole();
