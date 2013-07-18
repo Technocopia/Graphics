@@ -2,6 +2,7 @@ use <Parameters.scad>
 use <Tolerance.scad>
 use <Vitamins/BallBearing.scad>
 use <Vitamins/PlasticScrew.scad>
+use <KnuckleCapTop.scad>
 
 $fn=100;
 
@@ -22,10 +23,6 @@ difference(){
 	translate([0,0,-BallBearingHeight()/2]){
 		cylinder(BallBearingHeight()*4,(Bdiam/2),(Bdiam/2));
 	}
-
-	translate([0,-BallBearingDiam()/1.5,-2]){
-				hole();
-			}
 	translate([0,0,-BallBearingHeight()/2]){
 		cylinder(BallBearingHeight()+10,BallBearingInnerDiam(),BallBearingInnerDiam());
 	}
@@ -54,17 +51,16 @@ difference()	{
 }
 //this is the assembly of the two modules
 module Knuckle(){
-	difference(){
+	difference(){	
 		union(){
 			KnuckleShaft();
 			translate([0,-height/2-Bdiam/2-BallBearingInnerDiam()/2,0]){
 				BearingRecess();
 			}
 		}
-		translate([0,-height/2,-2]){
-			hole();
-		}
+		translate([0,-height/2-Bdiam/2-BallBearingInnerDiam()/2,BallBearingInnerDiam()/2+1]){
+			CapTop(false);
+		}		
 	}
 }
-
 Knuckle();
