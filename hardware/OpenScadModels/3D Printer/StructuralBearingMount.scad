@@ -14,31 +14,30 @@ use <Clips.scad>
 //This makes the structual bearing mount, in its entirety
 module StructuralBearingMount()
 {
-	union()
+	difference()
 	{
-		difference()
+		union()
 		{
-
-	//this cuts the bolthole out of the mount
 			Clips(Top());
-			translate([BoltHeadHeight()/2+BallBearingHeight()+PlasticWidth()+ MotorOutcrop(),0,BearingBracketHeight()/2])
+
+	//This adds the cylindrical peice, which itself maintains friction against the inside of the bearing allowing the outside to spin
+			translate([PlasticWidth(),0,BearingBracketHeight()/2])
 			{
 				rotate([0,90,0])
 				{
-					%LargeBolt();
+					cylinder(MotorOutcrop(), BearingBracketHeight()/2, (BallBearingDiam()-BallBearingInnerDiam())/2);
 				}
 			}
-		}
-
-	//This adds the cylindrical peice, which itself maintains friction against the inside of the bearing allowing the outside to spin
-		translate([PlasticWidth(),0,BearingBracketHeight()/2])
+			
+		}	
+	//this cuts the bolthole out of the mount
+		translate([BoltHeadHeight()/2+BallBearingHeight()+PlasticWidth()+ MotorOutcrop(),0,BearingBracketHeight()/2])
+		{
 			rotate([0,90,0])
 			{
-				{
-					cylinder(MotorOutcrop(), BallBearingInnerDiam()/2+(BallBearingInnerDiam()+BallBearingDiam())/4, BallBearingDiam()/2);
-				}
+				LargeBolt();
 			}
-		
+		}
 	}
 }
 

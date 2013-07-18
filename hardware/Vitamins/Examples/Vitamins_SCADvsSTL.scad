@@ -73,7 +73,7 @@ module test2()
 {
 	difference()
 	{
-		translate([-2,-10,35])
+		translate([-13,-40,-10])
 		{
 			cube([25, 60, 15]);
 		}
@@ -82,13 +82,13 @@ module test2()
 
 //Again, the "../" indicates going up one folder from the folder in which your file (in this case, "motor cutout test" is stored. After you are up to a folder that can branch back down the location of your desired STL, just start using folder names.
 
-		%import("../Motors With Built-In Tolerances/Older versions/tolerance motor-- screws up.stl");
+		import("../Actuators/StandardServo/StandardServo_Vitamin.stl");
 
 	}
 }
 
 //here I just flipped the result over so it has a flat surface to print on
-translate([39,-50,45])
+translate([50,-60,0])
 {
 	rotate([180, 0, 0])
 	{
@@ -98,10 +98,10 @@ translate([39,-50,45])
 
 //Here is just so you can see what the motor stl looks like. It is in blue, next to the cutout that it was used to make.
 
-translate([-10,-90,-47])
+translate([0,-50,0])
 {
 	color("Blue")
-	%import("../Motors With Built-In Tolerances/Older versions/tolerance motor-- screws up.stl");
+	import("../Actuators/StandardServo/StandardServo_Vitamin.stl");
 
 }
 

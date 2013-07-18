@@ -1,4 +1,4 @@
-use <../Parameters.scad>
+use <../Tolerance.scad>
 
 function BoxWidth()=100 + 3dPrinterTolerance();
 function BoxHeight()=150 + 3dPrinterTolerance();

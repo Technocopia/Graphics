@@ -1,3 +1,4 @@
+use <../Tolerance.scad>
 use <../Parameters.scad>
 use <../Slider.scad>
 use <BallBearing.scad>

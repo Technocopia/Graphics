@@ -4,11 +4,23 @@ use <../Slider.scad>
 use <BallBearing.scad>
 use <PlasticScrew.scad>
 
+
+///this is identical to subtractive sliding bearing cap except that it's centered differently, make this into a boolean at some point
+
 module BearingCap()
 {
-translate([-PlasticWidth()/2-BallBearingHeight()/2,-PlasticWidth()/2,-PlasticWidth()*1.25-1.5])
+
+//////////////////////////////THE ONLY DIFFERENCE IS HERE
+translate([-PlasticWidth()/2-BallBearingHeight()/2,-1-PlasticWidth()*1.25-BallBearingDiam()/2,-PlasticWidth()])
 {
-	union()
+	rotate([-90,0,0])
+	{
+
+
+
+
+
+union()
 	{
 	difference()
 	{
@@ -72,6 +84,8 @@ translate([PlasticWidth()/2+ScrewHeadDiameter()/2,-1, SliderHeight()+PlasticWidt
 				}
 			}
 		}
+
+}
 }
 }
 }

@@ -1,11 +1,11 @@
-//NOTE: WHEN MAKING BEARING HOLES FOR 3D PRINTED PARTS, YOU ALWAYS WANT YOUR TOLERANCE TO BE .04 (WHEN ADDED TO DIAMETER) OR .02 (ADDED TO RADIUS). THIS ENSURES A SNUG FIT.
+function BallBearingDiam() = 22;
+function BallBearingHeight() = 7;
+function BallBearingInnerDiam()= 8;
 
-tolerance = .04;
-bearingdiam = 21.9;
-bearingheight = 7;
 
-module bearing();
+module BallBearing(3dPrinterTolerance=.04)
 {
-cylinder(bearingheight, (bearingdiam+tolerance)/2, (bearingdiam+ tolerance)/2, 0);
+cylinder(BallBearingHeight(), (BallBearingDiam()+3dPrinterTolerance)/2, (BallBearingDiam()+3dPrinterTolerance)/2, 0);
 }
-bearing();
+
+BallBearing();
