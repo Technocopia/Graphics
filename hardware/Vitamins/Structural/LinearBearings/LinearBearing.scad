@@ -1,12 +1,10 @@
-use <../Tolerance.scad>
+function LinearBearingDiam() = 15;
+function LinearBearingInnerDiam() = 8.3;
+function LinearBearingHeight() = 24;
 
-function LinearBearingDiam() = 15 + 3dPrinterTolerance();
-function LinearBearingInnerDiam() = 8.3 + 3dPrinterTolerance();
-function LinearBearingHeight() = 24 + 3dPrinterTolerance();
-
-module LinearBearing()
+module LinearBearing(3dPrinterTolerance=.4)
 {
-cylinder(LinearBearingHeight(), LinearBearingDiam()/2, LinearBearingDiam()/2, 0);
+cylinder(LinearBearingHeight()+3dPrinterTolerance, LinearBearingDiam()/2+3dPrinterTolerance, LinearBearingDiam()/2+3dPrinterTolerance);
 }
 
 

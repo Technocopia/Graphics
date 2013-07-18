@@ -1,6 +1,6 @@
 
 
-//When calling this module, use toleranceMotor(boolean,boolean); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount)
+//When calling this module, use servoToleranceValueMotor(boolean,boolean); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount)
 
 
 
@@ -37,96 +37,96 @@ hubwidth=6;
 hublength=3;
 hubdist=3;
 
-//THIS IS THE TOLERANCE, THIS IS PROBABLY THE ONLY THING YOU WILL NEED TO ADJUST, IF THE HOLES ARE TOO SMALL, RAISE TOLERANCE, IF THEY ARE TOO BIG, LOWER TOLERANCE. IF THE HOLES DON'T LINE UP, THEN START CHANGING OTHER DIMENSIONS.
-tolerance=.75;
+//THIS IS THE servoToleranceValue, THIS IS PROBABLY THE ONLY THING YOU WILL NEED TO ADJUST, IF THE HOLES ARE TOO SMALL, RAISE servoToleranceValue, IF THEY ARE TOO BIG, LOWER servoToleranceValue. IF THE HOLES DON'T LINE UP, THEN START CHANGING OTHER DIMENSIONS.
+//servoToleranceValue=2;
 
 
 
 
 
 //defining a bolt
-module bolt()
+module bolt(servoToleranceValue=.75)
 {
-	cylinder(boltheight+tolerance, (boltdiam+tolerance)/2, (boltdiam+tolerance)/2, 0);
+	cylinder(boltheight+servoToleranceValue, (boltdiam+servoToleranceValue)/2, (boltdiam+servoToleranceValue)/2, 0);
 }
 
-module bodyBolts(boltPlacementZ){
+module bodyBolts(boltPlacementZ,servoToleranceValue=.75 ){
 		translate([boltdist,-boltdist,boltPlacementZ])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 		
 		translate([(thickness-boltdist),-boltdist,boltPlacementZ])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 
 		translate([boltdist,(length+boltdist),boltPlacementZ])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 		
 		translate([(thickness-boltdist),(length+boltdist),boltPlacementZ])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 }
 
-module motorBlock(boltsUp=true){
+module motorBlock(boltsUp=true,servoToleranceValue=.75){
 	union()
 	{
 //basic motor shape
-		translate([-tolerance, -tolerance, -tolerance])
+		translate([-servoToleranceValue, -servoToleranceValue, -servoToleranceValue])
 		{
-			cube([thickness+tolerance*2, length+tolerance*2, height+tolerance*2]);
+			cube([thickness+servoToleranceValue*2, length+servoToleranceValue*2, height+servoToleranceValue*2]);
 		}
 
 //wings for mounting
-		translate([-tolerance, (-tolerance+((length-wingslength)/2)), wingsdist-tolerance])
+		translate([-servoToleranceValue, (-servoToleranceValue+((length-wingslength)/2)), wingsdist-servoToleranceValue])
 		{
-			cube([thickness+tolerance*2, wingslength+tolerance*2, wingsheight+tolerance*2+boltheadheight]);
+			cube([thickness+servoToleranceValue*2, wingslength+servoToleranceValue*2, wingsheight+servoToleranceValue*2+boltheadheight]);
 		}
 
 //cylinder on top of motor
 		translate([cylinderdiam/2,cylinderdist,height])
 		{
-			cylinder(cylinderheight+tolerance*2, cylinderdiam/2+tolerance, cylinderdiam/2+tolerance, 0);
+			cylinder(cylinderheight+servoToleranceValue*2, cylinderdiam/2+servoToleranceValue, cylinderdiam/2+servoToleranceValue, 0);
 
 		}
 
 //body bolts
 
 		if(boltsUp==true){
-			bodyBolts(wingsdist+wingsheight);
+			bodyBolts(wingsdist+wingsheight,servoToleranceValue);
 		}else{
-			bodyBolts(wingsdist-boltheight);
+			bodyBolts(wingsdist-boltheight,servoToleranceValue);
 		}
 		
 //cylinder bolts
 		translate([thickness/2,cylinderdist-cylboltdist,(height+cylinderheight)])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 
 		translate([thickness/2,cylinderdist+cylboltdist,(height+cylinderheight)])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 
 		translate([thickness/2+cylboltdist,cylinderdist,(height+cylinderheight)])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 
 		translate([thickness/2-cylboltdist,cylinderdist,(height+cylinderheight)])
 		{
-			bolt();
+			bolt(servoToleranceValue);
 		}
 
 //hub for wires
-		translate([(thickness-(hubwidth+tolerance))/2,(length+tolerance),hubdist])
+		translate([(thickness-(hubwidth+servoToleranceValue))/2,(length+servoToleranceValue),hubdist])
 		{
-			cube([hubwidth+tolerance,hublength+tolerance,hubheight+tolerance]);
+			cube([hubwidth+servoToleranceValue,hublength+servoToleranceValue,hubheight+servoToleranceValue]);
 		}
 	}
 }
@@ -134,23 +134,23 @@ module motorBlock(boltsUp=true){
 
 
 //making the motor
-module toleranceMotor(boltsUp=true,hornCentered=false)
+module servoToleranceValueMotor(boltsUp=true,hornCentered=false,servoToleranceValue=.75)
 {
 	if(hornCentered==true){
-		translate([-thickness/2,-cylinderdist,-(height+cylinderheight)-tolerance*2])
+		translate([-thickness/2,-cylinderdist,-(height+cylinderheight)-servoToleranceValue*2])
 		{
-			motorBlock(boltsUp);
+			motorBlock(boltsUp,servoToleranceValue);
 		}
 	}else{
 		if(boltsUp == true){
-			translate([tolerance,-length-tolerance,(-height+(height-wingsdist-wingsheight-tolerance*3))])
+			translate([servoToleranceValue,-length-servoToleranceValue,(-height+(height-wingsdist-wingsheight-servoToleranceValue*3))])
 			{	
-				motorBlock(boltsUp);
+				motorBlock(boltsUp,servoToleranceValue);
 			}
 		}else{
-			translate([tolerance,-length-tolerance,(-height+(height-wingsdist)+tolerance)])
+			translate([servoToleranceValue,-length-servoToleranceValue,(-height+(height-wingsdist)+servoToleranceValue)])
 			{	
-				motorBlock(boltsUp);
+				motorBlock(boltsUp,servoToleranceValue);
 			}
 		}
 	}
@@ -158,7 +158,7 @@ module toleranceMotor(boltsUp=true,hornCentered=false)
 }
 
 
-toleranceMotor(true,true);
+servoToleranceValueMotor(true,true);
 
 
 
