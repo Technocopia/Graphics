@@ -10,16 +10,19 @@ function cupOD()=BallBearingDiam()/1.25+ScrewDiameter()/2;
 
 holeinset1=[0,-BallBearingDiam()/1.5,-ScrewLength()+4];
 holeinset2=[0,BallBearingDiam()/1.5,-ScrewLength()+4];
+
 module Base(){
+	
 	difference(){
-		cylinder(BallBearingInnerDiam()/4,cupOD(),cupOD());
+		cylinder(BallBearingInnerDiam()/4,cupOD()/1.05,cupOD()/1.05);
 		translate([0,0,-BallBearingInnerDiam()/4]){
-			cylinder(BallBearingInnerDiam()/4+4,BallBearingInnerDiam()/2,BallBearingInnerDiam()/2);
+			cylinder(BallBearingInnerDiam()/4+4,(BallBearingInnerDiam()+BallBearingDiam())/4,(BallBearingInnerDiam()+BallBearingDiam())/4);
 		}
 	}
 }
 
 module CapTop(print=true){
+	
 	if(print==true){
 		difference(){
 			Base();
