@@ -24,7 +24,7 @@ function EncoderChipOffset()=4 + 3dPrinterTolerance()/2;
 
 
 
-module Encoder()
+module Encoder(Bolts=false)
 {
 	//centers the encoder on the chip, which is the important part
 	translate([-EncoderWidth()/2,-EncoderChipOffset()-EncoderChipSide()/2,0])
@@ -47,23 +47,26 @@ module Encoder()
 			{	
 				cube([EncoderShortBoxWidth(), EncoderShortBoxLength(), EncoderBoxHeight()]);
 			}
+		if(Bolts==true)
+		{
 	//screws
-//			translate([EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
-//			{
-//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-//			}
-//			translate([EncoderWidth()-EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
-//			{
-//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-//			}
-//			translate([EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
-//			{
-//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-//			}
-//			translate([EncoderWidth()-EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
-//			{
-//				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
-//			}
+			translate([EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
+			{
+				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+			}
+			translate([EncoderWidth()-EncoderBoltInset(),EncoderBoltInset(),-EncoderBoltLength()/2])
+			{
+				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+			}
+			translate([EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
+			{
+				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+			}
+			translate([EncoderWidth()-EncoderBoltInset(),EncoderHeight()-EncoderBoltInset(),-EncoderBoltLength()/2])
+			{
+				cylinder(EncoderBoltLength(), EncoderBoltWidth()/2, EncoderBoltWidth()/2);
+			}
+		}else{}
 		}
 	}
 }
@@ -83,7 +86,7 @@ module EncoderSlot()
 		}
 		translate([-(EncoderLongBoxWidth()+EncoderShortBoxWidth())/2-1,-(EncoderHeight()+PlasticWidth()*4)/2-1,0])
 		{
-			cube([EncoderLongBoxWidth()+EncoderShortBoxWidth()+1,EncoderHeight()+PlasticWidth()*4,EncoderHeight()]);
+			cube([EncoderLongBoxWidth()+EncoderShortBoxWidth()+1,EncoderHeight()+PlasticWidth()*8,EncoderHeight()]);
 		}
 		//screws
 		translate([-EncoderWidth()/2+PlasticWidth()/2,-EncoderChipOffset()-PlasticWidth()-3dPrinterTolerance(),EncoderBoltLength()/2])

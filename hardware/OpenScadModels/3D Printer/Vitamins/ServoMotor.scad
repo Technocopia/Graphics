@@ -28,7 +28,7 @@ function MotorCylinderDist()=31;
 
 //all bolts
 function MotorBoltHeight()=13.5;
-function MotorBoltDiam()=2.1;
+function MotorBoltDiam()=2;
 
 //body bolts
 function MotorBoltDist()=4.35;
@@ -43,7 +43,7 @@ function MotorHubLength()=3;
 function MotorHubDist()=3;
 
 //THIS IS THE TOLERANCE, THIS IS PROBABLY THE ONLY THING YOU WILL NEED TO ADJUST, IF THE HOLES ARE TOO SMALL, RAISE MOTORTOLERANCE(), IF THEY ARE TOO BIG, LOWER MOTORTOLERANCE(). IF THE HOLES DON'T LINE UP, THEN START CHANGING OTHER DIMENSIONS.
-function MotorTolerance()=.75;
+function MotorTolerance()=.4;
 
 
 
