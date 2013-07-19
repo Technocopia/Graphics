@@ -86,15 +86,17 @@ module BearingCutout()
 			BallBearing();
 			translate([0,0,-EncoderShelfDistance()+BallBearingHeight()/2])
 			{
-				cylinder(EncoderShelfDistance(), BallBearingDiam()/2,BallBearingDiam()/2);
+				cylinder(EncoderShelfDistance(), BallBearingDiam()/2-PlasticWidth()/10,BallBearingDiam()/2-PlasticWidth()/10);
 			}
-			translate([0,0,BallBearingHeight()/1.5])
+			translate([0,0,BallBearingHeight()/2.5])
 			{
 				cylinder(PlasticWidth()*3, BallBearingDiam()/4,BallBearingDiam()/4);
 			}
 		}				
 	}
 }
+
+
 
 module EncoderMount()
 {
@@ -142,27 +144,28 @@ module StructuralFeet()
 		difference()
 		{
 			Clips(Bottom());
-				translate([0,-MotorThickness()/2,PlasticWidth()])
+				translate([-.5,-MotorThickness()/2,PlasticWidth()])
 				rotate([0,0,90])
 				{
 					rotate([90,0,0])
 					
 				{
-					ServoMotor(true,false);
+					ServoMotor();
 				}
 }
 				
 		}
 			
-wings();
+		wings();
 		difference()
 		{
 			EncoderMount();
-			translate([PlasticWidth()/2+EncoderShelfDistance()+BallBearingHeight(),0,MotorBracketHeight()-EncoderMountHeight()])
+			translate([PlasticWidth()/2+EncoderShelfDistance()+BallBearingHeight(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()/3])
 				{
-					rotate([180,0,00])
+					rotate([180,0,0])
 					{
-						#BearingCap(false, true);
+						FootBearingSlot();	
+							
 					}
 				}
 		}
@@ -208,6 +211,9 @@ translate([0,0, MotorBracketHeight()])
 
 
 //StructuralFeet();
+
+
+//FootBearingSlot();
 
 
 

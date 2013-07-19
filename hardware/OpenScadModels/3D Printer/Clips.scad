@@ -67,21 +67,29 @@ module sidebolts(Height = MotorBracketHeight())
 	{
 
 	//These make the boltholes for the clip
-		translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,Height/3])
+		//uncomment these translates and rotates when you're ready to 
+		//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,Height/3])
+		//{
+		//	rotate([90,0,0])
+		//	{
+		translate([SideWidth()*2-PlasticWidth()*1.5,PlasticWidth()+BoltHeadHeight()/2+1,Height/3])
 		{
-			rotate([90,0,0])
+			rotate([-90,0,0])
 			{
 				#SmallBolt();
 			}
 		}
-			translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,2*Height/3])
+			//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,2*Height/3])
+			//{
+			//	rotate([90,0,0])
+			//	{
+		translate([SideWidth()*2-PlasticWidth()*1.5,PlasticWidth()+BoltHeadHeight()/2+1,2*Height/3])
+		{
+			rotate([-90,0,0])
 			{
-				rotate([90,0,0])
-				{
 				#SmallBolt();
-				}
 			}
-		
+		}		
 	}
 }
 

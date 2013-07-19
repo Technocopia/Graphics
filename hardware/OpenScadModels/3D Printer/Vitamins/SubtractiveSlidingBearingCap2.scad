@@ -14,33 +14,37 @@ translate([-PlasticWidth()/2-BallBearingHeight()/2,-PlasticWidth()/2,-PlasticWid
 	{
 		union()
 		{
-			translate([-3dPrinterTolerance(),0,1])
+			translate([-3dPrinterTolerance()*2,0,1-3dPrinterTolerance()*2])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, PlasticWidth()+3dPrinterTolerance()*2, SliderHeight()+PlasticWidth()]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*4, PlasticWidth()+3dPrinterTolerance()*4, SliderHeight()+PlasticWidth()+3dPrinterTolerance()*4]);
 			}
-			translate([-3dPrinterTolerance(),PlasticWidth()+3dPrinterTolerance(),1])
+			translate([-3dPrinterTolerance()*2,PlasticWidth()+3dPrinterTolerance(),3dPrinterTolerance()])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, PlasticWidth()*2,PlasticWidth()]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*4, PlasticWidth()*2+3dPrinterTolerance(),PlasticWidth()+3dPrinterTolerance()*4+PlasticWidth()]);
 			}
-			translate([-3dPrinterTolerance(),-BallBearingHeight()/2,PlasticWidth()*.25])
+			translate([-3dPrinterTolerance()*2,-BallBearingHeight()/2,PlasticWidth()*.25-3dPrinterTolerance()*2])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()+PlasticWidth()]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*4, BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()+PlasticWidth()]);
 			}
-			translate([-3dPrinterTolerance(),-PlasticWidth(),BallBearingDiam()/2+PlasticWidth()*1.25])
+			translate([-3dPrinterTolerance()*2,-PlasticWidth(),BallBearingDiam()/2+PlasticWidth()*1.25])
 			{
 				rotate([0,90,0])
 				{
-					cylinder(BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, BallBearingDiam()/2+PlasticWidth(), BallBearingDiam()/2+PlasticWidth());
+					cylinder(BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*4, BallBearingDiam()/2+PlasticWidth()+3dPrinterTolerance()*2, BallBearingDiam()/2+PlasticWidth()+3dPrinterTolerance()*2);
 				}
 			}
 		}
 		translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25+1+3dPrinterTolerance()])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()-PlasticWidth()/4-3dPrinterTolerance()-1]);
+				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth()*2,BallBearingDiam()-PlasticWidth()/4-3dPrinterTolerance()-1]);
 			}
-		translate([-1,-BallBearingHeight()/2+PlasticWidth()*2-1+3dPrinterTolerance()*3,BallBearingDiam()])
+	translate([-1,-BallBearingHeight()/2+PlasticWidth()*2-1+3dPrinterTolerance()*3,BallBearingDiam()])
 			{
 				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()-PlasticWidth()/4-1]);
+			}
+		translate([-1,-BallBearingDiam()/2,-PlasticWidth()+3dPrinterTolerance()])
+			{
+				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()+PlasticWidth(),PlasticWidth()]);
 			}
 		translate([-1,-PlasticWidth(),SliderHeight()/2])
 		{                                                                                                                                   
@@ -50,9 +54,9 @@ translate([-PlasticWidth()/2-BallBearingHeight()/2,-PlasticWidth()/2,-PlasticWid
 			}
 		}
 	}
-	translate([-3dPrinterTolerance(),PlasticWidth()*2-3dPrinterTolerance(),PlasticWidth()-3dPrinterTolerance()])
+	translate([-3dPrinterTolerance()*2,PlasticWidth()*2-3dPrinterTolerance()*2,PlasticWidth()-3dPrinterTolerance()])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*2, PlasticWidth()+3dPrinterTolerance()*2,PlasticWidth()*2+3dPrinterTolerance()*2]);
+				cube([BallBearingHeight()+PlasticWidth()+3dPrinterTolerance()*4, PlasticWidth()+3dPrinterTolerance()*4,PlasticWidth()*2+3dPrinterTolerance()*4]);
 			}
 			translate([PlasticWidth()/2,-BallBearingDiam()/2+PlasticWidth(),SliderHeight()/2])
 		{
@@ -79,4 +83,26 @@ translate([PlasticWidth()/2+ScrewHeadDiameter()/2,-1, SliderHeight()+PlasticWidt
 //rotate([0,90,0])
 //%BallBearing();
 
-BearingCap();
+//BearingCap();
+
+module SlidingBearingCapSlot()
+{
+	union()
+	{
+		BearingCap();
+		translate([-BallBearingHeight()/2,-BallBearingDiam()/2+PlasticWidth()/2,0])
+			{
+				cube([BallBearingHeight(), BallBearingDiam()/2,BallBearingDiam()/2]);
+			}
+	}
+}
+		
+
+
+
+
+SlidingBearingCapSlot();
+
+
+
+

@@ -61,7 +61,8 @@ module Flare()
 				cube([FlareLength(),GripWidth()*2,SliderHeight()]);
 					translate([FlareLength()/2-PlasticWidth()/2,0,0])
 	{
-		BearingCap();
+		//BearingCap();
+		SlidingBearingCapSlot();
 	}
 				}
 		}
