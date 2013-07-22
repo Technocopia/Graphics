@@ -1,5 +1,5 @@
-function ZipTieWidth()=2.5;
-function ZipTieHeight()=1;
+function ZipTieWidth()=3.5;
+function ZipTieHeight()=2;
 function ZipTieLength()=100;
 
 module ZipTie()
