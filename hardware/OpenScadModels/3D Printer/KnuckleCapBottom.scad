@@ -24,7 +24,7 @@ module CapBottom(){
 			cylinder(BallBearingHeight(),BallBearingDiam()/2,BallBearingDiam()/2);
 		}	
 		translate([0,0,-BallBearingInnerDiam()/8]){
-			cylinder(BallBearingInnerDiam()/4+4,(BallBearingInnerDiam()+BallBearingDiam())/4,(BallBearingInnerDiam()+BallBearingDiam())/4);
+			cylinder(BallBearingInnerDiam()/4+4,(BallBearingInnerDiam()+BallBearingDiam())/3.5,(BallBearingInnerDiam()+BallBearingDiam())/3.5);
 		}
 		translate([0,0,BallBearingHeight()/2+1.2]){
 			CapTop(false);

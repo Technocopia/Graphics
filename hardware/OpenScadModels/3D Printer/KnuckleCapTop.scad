@@ -16,7 +16,7 @@ module Base(){
 	difference(){
 		cylinder(BallBearingInnerDiam()/4,cupOD()/1.05,cupOD()/1.05);
 		translate([0,0,-BallBearingInnerDiam()/4]){
-			cylinder(BallBearingInnerDiam()/4+4,(BallBearingInnerDiam()+BallBearingDiam())/4,(BallBearingInnerDiam()+BallBearingDiam())/4);
+			cylinder(BallBearingInnerDiam()/4+4,(BallBearingInnerDiam()+BallBearingDiam())/3.5,(BallBearingInnerDiam()+BallBearingDiam())/3.5);
 		}
 	}
 }
