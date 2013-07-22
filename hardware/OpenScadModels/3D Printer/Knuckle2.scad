@@ -23,6 +23,13 @@ module BearingRecess(){
 		translate([0,0,-BallBearingHeight()/2]){
 			cylinder(BallBearingHeight()*2,(Bdiam/2),(Bdiam/2));
 		}
+//this squares off the edges of the recess:
+		//translate([-cupOD()*2+BallBearingHeight(),-cupOD(),-2]){
+			//cube([cupOD(),cupOD()*2,BallBearingInnerDiam()/2+4]);
+		//}
+		//translate([cupOD()-BallBearingHeight(),-cupOD(),-2]){
+			//cube([cupOD(),cupOD()*2,BallBearingInnerDiam()/2+4]);
+		//}
 	}
 }
 
