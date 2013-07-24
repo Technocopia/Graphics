@@ -8,7 +8,7 @@ use <Vitamins/ZipTie.scad>
 function BearingGripDiam()= LinearBearingDiam()+PlasticWidth()*2;
 function SliderHeight()= LinearBearingHeight()+PlasticWidth()*2;
 function GripWidth()= PlasticWidth();
-function FlareLength()= (ZBearingSpacing()-ZrodSpacing())/2;
+function FlareLength()= (ZBearingSpacing()-ZrodSpacing())/2; 
 function FlareWidth()= BallBearingDiam()/2-PlasticWidth();
 
 $fn=100;
@@ -18,9 +18,9 @@ module LinearBearingGrip()
 	difference()
 	{
 		cylinder(SliderHeight(), BearingGripDiam()/2, BearingGripDiam()/2);
-		translate([0,0,PlasticWidth()+1])
+		translate([0,0,PlasticWidth()])
 		{
-			LinearBearing();
+			#LinearBearing();
 		}
 		translate([0,0,-1])
 		{
@@ -54,17 +54,17 @@ module SliderBase()
 
 module Flare()
 {
-	translate([-LinearBearingDiam()/2-FlareLength()-PlasticWidth()/2,-GripWidth(),0])
+	translate([-LinearBearingDiam()/2-FlareLength()-PlasticWidth()/2,-GripWidth()*1.5,0])
 		{
 			difference()
 			{
-				cube([FlareLength(),GripWidth()*2,SliderHeight()]);
-					translate([FlareLength()/2-PlasticWidth()/2,0,0])
-	{
-		//BearingCap();
-		SlidingBearingCapSlot();
-	}
+				cube([FlareLength()+PlasticWidth()/2,GripWidth()*2,SliderHeight()]);
+				translate([FlareLength()/2-PlasticWidth()/2,0,0])
+				{
+					//BearingCap();
+					SlidingBearingCapSlot();
 				}
+			}
 		}
 }
 
@@ -118,19 +118,19 @@ module ZipTieHoles()
 {
 	union()
 	{
-		translate([LinearBearingDiam()-PlasticWidth()/2,-GripWidth()-1,SliderHeight()/4])
+		translate([LinearBearingDiam()-PlasticWidth()/4,-GripWidth()*2-1,PlasticWidth()+LinearBearingRidgeOffset()-ZipTieHeight()])
 		{
 			ZipTie();
 		}
-		translate([LinearBearingDiam()-PlasticWidth()/2,-GripWidth()-1,SliderHeight()*3/4])
+		translate([LinearBearingDiam()-PlasticWidth()/4,-GripWidth()*2-1,SliderHeight()-(PlasticWidth()+LinearBearingRidgeOffset())-ZipTieHeight()])
 		{
 			ZipTie();
 		}
-		translate([-LinearBearingDiam()+PlasticWidth()/2,-GripWidth()-1,SliderHeight()/4])
+		translate([-LinearBearingDiam()+PlasticWidth()/4,-GripWidth()*2-1,PlasticWidth()+LinearBearingRidgeOffset()-ZipTieHeight()])
 		{
 			ZipTie();
 		}
-		translate([-LinearBearingDiam()+PlasticWidth()/2,-GripWidth()-1,SliderHeight()*3/4])
+		translate([-LinearBearingDiam()+PlasticWidth()/4,-GripWidth()*2-1,SliderHeight()-(PlasticWidth()+LinearBearingRidgeOffset())-ZipTieHeight()])
 		{
 			ZipTie();
 		}
@@ -140,7 +140,7 @@ module ZipTieHoles()
 
 
 
-%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
+//%cube(size=[ZBearingSpacing(), ZBearingSpacing(), 20,], center=true);
 
 
 module Slider()

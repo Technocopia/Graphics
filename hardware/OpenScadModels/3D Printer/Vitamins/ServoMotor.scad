@@ -26,6 +26,10 @@ function MotorCylinderHeight()=(46-38);
 function MotorCylinderDiam()=21;
 function MotorCylinderDist()=31;
 
+//nub on top of motor
+function MotorNubHeight()=5.85;
+function MotorNubDiam()=6;
+
 //all bolts
 function MotorBoltHeight()=13.5;
 function MotorBoltDiam()=2;
@@ -75,7 +79,7 @@ module MotorBodyBolts(boltPlacementZ){
 		}
 }
 
-module MotorBlock(boltsUp=true){
+module MotorBlock(boltsUp=true, Cylinder=true){
 	union()
 	{
 //basic motor shape
@@ -89,7 +93,8 @@ module MotorBlock(boltsUp=true){
 		{
 			cube([MotorThickness()+MotorTolerance()*2, MotorLength()+MotorTolerance()*2, MotorWingsHeight()+MotorTolerance()*2+MotorBoltHeadHeight()]);
 		}
-
+//determines if you should make the cylinder or a nub
+if(Cylinder==true){
 //cylinder on top of motor
 		translate([MotorCylinderDiam()/2,MotorCylinderDist(),MotorHeight()])
 		{
@@ -97,14 +102,6 @@ module MotorBlock(boltsUp=true){
 
 		}
 
-//body bolts
-
-		if(boltsUp==true){
-			MotorBodyBolts(MotorWingsDist()+MotorWingsHeight());
-		}else{
-			MotorBodyBolts(MotorWingsDist()-MotorBoltHeight());
-		}
-		
 //cylinder bolts
 		translate([MotorThickness()/2,MotorCylinderDist()-MotorCylBoltDist(),(MotorHeight()+MotorCylinderHeight())])
 		{
@@ -125,6 +122,23 @@ module MotorBlock(boltsUp=true){
 		{
 			MotorBolt();
 		}
+}else{
+//nub on top of motor
+		translate([MotorCylinderDiam()/2,MotorCylinderDist(),MotorHeight()])
+		{
+			cylinder(MotorNubHeight()+MotorTolerance()*2, MotorNubDiam()/2+MotorTolerance(), MotorNubDiam()/2+MotorTolerance(), 0);
+
+		}	
+}
+
+//body bolts
+
+		if(boltsUp==true){
+			MotorBodyBolts(MotorWingsDist()+MotorWingsHeight());
+		}else{
+			MotorBodyBolts(MotorWingsDist()-MotorBoltHeight());
+		}
+
 
 //hub for wires
 		translate([(MotorThickness()-(MotorHubWidth()+MotorTolerance()))/2,(MotorBaseLength()+MotorTolerance()),MotorHubDist()])
@@ -137,23 +151,23 @@ module MotorBlock(boltsUp=true){
 
 
 //making the motor
-module ServoMotor(boltsUp=true,hornCentered=false)
+module ServoMotor(boltsUp=true,hornCentered=false, Cylinder=true)
 {
 	if(hornCentered==true){
 		translate([-MotorThickness()/2,-MotorCylinderDist(),-(MotorHeight()+MotorCylinderHeight())-MotorTolerance()*2])
 		{
-			MotorBlock(boltsUp);
+			MotorBlock(boltsUp, Cylinder);
 		}
 	}else{
 		if(boltsUp == true){
 			translate([MotorTolerance(),(MotorLength()-MotorBaseLength())/2+MotorTolerance(),(-MotorHeight()+(MotorHeight()-MotorWingsDist()-MotorWingsHeight()-MotorTolerance()*3))])
 			{	
-				MotorBlock(boltsUp);
+				MotorBlock(boltsUp, Cylinder);
 			}
 		}else{
 			translate([MotorTolerance(),(MotorLength()-MotorBaseLength())/2+MotorTolerance(),(-MotorHeight()+(MotorHeight()-MotorWingsDist())+MotorTolerance())])
 			{	
-				MotorBlock(boltsUp);
+				MotorBlock(boltsUp, Cylinder);
 			}
 		}
 	}
@@ -161,7 +175,7 @@ module ServoMotor(boltsUp=true,hornCentered=false)
 }
 
 
-ServoMotor(true,false);
+ServoMotor(true,false,false);
 
 
 
