@@ -1,1 +1,4 @@
-use <../Vitamins/Electronics/Hot_Ends/PrintrBot_JHead_Hot_End.scad>;
+use <../Vitamins/Electronics/Hot_Ends/PrintrBotJHeadHotEnd_Vitamin.scad>;
+
+$fn=50;
+function ExtruderThickness() = 12.15;
