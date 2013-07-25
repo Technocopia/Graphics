@@ -1,11 +1,11 @@
 use <../Tolerance.scad>
 
-function PullyBodyWidth() = 22 + 3dPrinterTolerance();
-function PullyDiam() = 30 + 3dPrinterTolerance();
+function PullyBodyWidth(3dPrinterTolerance=.4) = 22 + 3dPrinterTolerance;
+function PullyDiam(3dPrinterTolerance=.4) = 30 + 3dPrinterTolerance;
 
-module Pully()
+module Pully(3dPrinterTolerance=.4)
 {
-	cylinder(PullyBodyWidth(), PullyDiam()/2, PullyDiam()/2);
+	cylinder(PullyBodyWidth(3dPrinterTolerance), PullyDiam(3dPrinterTolerance)/2, PullyDiam(3dPrinterTolerance)/2);
 }
 
 Pully();

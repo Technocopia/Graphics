@@ -1,26 +1,24 @@
-use <../Tolerance.scad>
+function RodEndLength(3dPrinterTolerance=.4) = 18+3dPrinterTolerance;
+function RodEndTopWidth(3dPrinterTolerance=.4) = 10+3dPrinterTolerance;
 
-function RodEndLength() = 18+3dPrinterTolerance();
-function RodEndTopWidth() = 10+3dPrinterTolerance();
+function RodEndHoleDiam(3dPrinterTolerance=.4) = 3.6+3dPrinterTolerance;
+function RodEndHoleLength(3dPrinterTolerance=.4) = 7+3dPrinterTolerance;
 
-function RodEndHoleDiam() = 3.6+3dPrinterTolerance();
-function RodEndHoleLength() = 7+3dPrinterTolerance();
-
-module RodEnd()
+module RodEnd(3dPrinterTolerance=.4)
 {
 	difference()
 	{
 		union()
 		{
-			cylinder(RodEndHoleLength(), RodEndTopWidth()/2, RodEndTopWidth()/2);
-			translate([0,-RodEndTopWidth()/2,0])	
+			cylinder(RodEndHoleLength(3dPrinterTolerance), RodEndTopWidth(3dPrinterTolerance)/2, RodEndTopWidth(3dPrinterTolerance)/2);
+			translate([0,-RodEndTopWidth(3dPrinterTolerance)/2,0])	
 			{
-				cube([RodEndLength()-RodEndTopWidth()/2,RodEndTopWidth(), RodEndHoleLength()]);
+				cube([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2,RodEndTopWidth(3dPrinterTolerance), RodEndHoleLength(3dPrinterTolerance)]);
 			}
 		}	
 		translate([0,0,-1])
 		{
-		cylinder(RodEndHoleLength()+2, RodEndHoleDiam()/2, RodEndHoleDiam()/2);
+		cylinder(RodEndHoleLength(3dPrinterTolerance)+2, RodEndHoleDiam(3dPrinterTolerance)/2, RodEndHoleDiam(3dPrinterTolerance)/2);
 		}
 	}
 }

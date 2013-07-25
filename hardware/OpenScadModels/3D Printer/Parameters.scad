@@ -11,7 +11,7 @@ function mm(i) = i*25.4;
 
 function RodEndSpacing()= 105;
 function ZrodSpacing()=RodEndSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
-//echo(ZrodSpacing());
+echo(ZrodSpacing());
 
 //parametric of which hotend is being used (printerbot or bucha nozzle)
 
@@ -35,3 +35,4 @@ function ZrodSpacing()=RodEndSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
 //the equation used for plastic width, it can of course be changed
 function PlasticWidth()= (ZrodDiameter()/2);
 function SideWidth() = (ZrodDiameter()+PlasticWidth());
+echo(PlasticWidth());
