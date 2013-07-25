@@ -9,8 +9,8 @@ function mm(i) = i*25.4;
 //(bearing diameter is dependent on rod diameter)
 
 
-function ZBearingSpacing()= 105;
-function ZrodSpacing()=ZBearingSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
+function RodEndSpacing()= 105;
+function ZrodSpacing()=RodEndSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
 //echo(ZrodSpacing());
 
 //parametric of which hotend is being used (printerbot or bucha nozzle)
