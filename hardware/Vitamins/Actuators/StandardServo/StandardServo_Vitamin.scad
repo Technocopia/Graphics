@@ -1,132 +1,143 @@
+//When calling this module, use toleranceMotor(boolean,boolean,boolean, number); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount), the third boolean determines whether to use the large cylindrical hub or the small metal nub. The number indicated the tolerance of the motor (default is .4 mm)
+
+//THIS IS FOR IF YOU USE OTHER KINDS OF MOTORS, MOTOROUTCROP IS THE DISTANCE FROM THE MOUNTING PLATE TO THE BUISNESS END OF YOUR MOTOR, IF YOU EVER NEED TO SWITCH TO ANOTHER JUST CHANGE THIS VALUE TO THE ACTUAL VALUE
+
+function MotorOutcrop()= MotorCylinderHeight()+(MotorHeight()-(MotorWingsHeight()+MotorWingsDist()))-MotorTolerance();
 
 
-//When calling this module, use servoToleranceValueMotor(boolean,boolean); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount)
-
-
+//for use when the motor is incorporated into parts
+	//this is distance, the short way, from the edge of the motor to the center of the hub
+function MotorCenterDist()=(MotorCylinderDiam()/2) + ((MotorBaseLength()-MotorBaseLength())/2-MotorTolerance()*2); 
 
 //basic motor shape
-height=38;
-length=42;
-thickness=21;
+function MotorHeight()=38;
+function MotorBaseLength()=42;
+function MotorThickness()=21;
 
 //wings for mounting
-wingsheight=5.5;
-wingslength=55;
-wingsdist=26.5;
-boltheadheight=1.4;
+function MotorWingsHeight()=5.5;
+function MotorLength()=55;
+function MotorWingsDist()=26.5;
+function MotorBoltHeadHeight()=1.4;
 
 //cylinder on top of motor
-cylinderheight=(46-38);
-cylinderdiam=21;
-cylinderdist=31;
+function MotorCylinderHeight()=(46-38);
+function MotorCylinderDiam()=21;
+function MotorCylinderDist()=31;
+
+//nub on top of motor
+function MotorNubHeight()=5.85;
+function MotorNubDiam()=6;
 
 //all bolts
-boltheight=13.5;
-boltdiam=2.1;
+function MotorBoltHeight()=13.5;
+function MotorBoltDiam()=2;
 
 //body bolts
-boltdist=4.35;
+function MotorBoltDist()=4.35;
 
 //cylinder bolts
-cylboltdist2=3.5;
-cylboltdist=7.12;
+function MotorCylBoltDist()=7.12;
 
 //hub for wires
-hubheight=3.7;
-hubwidth=6;
-hublength=3;
-hubdist=3;
+function MotorHubHeight()=3.7;
+function MotorHubWidth()=6;
+function MotorHubLength()=3;
+function MotorHubDist()=3;
 
-//THIS IS THE servoToleranceValue, THIS IS PROBABLY THE ONLY THING YOU WILL NEED TO ADJUST, IF THE HOLES ARE TOO SMALL, RAISE servoToleranceValue, IF THEY ARE TOO BIG, LOWER servoToleranceValue. IF THE HOLES DON'T LINE UP, THEN START CHANGING OTHER DIMENSIONS.
-//servoToleranceValue=2;
-
-
-
-
+//When calling this module, use ServoMotor(boolean,boolean); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount)
 
 //defining a bolt
-module bolt(servoToleranceValue=.75)
+module MotorBolt(ServoTolerance=.4)
 {
-	cylinder(boltheight+servoToleranceValue, (boltdiam+servoToleranceValue)/2, (boltdiam+servoToleranceValue)/2, 0);
+	cylinder(MotorBoltHeight()+ServoTolerance, (MotorBoltDiam()+ServoTolerance)/2, (MotorBoltDiam()+ServoTolerance)/2, 0);
 }
 
-module bodyBolts(boltPlacementZ,servoToleranceValue=.75 ){
-		translate([boltdist,-boltdist,boltPlacementZ])
+module bodyBolts(boltPlacementZ,ServoTolerance=.4 ){
+		translate([MotorBoltDist(),-MotorBoltDist(),boltPlacementZ])
 		{
-			bolt(servoToleranceValue);
+			MotorBolt(ServoTolerance);
 		}
 		
-		translate([(thickness-boltdist),-boltdist,boltPlacementZ])
+		translate([(MotorThickness()-MotorBoltDist()),-MotorBoltDist(),boltPlacementZ])
 		{
-			bolt(servoToleranceValue);
+			MotorBolt(ServoTolerance);
 		}
 
-		translate([boltdist,(length+boltdist),boltPlacementZ])
+		translate([MotorBoltDist(),(MotorBaseLength()+MotorBoltDist()),boltPlacementZ])
 		{
-			bolt(servoToleranceValue);
+			MotorBolt(ServoTolerance);
 		}
 		
-		translate([(thickness-boltdist),(length+boltdist),boltPlacementZ])
+		translate([(MotorThickness()-MotorBoltDist()),(MotorBaseLength()+MotorBoltDist()),boltPlacementZ])
 		{
-			bolt(servoToleranceValue);
+			MotorBolt(ServoTolerance);
 		}
 }
 
-module motorBlock(boltsUp=true,servoToleranceValue=.75){
+module motorBlock(boltsUp=true, Cylinder=true, ServoTolerance=.4){
 	union()
 	{
 //basic motor shape
-		translate([-servoToleranceValue, -servoToleranceValue, -servoToleranceValue])
+		translate([-ServoTolerance, -ServoTolerance, -ServoTolerance])
 		{
-			cube([thickness+servoToleranceValue*2, length+servoToleranceValue*2, height+servoToleranceValue*2]);
+			cube([MotorThickness()+ServoTolerance*2, MotorBaseLength()+ServoTolerance*2, MotorHeight()+ServoTolerance*2]);
 		}
 
 //wings for mounting
-		translate([-servoToleranceValue, (-servoToleranceValue+((length-wingslength)/2)), wingsdist-servoToleranceValue])
+		translate([-ServoTolerance, (-ServoTolerance+((MotorBaseLength()-MotorLength())/2)), MotorWingsDist()-ServoTolerance])
 		{
-			cube([thickness+servoToleranceValue*2, wingslength+servoToleranceValue*2, wingsheight+servoToleranceValue*2+boltheadheight]);
+			cube([MotorThickness()+ServoTolerance*2, MotorLength()+ServoTolerance*2, MotorWingsHeight()+ServoTolerance*2+MotorBoltHeadHeight()]);
 		}
 
+//determines if you should make the cylinder or a nub
+if(Cylinder==true){
 //cylinder on top of motor
-		translate([cylinderdiam/2,cylinderdist,height])
+		translate([MotorCylinderDiam()/2,MotorCylinderDist(),MotorHeight()])
 		{
-			cylinder(cylinderheight+servoToleranceValue*2, cylinderdiam/2+servoToleranceValue, cylinderdiam/2+servoToleranceValue, 0);
+			cylinder(MotorCylinderHeight()+ServoTolerance*2, MotorCylinderDiam()/2+ServoTolerance, MotorCylinderDiam()/2+ServoTolerance, 0);
 
 		}
 
-//body bolts
+//cylinder bolts
+		translate([MotorThickness()/2,MotorCylinderDist()-MotorCylBoltDist(),(MotorHeight()+MotorCylinderHeight())])
+		{
+			MotorBolt(ServoTolerance);
+		}
+
+		translate([MotorThickness()/2,MotorCylinderDist()+MotorCylBoltDist(),(MotorHeight()+MotorCylinderHeight())])
+		{
+			MotorBolt(ServoTolerance);
+		}
+
+		translate([MotorThickness()/2+MotorCylBoltDist(),MotorCylinderDist(),(MotorHeight()+MotorCylinderHeight())])
+		{
+			MotorBolt(ServoTolerance);
+		}
+
+		translate([MotorThickness()/2-MotorCylBoltDist(),MotorCylinderDist(),(MotorHeight()+MotorCylinderHeight())])
+		{
+			MotorBolt(ServoTolerance);
+		}
+}else{
+//nub on top of motor
+		translate([MotorCylinderDiam()/2,MotorCylinderDist(),MotorHeight()])
+		{
+			cylinder(MotorNubHeight()+ServoTolerance*2, MotorNubDiam()/2+ServoTolerance, MotorNubDiam()/2+ServoTolerance, 0);
+
+		}	
+}
 
 		if(boltsUp==true){
-			bodyBolts(wingsdist+wingsheight,servoToleranceValue);
+			bodyBolts(MotorWingsDist()+MotorWingsHeight(),ServoTolerance);
 		}else{
-			bodyBolts(wingsdist-boltheight,servoToleranceValue);
+			bodyBolts(MotorWingsDist()-MotorBoltHeight(),ServoTolerance);
 		}
 		
-//cylinder bolts
-		translate([thickness/2,cylinderdist-cylboltdist,(height+cylinderheight)])
-		{
-			bolt(servoToleranceValue);
-		}
-
-		translate([thickness/2,cylinderdist+cylboltdist,(height+cylinderheight)])
-		{
-			bolt(servoToleranceValue);
-		}
-
-		translate([thickness/2+cylboltdist,cylinderdist,(height+cylinderheight)])
-		{
-			bolt(servoToleranceValue);
-		}
-
-		translate([thickness/2-cylboltdist,cylinderdist,(height+cylinderheight)])
-		{
-			bolt(servoToleranceValue);
-		}
-
 //hub for wires
-		translate([(thickness-(hubwidth+servoToleranceValue))/2,(length+servoToleranceValue),hubdist])
+		translate([(MotorThickness()-(MotorHubWidth()+ServoTolerance))/2,(MotorBaseLength()+ServoTolerance),MotorHubDist()])
 		{
-			cube([hubwidth+servoToleranceValue,hublength+servoToleranceValue,hubheight+servoToleranceValue]);
+			cube([MotorHubWidth()+ServoTolerance,MotorHubLength()+ServoTolerance,MotorHubHeight()+ServoTolerance]);
 		}
 	}
 }
@@ -134,31 +145,39 @@ module motorBlock(boltsUp=true,servoToleranceValue=.75){
 
 
 //making the motor
-module servoToleranceValueMotor(boltsUp=true,hornCentered=false,servoToleranceValue=.75)
+module ServoMotor(boltsUp=true, Cylinder=true, hornCentered=false, ServoTolerance=.4)
 {
 	if(hornCentered==true){
-		translate([-thickness/2,-cylinderdist,-(height+cylinderheight)-servoToleranceValue*2])
-		{
-			motorBlock(boltsUp,servoToleranceValue);
-		}
-	}else{
-		if(boltsUp == true){
-			translate([servoToleranceValue,-length-servoToleranceValue,(-height+(height-wingsdist-wingsheight-servoToleranceValue*3))])
-			{	
-				motorBlock(boltsUp,servoToleranceValue);
+		if(Cylinder==true){
+			translate([-MotorThickness()/2,-MotorCylinderDist(),-(MotorHeight()+MotorCylinderHeight())-ServoTolerance*2])
+			{
+				motorBlock(boltsUp,Cylinder,ServoTolerance);
 			}
 		}else{
-			translate([servoToleranceValue,-length-servoToleranceValue,(-height+(height-wingsdist)+servoToleranceValue)])
+			translate([-MotorThickness()/2,-MotorCylinderDist(),-(MotorHeight()+MotorNubHeight())-ServoTolerance*2])
+			{
+				motorBlock(boltsUp,Cylinder,ServoTolerance);
+			}
+			}
+	}else{
+		if(boltsUp == true){
+			translate([ServoTolerance,-MotorBaseLength()-ServoTolerance,(-MotorHeight()+(MotorHeight()-MotorWingsDist()-MotorWingsHeight()-ServoTolerance*3))])
 			{	
-				motorBlock(boltsUp,servoToleranceValue);
+				motorBlock(boltsUp,Cylinder,ServoTolerance);
+			}
+		}else{
+			translate([ServoTolerance,-MotorBaseLength()-ServoTolerance,(-MotorHeight()+(MotorHeight()-MotorWingsDist())+ServoTolerance)])
+			{	
+				motorBlock(boltsUp,Cylinder,ServoTolerance);
 			}
 		}
 	}
 
 }
 
+//toleranceMotor(boolean,boolean,boolean, number); The first boolean determines the bolt direction(true is up, false is down, default=true), the second boolean determines whether to use the large cylindrical hub (true) or the small metal nub (false)(default=true), and the third determines where the module is centered (true centers at the hub, false centers at the motor mount, default=false). The number indicated the tolerance of the motor (default is .4 mm)
 
-servoToleranceValueMotor(true,true);
+ServoMotor(false,true,true,.4);
 
 
 
