@@ -1,7 +1,7 @@
 $fn=100;
 
-function MagnetDiam(3dPrinterTolerance=.4) = 3.1+3dPrinterTolerance;
-function MagnetLength(3dPrinterTolerance=.4) = 6.35+3dPrinterTolerance;
+function MagnetDiam(3dPrinterTolerance=.4) = 4.4+3dPrinterTolerance;
+function MagnetLength(3dPrinterTolerance=.4) = 9.6+3dPrinterTolerance;
 
 module EncoderMagnet(Cylinder=true,3dPrinterTolerance=.4){
 
