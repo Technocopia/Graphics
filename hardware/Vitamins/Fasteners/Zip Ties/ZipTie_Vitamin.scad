@@ -7,4 +7,4 @@ module ZipTie(3dPrinterTolerance=.4)
 	cube([ZipTieHeight(3dPrinterTolerance),ZipTieLength(3dPrinterTolerance), ZipTieWidth(3dPrinterTolerance)]);
 }
 
-ZipTie();
+ZipTie(.4);

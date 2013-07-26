@@ -29,4 +29,4 @@ module HiLoBolt(3dPrinterTolerance=.4, PlasticWidth=4.2)
 
 
 
-HiLoBolt();
+HiLoBolt(.4,4.2);

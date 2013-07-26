@@ -25,4 +25,4 @@ rotate([0,90,0])
 	}
 }
 
-GenericStepper();
+GenericStepper(.4);
