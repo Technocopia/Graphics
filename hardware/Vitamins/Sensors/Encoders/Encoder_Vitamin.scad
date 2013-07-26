@@ -69,7 +69,7 @@ if(Bolts==true)
 	}
 }
 
-//This is the encoder, complete with its encoder bolts (thought bolts can be removed by changing the boolean to "false". It is shown in red.
+//This is the encoder, complete with its encoder bolts (though bolts can be removed by changing the boolean to "false". It is shown in red.
 translate([-50,0,0])
 {
 	color("Red")
