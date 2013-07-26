@@ -1,9 +1,9 @@
-use <parameters.scad>
-use <Vitamins/Zrod.scad>
-use <Vitamins/ServoMotor.scad>
-use <Vitamins/SmallBolts.scad>
-use <Vitamins/PlasticScrew.scad>
-use <Vitamins/BallBearing.scad>
+use <Parameters.scad>
+use <../Vitamins/Structural/SteelRod/8mm_Rod_Vitamin.scad>
+use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
+use <../Vitamins/Fasteners/ScrewsAsBolts/High_Low_Screw_As_Bolt_Vitamin.scad>
+use <../Vitamins/Fasteners/Screws/High_Low_Screw_Viamin.scad>
+use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 
 
 //These allow you to call the "top" or "bottom" bracket rather than true or false, so it's easier to remember.
