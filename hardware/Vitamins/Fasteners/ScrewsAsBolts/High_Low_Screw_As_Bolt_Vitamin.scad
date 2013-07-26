@@ -1,6 +1,3 @@
-use <../Tolerance.scad>
-use <../Parameters.scad>
-
 //This is modelling a plastic screw being used as a bolt, and it's got a thicker bit so that it can slide through one side of the grip and then grab onto the other
 
 function OuterDiameter(3dPrinterTolerance=.4) = 4.5 + 3dPrinterTolerance*2;
@@ -11,7 +8,7 @@ function BoltHeadHeight(3dPrinterTolerance=.4)= 2.5 + 3dPrinterTolerance;
 
 //err on the side of larger tolerances for bolts
 
-module SmallBolt(3dPrinterTolerance=.4, PlasticWidth=4.2)
+module HiLoBolt(3dPrinterTolerance=.4, PlasticWidth=4.2)
 {
 	union()
 	{
@@ -32,4 +29,4 @@ module SmallBolt(3dPrinterTolerance=.4, PlasticWidth=4.2)
 
 
 
-SmallBolt();
+HiLoBolt();
