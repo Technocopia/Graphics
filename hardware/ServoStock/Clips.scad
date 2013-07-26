@@ -2,7 +2,7 @@ use <Parameters.scad>
 use <../Vitamins/Structural/SteelRod/8mm_Rod_Vitamin.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 use <../Vitamins/Fasteners/ScrewsAsBolts/High_Low_Screw_As_Bolt_Vitamin.scad>
-use <../Vitamins/Fasteners/Screws/High_Low_Screw_Viamin.scad>
+use <../Vitamins/Fasteners/Screws/High_Low_Screw_Vitamin.scad>
 use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 
 
@@ -10,8 +10,8 @@ use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 function Top() = false;
 function Bottom() = true;
 
-function MotorBracketHeight()= MotorLength()+MotorTolerance()*4+PlasticWidth()*2;
-function BearingBracketHeight()= BallBearingDiam()*1.5;
+function MotorBracketHeight()= StandardServoLength()+ServoTolerance()*4+PlasticWidth()*2;
+function BearingBracketHeight()=608BallBearingDiam()*1.5;
 function SlotWidth()= PlasticWidth()/2;
 
 //This makes a single clip
@@ -37,14 +37,14 @@ module clip(Height = MotorBracketHeight())
 
 
 	//This makes the holes for the structural rod
-				translate([PlasticWidth()+ZrodDiameter()/4,SideWidth()/2,-1])
+				translate([PlasticWidth()+8mmRodDiameter()/4,SideWidth()/2,-1])
 				{
-					cylinder(Height+2, ZrodDiameter()/2, ZrodDiameter()/2);
+					cylinder(Height+2, 8mmRodDiameter()/2, 8mmRodDiameter()/2);
 				}
 
 
 	//This makes the slot for the clip
-				translate([ZrodDiameter()/2+ZrodDiameter()/4+1,SideWidth()/2-PlasticWidth()/4,-1])
+				translate([8mmRodDiameter()/2+8mmRodDiameter()/4+1,SideWidth()/2-PlasticWidth()/4,-1])
 				{
 					cube([SideWidth()*2-SideWidth()/2+PlasticWidth(),SlotWidth(),Height+2]);
 				}
@@ -53,7 +53,7 @@ module clip(Height = MotorBracketHeight())
 	//This makes the screwholes for the bed mount
 				translate([-PlasticWidth()/2,SideWidth()/2,-1])
 				{
-					cylinder(Height+2, ScrewDiameter()/2, ScrewDiameter()/2);
+					cylinder(Height+2, HiLoScrewDiameter()/2, HiLoScrewDiameter()/2);
 				}
 			} 	
 		}	
@@ -68,26 +68,26 @@ module sidebolts(Height = MotorBracketHeight())
 
 	//These make the boltholes for the clip
 		//uncomment these translates and rotates when you're ready to 
-		//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,Height/3])
+		//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-HiLoBoltHeadHeight()/2-1,Height/3])
 		//{
 		//	rotate([90,0,0])
 		//	{
-		translate([SideWidth()*2-PlasticWidth()*1.5,PlasticWidth()+BoltHeadHeight()/2+1,Height/3])
+		translate([SideWidth()*2-PlasticWidth()*1.5,PlasticWidth()+HiLoBoltHeadHeight()/2+1,Height/3])
 		{
 			rotate([-90,0,0])
 			{
-				#SmallBolt();
+				#HiLoBolt();
 			}
 		}
-			//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-BoltHeadHeight()/2-1,2*Height/3])
+			//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-HiLoBoltHeadHeight()/2-1,2*Height/3])
 			//{
 			//	rotate([90,0,0])
 			//	{
-		translate([SideWidth()*2-PlasticWidth()*1.5,PlasticWidth()+BoltHeadHeight()/2+1,2*Height/3])
+		translate([SideWidth()*2-PlasticWidth()*1.5,PlasticWidth()+HiLoBoltHeadHeight()/2+1,2*Height/3])
 		{
 			rotate([-90,0,0])
 			{
-				#SmallBolt();
+				#HiLoBolt();
 			}
 		}		
 	}
@@ -131,10 +131,10 @@ module Clips(MotorHeight=true)
 					{
 						clip(MotorBracketHeight());
 					}
-						translate([0,ZrodDiameter()/2, 0])
+						translate([0,8mmRodDiameter()/2, 0])
 	//this draws the box between the clips
 					{
-						cube([PlasticWidth(), ZrodSpacing()-ZrodDiameter(),MotorBracketHeight()]);
+						cube([PlasticWidth(), ZrodSpacing()-8mmRodDiameter(),MotorBracketHeight()]);
 					}
 				}
 				bolts(MotorBracketHeight());
@@ -156,10 +156,10 @@ module Clips(MotorHeight=true)
 					{
 						clip(BearingBracketHeight());
 					}
-						translate([0,ZrodDiameter()/2, 0])
+						translate([0,8mmRodDiameter()/2, 0])
 	//this draws the box between the clips
 					{
-						cube([PlasticWidth(), ZrodSpacing()-ZrodDiameter(),BearingBracketHeight()]);
+						cube([PlasticWidth(), ZrodSpacing()-8mmRodDiameter(),BearingBracketHeight()]);
 					}
 				}
 				bolts(BearingBracketHeight());
@@ -171,6 +171,3 @@ module Clips(MotorHeight=true)
 
 
 Clips(Top());
-
-
-
