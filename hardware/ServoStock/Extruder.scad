@@ -27,8 +27,9 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 {
 	if(servo==true){
 		difference(){
-			ExtruderBlock(.4);
-			rotate([0,90,0]){translate([0,0,ExtruderLength()-HotEndLength()/5]){#HotEnd(false,.4);}}
+			translate([-ExtruderLength()/2,-ExtruderWidth()/2,0]){ExtruderBlock(.4);}
+			translate([ExtruderWidth()/2,0,ExtruderHeight()]){rotate([0,90,0]){HotEnd(false,.4);}}
+			translate([0,0,StandardServoHeightAbvWings()*2]){rotate([0,0,-90]){#StandardServoMotor(true,2,true,.4);}}
 		}
 	}else{
 	}
