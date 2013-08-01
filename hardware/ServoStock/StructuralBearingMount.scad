@@ -1,8 +1,9 @@
-use <parameters.scad>
-use <Vitamins/Zrod.scad>
-use <Vitamins/BallBearing.scad>
-use <Vitamins/LargeBolts.scad>
-use <Vitamins/ServoMotor.scad>
+use <Parameters.scad>
+use <../Vitamins/Structural/SteelRod/8mm_Rod_Vitamin.scad>
+use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
+use <../Vitamins/Fasteners/Bolts/M8x30_Vitamin.scad>
+use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
+
 use <Clips.scad>
 
 
@@ -25,17 +26,17 @@ module StructuralBearingMount()
 			{
 				rotate([0,90,0])
 				{
-					cylinder(MotorOutcrop(), BearingBracketHeight()/2, (BallBearingDiam()-BallBearingInnerDiam())/2);
+					cylinder(StandardServoOutcrop(), BearingBracketHeight()/2, (608BallBearingDiam()-608BallBearingInnerDiam())/2);
 				}
 			}
 			
 		}	
 	//this cuts the bolthole out of the mount
-		translate([BoltHeadHeight()/2+BallBearingHeight()+PlasticWidth()+ MotorOutcrop(),0,BearingBracketHeight()/2])
+		translate([M8x30BoltHeadHeight()/2+608BallBearingHeight()+PlasticWidth()+ StandardServoOutcrop(),0,BearingBracketHeight()/2])
 		{
 			rotate([0,90,0])
 			{
-				LargeBolt();
+				#M8x30Bolt();
 			}
 		}
 	}

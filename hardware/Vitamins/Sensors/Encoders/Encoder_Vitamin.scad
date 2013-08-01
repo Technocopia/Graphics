@@ -34,7 +34,7 @@ module Encoder(Bolts=true, 3dPrinterTolerance=.4)
 	//chip
 			translate([EncoderWidth(3dPrinterTolerance)/2-EncoderChipSide(3dPrinterTolerance)/2, EncoderChipOffset(3dPrinterTolerance), -EncoderChipHeight(3dPrinterTolerance)])
 			{
-				cube([EncoderChipSide(3dPrinterTolerance), EncoderChipSide(3dPrinterTolerance),EncoderChipHeight(3dPrinterTolerance)]);
+				#cube([EncoderChipSide(3dPrinterTolerance), EncoderChipSide(3dPrinterTolerance),EncoderChipHeight(3dPrinterTolerance)]);
 			}
 	//boxes
 			translate([EncoderShortBoxInset(3dPrinterTolerance)+EncoderShortBoxWidth(3dPrinterTolerance),0,0])
@@ -91,11 +91,12 @@ module Encoder_Keepaway(3dPrinterTolerance=.4)
 			cube([EncoderLongBoxWidth(3dPrinterTolerance)+EncoderShortBoxWidth(3dPrinterTolerance)+1,EncoderHeight(3dPrinterTolerance)+EncoderThickness(3dPrinterTolerance)*16,EncoderHeight(3dPrinterTolerance)]);
 		}
 		//screws
-		translate([-EncoderWidth()/2+EncoderThickness()*2,-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])
+		translate([-EncoderWidth()/2+EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])
+
 		{
 			#HiLoScrew(3dPrinterTolerance);
 		}
-translate([EncoderWidth()/2-EncoderThickness()*2,-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])		
+translate([EncoderWidth()/2-EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])		
 		{
 			#HiLoScrew(3dPrinterTolerance);
 		}
@@ -107,7 +108,9 @@ translate([50,0,0])
 {
 	union()
 	{
-		Encoder();
+		Encoder(false);
 		%Encoder_Keepaway();
 	}
 }
+
+

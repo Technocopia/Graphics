@@ -10,7 +10,7 @@ use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 function Top() = false;
 function Bottom() = true;
 
-function MotorBracketHeight()= StandardServoLength()+ServoTolerance()*4+PlasticWidth()*2;
+function MotorBracketHeight()= StandardServoLength()+StandardServoTolerance()*4+PlasticWidth()*2;
 function BearingBracketHeight()=608BallBearingDiam()*1.5;
 function SlotWidth()= PlasticWidth()/2;
 
