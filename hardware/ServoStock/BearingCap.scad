@@ -1,6 +1,7 @@
 use <Parameters.scad>
-use <Tolerances.scad>
+
 use <../Vitamins/Sensors/Encoders/Encoder_Vitamin.scad>
+use <../Vitamins/Kinematics/Pulleys/Pulley_Vitamin.scad>
 
 use <StructuralFeet.scad>	
 
@@ -49,7 +50,7 @@ module BearingCap()
 						}
 					}
 				}
-			translate([-PlasticWidth(),0,0])
+			translate([-PulleyHubHeight(),0,0])
 			{
 				rotate([0,0,180])
 				{
@@ -80,7 +81,7 @@ module SubtractiveBearingCap(SubtractiveBearingCapTolerance=.4)
 		{
 			BearingCapFlare(SubtractiveBearingCapTolerance);
 		}	
-	translate([-PlasticWidth(),0,0])
+	translate([-PulleyHubHeight(),0,0])
 			{
 				rotate([0,0,180])
 				{

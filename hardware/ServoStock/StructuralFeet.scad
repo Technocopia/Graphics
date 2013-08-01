@@ -1,7 +1,7 @@
 use <Parameters.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 use <../Vitamins/Fasteners/Screws/High_Low_Screw_Vitamin.scad>
-use <../Vitamins/Kinematics/Pulleys/Generic_Pulley_Vitamin.scad>
+use <../Vitamins/Kinematics/Pulleys/Pulley_Vitamin.scad>
 use <../Vitamins/Sensors/Encoders/Encoder_Vitamin.scad>
 use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 
@@ -9,12 +9,15 @@ use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 use <BearingCap.scad>	
 use <Clips.scad>	
 
+function AreWeClear()=PlasticWidth()+(StandardServoLength()-StandardServoCylinderDist())-PulleyOuterDiam()/2;
+echo("ARE WE CLEAR", AreWeClear());
+
 
 function EncoderShelfWidth() = PlasticWidth()*3+608BallBearingHeight()+EncoderThickness();
-function EncoderShelfDistance() = StandardServoOutcrop()-PlasticWidth()+GenericPulleyBodyWidth();
+function EncoderShelfDistance() = StandardServoOutcrop()-PlasticWidth()+WorkingPulleyHeight();
 function EncoderShelfLength() = ZrodSpacing()-SideWidth()+SlotWidth();
 function EncoderShelfOffset() = -ZrodSpacing()/2+PlasticWidth()+SlotWidth()/2;
-function EncoderCutoutLength()= GenericPulleyDiam()+PlasticWidth()*2;
+function EncoderCutoutLength()= PulleyDiam()+PlasticWidth()*2;
 function EncoderMountHeight() = StandardServoCenterDist()+StandardServoTolerance()*4+StandardServoBoltDiam()/2;
 function EncoderMountWidth() = EncoderWidth()+PlasticWidth();
 
@@ -144,14 +147,14 @@ module StructuralFeet()
 	{
 		difference()
 		{
-			Clips(Bottom());
+			Clips(true);
 				translate([-.5,-StandardServoThickness()/2,PlasticWidth()])
 				rotate([0,0,90])
 				{
 					rotate([90,0,0])
 					
 					{
-						StandardServoMotor(true, true, false, .4);							
+						StandardServoMotor(true, 1, false, .4);							
 					}
 				}
 				
@@ -174,7 +177,7 @@ module StructuralFeet()
 				}
 		}
 	}
-			translate([EncoderShelfDistance()+PlasticWidth()*2,0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
+			translate([EncoderShelfDistance()+PlasticWidth()+PulleyHubHeight(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
 			{
 				BearingCutout();
 				translate([608BallBearingHeight()*1.5,0,0])
@@ -212,9 +215,14 @@ translate([0,0, MotorBracketHeight()])
 	}
 }
 
+//check it out the pulley fits and everything
 
+//translate([-StandardServoCylinderHeight()-PlasticWidth(),0,EncoderMountHeight()+PlasticWidth()])
+//	rotate([0,-90,0])
+//		{
+//		#servo_pulley(true);
+//		}
 
 //StructuralFeet();
-
 
 //FootBearingSlot();

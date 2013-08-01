@@ -2,7 +2,11 @@
 
 //THIS IS FOR IF YOU USE OTHER KINDS OF MOTORS, MOTOROUTCROP IS THE DISTANCE FROM THE MOUNTING PLATE TO THE BUISNESS END OF YOUR MOTOR, IF YOU EVER NEED TO SWITCH TO ANOTHER JUST CHANGE THIS VALUE TO THE ACTUAL VALUE
 
-function StandardServoOutcrop()= StandardServoCylinderHeight()+(StandardServoHeight()-(StandardServoWingsHeight()+StandardServoWingsDist()))-StandardServoTolerance();
+function StandardServoHeightAbvWings()=(StandardServoHeight()-(StandardServoWingsHeight()+StandardServoWingsDist()))-StandardServoTolerance();
+
+function StandardServoOutcrop()= StandardServoCylinderHeight()+StandardServoHeightAbvWings();
+
+function StandardServoWingLength()= (StandardServoLength()-StandardServoBaseLength())/2;
 
 
 //for use when the motor is incorporated into parts
@@ -56,7 +60,8 @@ module StandardServoBolt(ServoTolerance=StandardServoTolerance())
 	cylinder(StandardServoBoltHeight()+ServoTolerance, (StandardServoBoltDiam()+ServoTolerance)/2, (StandardServoBoltDiam()+ServoTolerance)/2, 0);
 }
 
-module bodyBolts(boltPlacementZ,ServoTolerance=StandardServoTolerance() ){
+module bodyBolts(boltPlacementZ,ServoTolerance=StandardServoTolerance())
+{
 		translate([StandardServoBoltDist(),-StandardServoBoltDist(),boltPlacementZ])
 		{
 			StandardServoBolt(ServoTolerance);
@@ -78,7 +83,7 @@ module bodyBolts(boltPlacementZ,ServoTolerance=StandardServoTolerance() ){
 		}
 }
 
-module StandardServoBlock(boltsUp=true, Cylinder=true, ServoTolerance=StandardServoTolerance()){
+module StandardServoBlock(boltsUp=true, Cylinder=1, ServoTolerance=StandardServoTolerance()){
 	union()
 	{
 //basic motor shape
@@ -94,7 +99,7 @@ module StandardServoBlock(boltsUp=true, Cylinder=true, ServoTolerance=StandardSe
 		}
 
 //determines if you should make the cylinder or a nub
-if(Cylinder==true){
+if(Cylinder==1){
 //cylinder on top of motor
 		translate([StandardServoCylinderDiam()/2,StandardServoCylinderDist(),StandardServoHeight()])
 		{
@@ -123,12 +128,30 @@ if(Cylinder==true){
 			StandardServoBolt(ServoTolerance);
 		}
 }else{
+	if(Cylinder==2){
 //nub on top of motor
 		translate([StandardServoCylinderDiam()/2,StandardServoCylinderDist(),StandardServoHeight()])
 		{
 			cylinder(StandardServoNubHeight()+ServoTolerance*2, StandardServoNubDiam()/2+ServoTolerance, StandardServoNubDiam()/2+ServoTolerance, 0);
 
-		}	
+		}
+}else{
+	if(Cylinder==3){
+	union()
+	{
+		translate([StandardServoCylinderDiam()/2,StandardServoCylinderDist(),StandardServoHeight()])
+		{
+			cylinder(StandardServoNubHeight()+ServoTolerance*2, StandardServoNubDiam()/2+ServoTolerance, StandardServoNubDiam()/2+ServoTolerance, 0);
+
+		}
+
+		translate([StandardServoThickness()/2+StandardServoTolerance(),StandardServoCylinderDist(),StandardServoHeight()+StandardServoNubHeight()+ServoTolerance*6])
+		{
+			Servo_wheel_4_arm_horn();
+		}
+	}
+}
+}	
 }
 
 		if(boltsUp==true){
@@ -148,18 +171,25 @@ if(Cylinder==true){
 
 
 //making the motor
-module StandardServoMotor(boltsUp=true, Cylinder=true, hornCentered=false, ServoTolerance=StandardServoTolerance())
+module StandardServoMotor(boltsUp=true, Cylinder=1, hornCentered=false, ServoTolerance=StandardServoTolerance())
 {
 	if(hornCentered==true){
-		if(Cylinder==true){
+		if(Cylinder==1){
 			translate([-StandardServoThickness()/2,-StandardServoCylinderDist(),-(StandardServoHeight()+StandardServoCylinderHeight())-ServoTolerance*2])
 			{
 				StandardServoBlock(boltsUp,Cylinder,ServoTolerance);
 			}
 		}else{
+			if(Cylinder==2){
 			translate([-StandardServoThickness()/2,-StandardServoCylinderDist(),-(StandardServoHeight()+StandardServoNubHeight())-ServoTolerance*2])
 			{
 				StandardServoBlock(boltsUp,Cylinder,ServoTolerance);
+			}
+			}else{
+				translate([-StandardServoThickness()/2,-StandardServoCylinderDist(),-(StandardServoHeight()+StandardServoNubHeight())-ServoTolerance*2-horn_height+.5])
+				{
+					StandardServoBlock(boltsUp,Cylinder,ServoTolerance);
+				}
 			}
 			}
 	}else{
@@ -179,10 +209,79 @@ module StandardServoMotor(boltsUp=true, Cylinder=true, hornCentered=false, Servo
 }
 
 
+///YOU MIGHT WANT TO CLEAN UP THE PRONGEY GUY
 
-// StandardServoMotor (boolean,boolean,boolean, number); The first boolean determines the bolt direction(true is up, false is down, default=true), the second boolean determines whether to use the large cylindrical hub (true) or the small metal nub (false)(default=true), and the third determines where the module is centered (true centers at the hub, false centers at the motor mount, default=false). The number indicated the tolerance of the motor (default is .4 mm)
+//-------------------------------------------
+//-- Futaba 3003 4-arm horn
+//-------------------------------------------
 
-StandardServoMotor(false,true,false,.4);
+//-- Futaba 3003 4-arm horn parameters
+a4h_end_diam = 5;
+a4h_center_diam = 10;
+a4h_arm_length = 15;
+a4h_drill_distance = 13.3;
+
+horn_drill_diam = 2;
+horn_drill_distance = 8;
+horn_height = 4;
+
+///YO FIX THIS
+
+function horn_height()=4;
+
+module horn4(h=5)
+{
+  union() {
+    //-- Center part (is a square)
+    cube([a4h_center_diam+0.2,a4h_center_diam+0.2,h],center=true);
+
+    //-- Place the 4 arms in every side of the cube
+    for ( i = [0 : 3] ) {
+      rotate( [0,0,i*90])
+      translate([0, a4h_center_diam/2, 0])
+      horn4_arm(h);
+    }
+  }
+}
+module horn4_arm(h=5)
+{
+  translate([0,a4h_arm_length-a4h_end_diam/2,0])
+  //-- The arm consist of the perimeter of a cylinder and a cube
+  hull() {
+    cylinder(r=a4h_end_diam/2, h=h, center=true, $fn=20);
+    translate([0,1-a4h_arm_length+a4h_end_diam/2,0])
+      cube([a4h_center_diam,2,h],center=true);
+  }
+}
+module Servo_wheel_4_arm_horn()
+{    
+      horn4(h= horn_height);
+}
+//--------------------------------------------------------------
+//-- Generic module for the horn's drills
+//-- Parameters:
+//--  d = drill's radial distance (from the horn's center)
+//--  n = number of drills
+//--  h = wheel height222222
+//--------------------------------------------------------------
+module horn_drills(d,n,h)
+{
+  union() {
+    for ( i = [0 : n-1] ) {
+        rotate([0,0,i*360/n])
+        translate([0,horn_drill_distance,0])
+        cylinder(r=horn_drill_diam/2, h=h+10,center=true, $fn=60);  
+      }
+  }
+}
+
+
+
+
+// StandardServoMotor (boolean,number,boolean, number); The first boolean determines the bolt direction(true is up, false is down, default=true), the first number determines whether to use the large cylindrical hub (1), the small metal nub (2), or the 4-arm horn (3)(default=1). The second boolean determines where the module is centered (true centers at the hub, false centers at the motor mount, default=false). The number indicated the tolerance of the motor (default is .4 mm)
+
+StandardServoMotor(false,1,true,.4);
+
 
 
 

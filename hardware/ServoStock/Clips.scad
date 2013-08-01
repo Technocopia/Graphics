@@ -6,9 +6,6 @@ use <../Vitamins/Fasteners/Screws/High_Low_Screw_Vitamin.scad>
 use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 
 
-//These allow you to call the "top" or "bottom" bracket rather than true or false, so it's easier to remember.
-function Top() = false;
-function Bottom() = true;
 
 function MotorBracketHeight()= StandardServoLength()+StandardServoTolerance()*4+PlasticWidth()*2;
 function BearingBracketHeight()=608BallBearingDiam()*1.5;
@@ -170,4 +167,4 @@ module Clips(MotorHeight=true)
 
 
 
-Clips(Top());
+Clips(false);

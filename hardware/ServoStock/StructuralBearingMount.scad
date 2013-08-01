@@ -4,7 +4,11 @@ use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 use <../Vitamins/Fasteners/Bolts/M8x30_Vitamin.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 
+
 use <Clips.scad>
+use <Pulley.scad>
+
+
 
 
 //note to self, this is how this part is oriented in rostock mini, but to me it makes more sense to flip the bolt round the other way so that the clips are facing inward (so they'd face out on the bottom and in on the top), I think this would make accessing the belt a lot easier, but maybe there's a reason it's like this so I'm leaving it as-is for now.
@@ -26,7 +30,7 @@ module StructuralBearingMount()
 			{
 				rotate([0,90,0])
 				{
-					cylinder(StandardServoOutcrop(), BearingBracketHeight()/2, (608BallBearingDiam()-608BallBearingInnerDiam())/2);
+					cylinder(StandardServoOutcrop()+PulleyBaseHeight(), BearingBracketHeight()/2, (608BallBearingDiam()-608BallBearingInnerDiam())/2);
 				}
 			}
 			

@@ -27,11 +27,7 @@ module LinearBearingGrip()
 			}
 			translate([0,0,-1])
 			{
-				cylinder(PlasticWidth()+2, LM8UULinearBearingDiam()/2.2, LM8UULinearBearingDiam()/2.2);
-			}
-			translate([0,0,PlasticWidth()+LM8UULinearBearingHeight()-1])
-			{
-				cylinder(PlasticWidth()+2, LM8UULinearBearingDiam()/2.2, LM8UULinearBearingDiam()/1.9);	
+			cylinder(SliderHeight()+2, LM8UULinearBearingDiam()/2.2, LM8UULinearBearingDiam()/2.2);
 			}
 			translate([-BearingGripDiam()/2+LM8UULinearBearingDiam()/4,LM8UULinearBearingDiam()/3,-1])
 			{
@@ -90,9 +86,9 @@ module SliderBase()
 {
 	union()
 	{
-		translate([LM8UULinearBearingDiam()/2+1,PlasticWidth()/2-GripWidth(),0])
+		translate([LM8UULinearBearingDiam()/2,PlasticWidth()/2-GripWidth(),0])
 		{
-			cube([ZrodSpacing()-LM8UULinearBearingDiam()-2,GripWidth(),SliderHeight()]);
+			cube([ZrodSpacing()-LM8UULinearBearingDiam(),GripWidth(),SliderHeight()]);
 		}
 		translate([0,PlasticWidth()/2,0])
 		{
@@ -110,9 +106,9 @@ module SliderBase()
 
 module Flare()
 {
-	translate([-LM8UULinearBearingDiam()/2-FlareLength()-PlasticWidth()/2-1,-GripWidth()*1.5,0])
+	translate([-LM8UULinearBearingDiam()/2-FlareLength()-PlasticWidth()/2,-GripWidth()*1.5,0])
 	{
-		cube([FlareLength()+PlasticWidth()/2,GripWidth()*2-1,SliderHeight()]);
+		cube([FlareLength()+PlasticWidth()/2,GripWidth()*2,SliderHeight()]);
 	}
 }
 
@@ -135,7 +131,7 @@ module Slider()
 				Flare();
 			}
 		}
-	//	BeltClip();
+		BeltClip();
 	}
 }
 
