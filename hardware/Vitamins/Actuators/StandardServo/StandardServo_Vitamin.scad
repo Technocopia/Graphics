@@ -2,12 +2,12 @@
 
 //THIS IS FOR IF YOU USE OTHER KINDS OF MOTORS, MOTOROUTCROP IS THE DISTANCE FROM THE MOUNTING PLATE TO THE BUISNESS END OF YOUR MOTOR, IF YOU EVER NEED TO SWITCH TO ANOTHER JUST CHANGE THIS VALUE TO THE ACTUAL VALUE
 
-function MotorOutcrop()= MotorCylinderHeight()+(MotorHeight()-(MotorWingsHeight()+MotorWingsDist()))-MotorTolerance();
+function StandardServoOutcrop()= StandardServoCylinderHeight()+(StandardServoHeight()-(StandardServoWingsHeight()+StandardServoWingsDist()))-StandardServoTolerance();
 
 
 //for use when the motor is incorporated into parts
 	//this is distance, the short way, from the edge of the motor to the center of the hub
-function MotorCenterDist()=(MotorCylinderDiam()/2) + ((MotorBaseLength()-MotorBaseLength())/2-MotorTolerance()*2); 
+function StandardServoCenterDist()=(StandardServoCylinderDiam()/2) + ((StandardServoLength()-StandardServoBaseLength())/2-StandardServoTolerance()*2); 
 
 //basic motor shape
 function StandardServoHeight()=38;
@@ -46,17 +46,17 @@ function StandardServoHubLength()=3;
 function StandardServoHubDist()=3;
 
 //tolerance for servo
-function ServoTolerance()=.4;
+function StandardServoTolerance()=.4;
 
 //When calling this module, use StandardServoMotor(boolean,boolean); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount)
 
 //defining a bolt
-module StandardServoBolt(ServoTolerance=ServoTolerance())
+module StandardServoBolt(ServoTolerance=StandardServoTolerance())
 {
 	cylinder(StandardServoBoltHeight()+ServoTolerance, (StandardServoBoltDiam()+ServoTolerance)/2, (StandardServoBoltDiam()+ServoTolerance)/2, 0);
 }
 
-module bodyBolts(boltPlacementZ,ServoTolerance=.4 ){
+module bodyBolts(boltPlacementZ,ServoTolerance=StandardServoTolerance() ){
 		translate([StandardServoBoltDist(),-StandardServoBoltDist(),boltPlacementZ])
 		{
 			StandardServoBolt(ServoTolerance);
@@ -78,7 +78,7 @@ module bodyBolts(boltPlacementZ,ServoTolerance=.4 ){
 		}
 }
 
-module StandardServoBlock(boltsUp=true, Cylinder=true, ServoTolerance=ServoTolerance()){
+module StandardServoBlock(boltsUp=true, Cylinder=true, ServoTolerance=StandardServoTolerance()){
 	union()
 	{
 //basic motor shape
@@ -148,7 +148,7 @@ if(Cylinder==true){
 
 
 //making the motor
-module StandardServoMotor(boltsUp=true, Cylinder=true, hornCentered=false, ServoTolerance=ServoTolerance())
+module StandardServoMotor(boltsUp=true, Cylinder=true, hornCentered=false, ServoTolerance=StandardServoTolerance())
 {
 	if(hornCentered==true){
 		if(Cylinder==true){
@@ -164,12 +164,12 @@ module StandardServoMotor(boltsUp=true, Cylinder=true, hornCentered=false, Servo
 			}
 	}else{
 		if(boltsUp == true){
-			translate([ServoTolerance,-StandardServoBaseLength()-ServoTolerance,(-StandardServoHeight()+(StandardServoHeight()-StandardServoWingsDist()-StandardServoWingsHeight()-ServoTolerance*3))])
+			translate([ServoTolerance,(StandardServoLength()-StandardServoBaseLength())/2+ServoTolerance,(-StandardServoHeight()+(StandardServoHeight()-StandardServoWingsDist())-StandardServoWingsHeight()-ServoTolerance*4)])
 			{	
 				StandardServoBlock(boltsUp,Cylinder,ServoTolerance);
 			}
 		}else{
-			translate([ServoTolerance,-StandardServoBaseLength()-ServoTolerance,(-StandardServoHeight()+(StandardServoHeight()-StandardServoWingsDist())+ServoTolerance)])
+			translate([ServoTolerance,(StandardServoLength()-StandardServoBaseLength())/2+ServoTolerance,(-StandardServoHeight()+(StandardServoHeight()-StandardServoWingsDist())-StandardServoWingsHeight()-ServoTolerance*4)])
 			{	
 				StandardServoBlock(boltsUp,Cylinder,ServoTolerance);
 			}
@@ -178,9 +178,11 @@ module StandardServoMotor(boltsUp=true, Cylinder=true, hornCentered=false, Servo
 
 }
 
+
+
 // StandardServoMotor (boolean,boolean,boolean, number); The first boolean determines the bolt direction(true is up, false is down, default=true), the second boolean determines whether to use the large cylindrical hub (true) or the small metal nub (false)(default=true), and the third determines where the module is centered (true centers at the hub, false centers at the motor mount, default=false). The number indicated the tolerance of the motor (default is .4 mm)
 
-StandardServoMotor(false,true,true,.4);
+StandardServoMotor(false,true,false,.4);
 
 
 
