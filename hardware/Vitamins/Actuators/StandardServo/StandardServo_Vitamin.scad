@@ -50,7 +50,7 @@ function StandardServoHubLength()=3;
 function StandardServoHubDist()=3;
 
 //tolerance for servo
-function StandardServoTolerance()=.4;
+function StandardServoTolerance()=.6;
 
 //When calling this module, use StandardServoMotor(boolean,boolean); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount)
 

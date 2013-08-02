@@ -5,12 +5,14 @@ use <../Vitamins/Actuators/StandardServo/Servo_Connector_Vitamin.scad>;
 use <../Vitamins/Fasteners/Screws/High_Low_Screw_Vitamin.scad>;
 use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>;
 use <../Vitamins/Sensors/Encoders/Encoder_Vitamin.scad>;
+use <../Vitamins/Sensors/Encoders/EncoderMagnet_Vitamin.scad>;
+use <../Vitamins/Tools/Filament_Vitamin.scad>;
 use <ExtruderIdlerWheel.scad>;
 
 //core dimensions of the part depend on the screw, servo, and servo connector.  Width is based on the standard platform fastener distance.  Parameterize when possible.
 function ExtruderLength(3dPrinterTolerance=.4) = StandardServoLength(3dPrinterTolerance)+HiLoScrewLength(3dPrinterTolerance)/2+2*ConnectorLength(3dPrinterTolerance);
 function ExtruderHeight(3dPrinterTolerance=.4) = HiLoScrewLength(3dPrinterTolerance)/2;
-function ExtruderWidth(3dPrinterTolerance=.4) = 54+HotEndDiam(3dPrinterTolerance)/2;
+function ExtruderWidth(3dPrinterTolerance=.4) = 54+HotEndDiam(3dPrinterTolerance);
 
 
 //Creating the basic extruder block
@@ -28,8 +30,10 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 	if(servo==true){
 		difference(){
 			translate([-ExtruderLength()/2,-ExtruderWidth()/2,0]){ExtruderBlock(.4);}
-			translate([ExtruderWidth()/2,0,ExtruderHeight()]){rotate([0,90,0]){HotEnd(false,.4);}}
-			translate([0,0,StandardServoHeightAbvWings()*2]){rotate([0,0,-90]){#StandardServoMotor(true,2,true,.4);}}
+			translate([ExtruderWidth()/2,0,ExtruderHeight()]){rotate([0,90,0]){#HotEnd(false,.4);}}
+			translate([0,StandardServoNubDiam()/2,StandardServoHeightAbvWings()*2]){rotate([0,0,-90]){#StandardServoMotor(true,2,true,.4);}}
+			rotate([0,90,0]){translate([-ExtruderHeight(),0,-ExtruderLength()/2-2]){Filament(1.75,100,0);}}
+			translate([0,0,MagnetLength()]){#IdlerWheel();}
 		}
 	}else{
 	}
