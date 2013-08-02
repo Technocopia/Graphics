@@ -154,7 +154,7 @@ module StructuralFeet()
 					rotate([90,0,0])
 					
 					{
-						StandardServoMotor(true, 1, false, .4);							
+						StandardServoMotor(true, 1, false);							
 					}
 				}
 				
