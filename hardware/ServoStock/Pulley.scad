@@ -25,6 +25,9 @@ function PulleyDiam() = (numTeeth*pitch/PI/2-beltThickness)*2;
 function PulleyInnerDiam() = (numTeeth*pitch/PI/2-beltThickness-notchDepth)*2;
 function PulleyOuterDiam() = (numTeeth*pitch/PI/2-beltThickness+2)*2;
 
+
+//label all of these and maybe include a commented out cylinder demonstrating each so that other people can understand the code better
+
 echo(PulleyOuterDiam());
 
 function PulleyHubHeight()= 608BallBearingHeight()*.7;
@@ -38,9 +41,9 @@ function PulleyHeight()=PulleyBaseHeight()+toothHeight+flangeHeight+PulleyHubHei
 
 function PulleyTotalHeight()=PulleyHeight()+608BallBearingHeight();
 
-
+function PulleyBeltOffset()=splineToPulleyHeight+beltWidth/2;
 //translate([10,10,0])
-///#cube([5, 5, PulleyTotalHeight()]);
+//#cube([5, 5, PulleyBeltOffset()]);
 
 
 bearingStopRadius = shaftDiameter/1.4;
