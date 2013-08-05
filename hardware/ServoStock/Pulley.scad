@@ -240,7 +240,7 @@ module shaft(MagnetType=true){
 		}
 		
 			translate([0, 0, PulleyTotalHeight()-MagnetLength()+1])
-				EncoderMagnet(MagnetType,.4);
+				MagnetDraft();
 		
 	}
 }
