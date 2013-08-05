@@ -75,17 +75,17 @@ module LinearBearingGrip()
 
 module BeltClip()
 {
-	difference()
+	translate([-PulleyInnerDiam()/2-2XLBeltGripHeight(),BeltClipLength()/2,SliderHeight()/2])
 	{
-		translate([-PulleyInnerDiam(),BeltClipLength()/2,SliderHeight()/2])
+		difference()
 		{
 			cube([2XLBeltGripHeight()*3, BeltClipLength(), SliderHeight()], center=true);
-		}
-		translate([-2XLBeltGripHeight()-PulleyInnerDiam(),BeltClipLength()-2XLBeltWidth()*1.5+1,SliderHeight()+1])
-		{
-			rotate([0,90,0])
+			translate([0,BeltClipLength()/2-2XLBeltSlotWidth()+.12,SliderHeight()+1])
 			{
-				2XLTimingBeltSlot();
+				rotate([0,90,0])
+				{
+					2XLTimingBeltSlot();
+				}
 			}
 		}
 	}
@@ -117,13 +117,13 @@ module SliderBase()
 	}
 }
 
-module Flare()
-{
-	translate([-LM8UULinearBearingDiam()/2-FlareLength()-PlasticWidth()/2-1,-GripWidth()*1.5,0])
-	{
-		cube([FlareLength()+PlasticWidth()/2,GripWidth()*2-1,SliderHeight()]);
-	}
-}
+//module Flare()
+//{
+//	translate([-LM8UULinearBearingDiam()/2-FlareLength()-PlasticWidth()/2-1,-GripWidth()*1.5,0])
+//	{
+//		cube([FlareLength()+PlasticWidth()/2,GripWidth()*2-1,SliderHeight()]);
+//	}
+//}
 
 
 
@@ -138,17 +138,25 @@ module Slider()
 		translate([-ZrodSpacing()/2,-PlasticWidth()/2,0])
 		{
 			SliderBase();			
-			Flare();
-			mirror([1,0,0])
-			{
-				translate([-ZrodSpacing(),0,0])
-				{
-					Flare();
-				}
-			}
+			//Flare();
+			//mirror([1,0,0])
+			//{
+				//translate([-ZrodSpacing(),0,0])
+				//{
+				//	Flare();
+				//}
+			//}
 		}
 	BeltClip();
 	}
 }
 
 Slider();
+
+//to check if pulley lines up
+//use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
+//translate([0,StandardServoCylinderHeight(),0])
+//	rotate([-90,0,0])
+//		{
+//		servo_pulley(true);
+//		}
