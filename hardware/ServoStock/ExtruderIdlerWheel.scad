@@ -11,9 +11,9 @@ difference()
 	union()
 	{
 		cylinder(MagnetLength(3dPrinterTolerance), 608BallBearingInnerDiam(-3dPrinterTolerance)/2, 608BallBearingInnerDiam(-3dPrinterTolerance)/2);
-			translate([0,0,MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)-(MagnetLength(3dPrinterTolerance)-608BallBearingHeight(3dPrinterTolerance))])
+			translate([0,0,(MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)*2)])
 			{
-				cylinder(MagnetLength(3dPrinterTolerance)-608BallBearingHeight(3dPrinterTolerance),((608BallBearingDiam(3dPrinterTolerance)+608BallBearingInnerDiam(3dPrinterTolerance))/2)/2,((608BallBearingDiam(3dPrinterTolerance)+608BallBearingInnerDiam(3dPrinterTolerance))/2)/2);
+				cylinder(MagnetLength(3dPrinterTolerance)-608BallBearingHeight()/2,((608BallBearingDiam(3dPrinterTolerance)+608BallBearingInnerDiam(3dPrinterTolerance))/2)/2,((608BallBearingDiam(3dPrinterTolerance)+608BallBearingInnerDiam(3dPrinterTolerance))/2)/2);
 			}
 			translate([0,0,MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)])
 			{

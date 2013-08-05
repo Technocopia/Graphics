@@ -255,7 +255,7 @@ module servo_pulley(MagnetType=true, MotorType=true){
 	difference(){
 		pulley(MagnetType);		
 		translate([0,0,-1])
-			StandardServoMotor(true,1,true,.4);
+			StandardServoMotor(true,1,true);
 		}
 		}else{
 		difference(){
@@ -266,7 +266,7 @@ module servo_pulley(MagnetType=true, MotorType=true){
 					cylinder(h=horn_height(), r=PulleyOuterDiam()/2);
 				}
 				}						
-			StandardServoMotor(false,3,true,.4);
+			StandardServoMotor(false,3,true);
 			}
 		
 	}
