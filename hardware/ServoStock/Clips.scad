@@ -20,37 +20,32 @@ module clip(Height = MotorBracketHeight())
 		{	
 			difference()
 			{
-
-
-	//this makes the basic curved rectangle shape of the clip
+				//this makes the basic curved rectangle shape of the clip
 				union()
 				{
 					cube([SideWidth()*2,SideWidth(),Height]);
 					translate([0,SideWidth()/2,0])
 					{
-						cylinder(Height,SideWidth()/2,SideWidth()/2);
+						cylinder(h=Height,r=SideWidth()/2);
 					}
 				}
 
-
-	//This makes the holes for the structural rod
+				//This makes the holes for the structural rod
 				translate([PlasticWidth()+8mmRodDiameter()/4,SideWidth()/2,-1])
 				{
-					cylinder(Height+2, 8mmRodDiameter()/2, 8mmRodDiameter()/2);
+					cylinder(h=Height+2, r=8mmRodDiameter()/2);
 				}
 
-
-	//This makes the slot for the clip
+				//This makes the slot for the clip
 				translate([8mmRodDiameter()/2+8mmRodDiameter()/4+1,SideWidth()/2-PlasticWidth()/4,-1])
 				{
 					cube([SideWidth()*2-SideWidth()/2+PlasticWidth(),SlotWidth(),Height+2]);
 				}
 
-
-	//This makes the screwholes for the bed mount
+				//This makes the screwholes for the bed mount
 				translate([-PlasticWidth()/2,SideWidth()/2,-1])
 				{
-					cylinder(Height+2, HiLoScrewDiameter()/2, HiLoScrewDiameter()/2);
+					cylinder(h=Height+2, r=HiLoScrewDiameter()/2);
 				}
 			} 	
 		}	
@@ -63,7 +58,7 @@ module sidebolts(Height = MotorBracketHeight())
 	union()
 	{
 
-	//These make the boltholes for the clip
+		//These make the boltholes for the clip
 		//uncomment these translates and rotates when you're ready to 
 		//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-HiLoBoltHeadHeight()/2-1,Height/3])
 		//{
@@ -76,10 +71,10 @@ module sidebolts(Height = MotorBracketHeight())
 				#HiLoBolt();
 			}
 		}
-			//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-HiLoBoltHeadHeight()/2-1,2*Height/3])
-			//{
-			//	rotate([90,0,0])
-			//	{
+		//translate([SideWidth()*2-PlasticWidth()*1.5,-PlasticWidth()-HiLoBoltHeadHeight()/2-1,2*Height/3])
+		//{
+		//	rotate([90,0,0])
+		//	{
 		translate([SideWidth()*2-PlasticWidth()*1.5,PlasticWidth()+HiLoBoltHeadHeight()/2+1,2*Height/3])
 		{
 			rotate([-90,0,0])

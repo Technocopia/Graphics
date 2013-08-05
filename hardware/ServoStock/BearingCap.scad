@@ -43,10 +43,7 @@ module BearingCap()
 					{
 						rotate([0,0,90])
 						{
-						
 							Encoder_Keepaway();
-							
-						
 						}
 					}
 				}
@@ -81,13 +78,13 @@ module SubtractiveBearingCap(SubtractiveBearingCapTolerance=.4)
 		{
 			BearingCapFlare(SubtractiveBearingCapTolerance);
 		}	
-	translate([-PulleyHubHeight(),0,0])
+		translate([-PulleyHubHeight(),0,0])
+		{
+			rotate([0,0,180])
 			{
-				rotate([0,0,180])
-				{
-					BearingCutout();
-				}
+				BearingCutout();
 			}
+		}
 	}	
 }
 
