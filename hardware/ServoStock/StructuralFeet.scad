@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 use <Parameters.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 use <../Vitamins/Fasteners/Screws/High_Low_Screw_Vitamin.scad>
@@ -209,9 +208,6 @@ translate([0,0, MotorBracketHeight()])
 //		}
 
 //StructuralFeet();
-
-//FootBearingSlot();
-=======
 use <Parameters.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 use <../Vitamins/Fasteners/Screws/High_Low_Screw_Vitamin.scad>
@@ -440,4 +436,4 @@ translate([0,0, MotorBracketHeight()])
 //StructuralFeet();
 
 //FootBearingSlot();
->>>>>>> branch 'master' of https://AcesJalopy@code.google.com/p/the-technocopia-project/
+
