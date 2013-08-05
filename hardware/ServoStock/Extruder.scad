@@ -31,9 +31,10 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 		difference(){
 			translate([-ExtruderLength()/2,-ExtruderWidth()/2,0]){ExtruderBlock(.4);}
 			translate([ExtruderWidth()/2,0,ExtruderHeight()]){rotate([0,90,0]){#HotEnd(false,.4);}}
-			translate([0,StandardServoNubDiam()/2,StandardServoHeightAbvWings()*2]){rotate([0,0,-90]){#StandardServoMotor(true,2,true,.4);}}
+			translate([0,StandardServoNubDiam()/2,StandardServoHeightAbvWings()*1.75]){rotate([0,0,-90]){#StandardServoMotor(true,2,true,.4);}}
 			rotate([0,90,0]){translate([-ExtruderHeight(),0,-ExtruderLength()/2-2]){Filament(1.75,100,0);}}
-			translate([0,0,MagnetLength()]){#IdlerWheel();}
+			translate([0,-ExtruderIdlerWheelDiam()/2,ExtruderHeight(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){cylinder(h=ExtruderIdlerWheelThickness(3dPrinterTolerance)+1, r=ExtruderIdlerWheelDiam(3dPrinterTolerance)/2+.5);}
+			translate([0,-ExtruderIdlerWheelDiam()/2,MagnetLength()-MagnetLength()-2]){cylinder(h=MagnetLength(3dPrinterTolerance)*2, r=608BallBearingInnerDiam(-3dPrinterTolerance)/2);}
 		}
 	}else{
 	}
