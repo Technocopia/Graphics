@@ -5,8 +5,29 @@ function ExtruderIdlerWheelThickness(3dPrinterTolerance=.4) = 1.65+3dPrinterTole
 function ExtruderIdlerWheelDiam(3dPrinterTolerance=.4) = 33.5+3dPrinterTolerance;
 function ExtruderIdlerWheelInnerDiam(3dPrinterTolerance=.4) = 32+3dPrinterTolerance;
 
+//creates the Idler Wheel for Printing.  When you want to print the idler wheels, call this module!
 module IdlerWheel(3dPrinterTolerance=.4){
 	difference()
+	{
+		union()
+		{
+	//the shaft which holds the encoder magnet:
+			cylinder(h=MagnetLength(3dPrinterTolerance), r=608BallBearingInnerDiam(-3dPrinterTolerance)/2);
+			
+				translate([0,0,MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)/2])
+				{
+	//the idler wheel:				
+					cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance),ExtruderIdlerWheelDiam(3dPrinterTolerance)/2,ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/2);
+				}
+	//the bearing 
+				translate([0,0,MagnetLength()-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);}			
+		}
+		translate([0,0,MagnetLength(3dPrinterTolerance)-.25]){rotate([0,180,0]){MagnetDraft(.4);}}
+	}
+}
+//creates the Idler Wheel footprint for the extruder.
+module IdlerWheelKeepaway(3dPrinterTolerance=.4){
+		difference()
 	{
 		union()
 		{
@@ -14,17 +35,14 @@ module IdlerWheel(3dPrinterTolerance=.4){
 			
 				translate([0,0,MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)/2])
 				{
-					cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance),ExtruderIdlerWheelDiam(3dPrinterTolerance)/2,ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/2);
-				}			
+					cylinder(h=ExtruderIdlerWheelThickness(3dPrinterTolerance),r=(ExtruderIdlerWheelDiam(3dPrinterTolerance)/2)+.5);
+				}
+				translate([0,0,MagnetLength()-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);}			
 		}
 		translate([0,0,MagnetLength(3dPrinterTolerance)-.25]){rotate([0,180,0]){MagnetDraft(.4);}}
 	}
 }
 
-translate([0,0,MagnetLength()+ExtruderIdlerWheelThickness()/2])
-{
-	rotate([0,180,0])
-	{
-		IdlerWheel(.4);	
-	}
-}
+
+//translate([0,0,MagnetLength()+ExtruderIdlerWheelThickness()/2]){rotate([0,180,0]){IdlerWheel(.4);}}
+IdlerWheelKeepaway(.4);
