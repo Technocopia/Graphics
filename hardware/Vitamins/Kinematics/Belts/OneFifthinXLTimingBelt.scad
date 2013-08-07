@@ -1,9 +1,9 @@
-function 2XLBeltBaseHeight(3dPrinterTolerance=.4)= 1.4 + 3dPrinterTolerance;
-function 2XLBeltGripHeight(3dPrinterTolerance=.4)= 2.6 + 3dPrinterTolerance;
-function 2XLBeltToothWidth(3dPrinterTolerance=.4)= 2.5 + 3dPrinterTolerance;
-function 2XLBeltSpaceWidth(3dPrinterTolerance=.4)= 3.1 + 3dPrinterTolerance;
-function 2XLBeltWidth(3dPrinterTolerance=.4)= 6.6 + 3dPrinterTolerance;
-function 2XLBeltPitch()= 5;
+function 2XLBeltBaseHeight(3dPrinterTolerance=.4)= 1.3 + 3dPrinterTolerance;
+function 2XLBeltGripHeight(3dPrinterTolerance=.4)= 2.5 + 3dPrinterTolerance;
+function 2XLBeltToothWidth(3dPrinterTolerance=.4)= 2.2 + 3dPrinterTolerance;
+function 2XLBeltSpaceWidth(3dPrinterTolerance=.4)= 2.7 + 3dPrinterTolerance;
+function 2XLBeltWidth(3dPrinterTolerance=.4)= 6.4 + 3dPrinterTolerance;
+function 2XLBeltPitch()= 4.9;
 function 2XLBeltSlotWidth(3dPrinterTolerance=.4)=2XLBeltWidth(3dPrinterTolerance)*1.6;
 
 
@@ -14,7 +14,7 @@ module 2XLTimingBelt(3dPrinterTolerance=.4, Length=70,) {
 	cube([Length,2XLBeltWidth(3dPrinterTolerance),2XLBeltBaseHeight(3dPrinterTolerance)]) ;
 	for (inc = [0:(2XLBeltToothWidth(3dPrinterTolerance)
 +2XLBeltSpaceWidth(0)-3dPrinterTolerance):Length-2XLBeltToothWidth(3dPrinterTolerance)
-]) #translate([inc,0,2XLBeltBaseHeight(3dPrinterTolerance)]) cube([2XLBeltToothWidth(3dPrinterTolerance)
+]) #translate([inc,0,2XLBeltBaseHeight(3dPrinterTolerance)+.04]) cube([2XLBeltToothWidth(3dPrinterTolerance)
 ,2XLBeltWidth(3dPrinterTolerance),(2XLBeltGripHeight(3dPrinterTolerance)-2XLBeltBaseHeight(3dPrinterTolerance))]) ;
 }
 
@@ -33,5 +33,5 @@ module 2XLTimingBeltSlot(3dPrinterTolerance=.4, Length=70) {
 ,2XLBeltSlotWidth(3dPrinterTolerance),(2XLBeltGripHeight(3dPrinterTolerance*3)-2XLBeltBaseHeight(3dPrinterTolerance))]) ;
 }
 
-translate([0,-10,0])
+translate([0,-15,0])
 2XLTimingBeltSlot();
