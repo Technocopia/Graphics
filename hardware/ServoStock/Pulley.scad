@@ -1,6 +1,7 @@
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 use <../Vitamins/Sensors/Encoders/EncoderMagnet_Vitamin.scad>
+use <../Vitamins/Kinematics/Belts/OneFifthinXLTimingBelt.scad>
 
 
 ///THIS, LIKE EVERYTHING ELSE, REALLY NEEDS TO GET TIDIED UP, BUT I DON'T FEEL LIKE DEALING WITH THAT JUST NOW (ALL THE DIMENSIONS ETC SHOULD BE PERFECT)
@@ -15,8 +16,8 @@ $fn = 60;
 shaftDiameter = 608BallBearingInnerDiam(); 
 flanges = 2; // the rims that keep the belt from going anywhere
 flangeHeight = 2;
-numTeeth = 18; // usually 16 // this value together with the pitch determines the pulley diameter
-toothType = 1; // 1 = slightly rounded, 2 = oval sharp, 3 = square. For square, set the toothWith a little low.
+numTeeth = 22; // usually 16 // this value together with the pitch determines the pulley diameter
+toothType = 3; // 1 = slightly rounded, 2 = oval sharp, 3 = square. For square, set the toothWith a little low.
 splineToPulleyHeight = 4;	//Clearance for servo spline from x-y plane
 
 //////////HEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEYHEY
@@ -28,7 +29,7 @@ function PulleyOuterDiam() = (numTeeth*pitch/PI/2-beltThickness+2)*2;
 
 //label all of these and maybe include a commented out cylinder demonstrating each so that other people can understand the code better
 
-echo(PulleyOuterDiam());
+echo(PulleyInnerDiam());
 
 function PulleyHubHeight()= 608BallBearingHeight()*.7;
 
@@ -48,16 +49,18 @@ function PulleyBeltOffset()=splineToPulleyHeight+beltWidth/2;
 
 bearingStopRadius = shaftDiameter/1.4;
 
+function StressReliefOffsetHeight()= splineToPulleyHeight+toothHeight+flangeHeight;
+
 
 ////////////////////////
-/////Belt Proerties/////
+/////Belt Properties/////
 ////////////////////////
-pitch = 5.2; // distance between the teeth
-beltWidth = 6; // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
-beltThickness = 0.65; // thickness of the part excluding the notch depth!
-notchDepth = 1.8; // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
-toothWidth = 2.5; // Teeth of the PULLEY, that is.
-toothHeight = beltWidth+flangeHeight*2;
+pitch = 2XLBeltPitch(); // distance between the teeth
+beltWidth = 2XLBeltWidth(); // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
+beltThickness = 2XLBeltBaseHeight(); // thickness of the part excluding the notch depth!
+notchDepth = 2XLBeltGripHeight(1); // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
+toothWidth = 2XLBeltSpaceWidth()/2; // Teeth of the PULLEY, that is.
+toothHeight = beltWidth+flangeHeight*1.5;
 
 ////////////////////////
 ////Magnet Proerties////
@@ -234,7 +237,7 @@ module shaft(MagnetType=true){
 			//translate([0,0,splineToPulleyHeight])
 			//	cylinder(r = bearingStopRadius, h = bearingDistance-splineToPulleyHeight, center = false);
 			//Stress relief
-			translate([0,0,splineToPulleyHeight+toothHeight+flangeHeight])
+			translate([0,0,StressReliefOffsetHeight()])
 				cylinder(h = PulleyHubHeight(), r1 = bearingStopRadius+3, r2 = bearingStopRadius, center = false);
 
 		}

@@ -35,13 +35,13 @@ function StandardServoNubDiam()=6;
 
 //all bolts
 function StandardServoBoltHeight()=13.5;
-function StandardServoBoltDiam()=2;
+function StandardServoBoltDiam()=2.25;
 
 //body bolts
 function StandardServoBoltDist()=4.35;
 
 //cylinder bolts
-function StandardServoCylBoltDist()=7.12;
+function StandardServoCylBoltDist()=7.62;
 
 //hub for wires
 function StandardServoHubHeight()=3.7;
@@ -57,7 +57,7 @@ function StandardServoTolerance()=.6;
 //defining a bolt
 module StandardServoBolt(ServoTolerance=StandardServoTolerance())
 {
-	cylinder(StandardServoBoltHeight()+ServoTolerance, (StandardServoBoltDiam()+ServoTolerance)/2, (StandardServoBoltDiam()+ServoTolerance)/2, 0);
+	cylinder(h=StandardServoBoltHeight()+ServoTolerance, r=(StandardServoBoltDiam()+ServoTolerance)/2, $fn=100);
 }
 
 module bodyBolts(boltPlacementZ,ServoTolerance=StandardServoTolerance())
@@ -262,7 +262,7 @@ module Servo_wheel_4_arm_horn()
 //-- Parameters:
 //--  d = drill's radial distance (from the horn's center)
 //--  n = number of drills
-//--  h = wheel height222222
+//--  h = wheel height
 //--------------------------------------------------------------
 module horn_drills(d,n,h)
 {
@@ -280,7 +280,7 @@ module horn_drills(d,n,h)
 
 // StandardServoMotor (boolean,number,boolean, number); The first boolean determines the bolt direction(true is up, false is down, default=true), the first number determines whether to use the large cylindrical hub (1), the small metal nub (2), or the 4-arm horn (3)(default=1). The second boolean determines where the module is centered (true centers at the hub, false centers at the motor mount, default=false). The number indicated the tolerance of the motor (default is .4 mm)
 
-StandardServoMotor(true,2,true,.4);
+StandardServoMotor(true,1,true,.4);
 
 
 
