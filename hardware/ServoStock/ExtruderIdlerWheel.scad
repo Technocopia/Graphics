@@ -6,34 +6,25 @@ function ExtruderIdlerWheelDiam(3dPrinterTolerance=.4) = 33.5+3dPrinterTolerance
 function ExtruderIdlerWheelInnerDiam(3dPrinterTolerance=.4) = 32+3dPrinterTolerance;
 
 module IdlerWheel(3dPrinterTolerance=.4){
-difference()
-{
-	union()
+	difference()
 	{
-		cylinder(MagnetLength(3dPrinterTolerance), 608BallBearingInnerDiam(-3dPrinterTolerance)/2, 608BallBearingInnerDiam(-3dPrinterTolerance)/2);
+		union()
+		{
+			cylinder(h=MagnetLength(3dPrinterTolerance), r=608BallBearingInnerDiam(-3dPrinterTolerance)/2);
 			
-			translate([0,0,MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)/2])
-			{
-				cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance),ExtruderIdlerWheelDiam(3dPrinterTolerance)/2,ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/2);
-			}
-			translate([ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/3,0,MagnetLength(3dPrinterTolerance)+ExtruderIdlerWheelThickness(3dPrinterTolerance)/2])
-			{
-				cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance),608BallBearingInnerDiam(-3dPrinterTolerance)/3, 608BallBearingInnerDiam(-3dPrinterTolerance)/3);
-			}	
-			translate([-ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/3,0,MagnetLength(3dPrinterTolerance)+ExtruderIdlerWheelThickness(3dPrinterTolerance)/2])
-			{
-				cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance),608BallBearingInnerDiam(-3dPrinterTolerance)/3, 608BallBearingInnerDiam(-3dPrinterTolerance)/3);
-			}		
-	}
-	EncoderMagnet(true,.4);
-	translate([0,-(ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/3),MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)-2])
-	{
-		cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance)+4,608BallBearingInnerDiam(3dPrinterTolerance)/3,608BallBearingInnerDiam(3dPrinterTolerance)/3);
-	}
-	translate([0,(ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/3),MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)-2])
-	{
-		cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance)+4,608BallBearingInnerDiam(3dPrinterTolerance)/3,608BallBearingInnerDiam(3dPrinterTolerance)/3);
+				translate([0,0,MagnetLength(3dPrinterTolerance)-ExtruderIdlerWheelThickness(3dPrinterTolerance)/2])
+				{
+					cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance),ExtruderIdlerWheelDiam(3dPrinterTolerance)/2,ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/2);
+				}			
+		}
+		translate([0,0,MagnetLength(3dPrinterTolerance)-.25]){rotate([0,180,0]){MagnetDraft(.4);}}
 	}
 }
+
+translate([0,0,MagnetLength()+ExtruderIdlerWheelThickness()/2])
+{
+	rotate([0,180,0])
+	{
+		IdlerWheel(.4);	
+	}
 }
-IdlerWheel(.4);	
