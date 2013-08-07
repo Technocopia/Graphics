@@ -59,7 +59,7 @@ pitch = 2XLBeltPitch(); // distance between the teeth
 beltWidth = 2XLBeltWidth(); // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
 beltThickness = 2XLBeltBaseHeight(); // thickness of the part excluding the notch depth!
 notchDepth = 2XLBeltGripHeight(1); // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
-toothWidth = 2XLBeltSpaceWidth()/2; // Teeth of the PULLEY, that is.
+toothWidth = 2XLBeltSpaceWidth()/4; // Teeth of the PULLEY, that is.
 toothHeight = beltWidth+flangeHeight*1.5;
 
 ////////////////////////

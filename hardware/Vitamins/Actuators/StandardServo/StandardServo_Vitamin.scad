@@ -41,7 +41,7 @@ function StandardServoBoltDiam()=2.25;
 function StandardServoBoltDist()=4.35;
 
 //cylinder bolts
-function StandardServoCylBoltDist()=8.12;
+function StandardServoCylBoltDist()=7.62;
 
 //hub for wires
 function StandardServoHubHeight()=3.7;
