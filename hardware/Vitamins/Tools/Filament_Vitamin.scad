@@ -1,11 +1,11 @@
-
-module Filament(FilamentDiam=1.75, Height=70, 3DPrinterTolerance=.4)
+function FilamentDiam()=1.75;
+function FilamentHeight()=70;
+module Filament(3DPrinterTolerance=.4)
 {
 	$fn=50;
-	cylinder(h=Height, r=(FilamentDiam+3DPrinterTolerance)/2);
+	cylinder(h=FilamentHeight(), r=FilamentDiam(3dPrinterTolerance)/2);
 }
 
 Filament();
 
-translate([10,0,0])
-Filament(3, 100, 0);
+
