@@ -4,9 +4,12 @@ use <../Vitamins/Kinematics/Pulleys/Pulley_Vitamin.scad>
 
 //when using the 608 ball bearing, outside 
 
-function BearingPlasticWidth()= 608BallBearingHeight(.04)/2 -.5;
+function BearingPlasticWidth()= (PulleyInnerDiam()-608BallBearingDiam())/2-.3;
 
-echo(608BallBearingDiam(.04)+BearingPlasticWidth());
+function BearingClipDiam()= 608BallBearingDiam()+ BearingPlasticWidth()*2;
+
+echo(BearingClipDiam());
+echo(BearingPlasticWidth());
 
 
 module IdlerBearingClip()
@@ -15,11 +18,11 @@ module IdlerBearingClip()
 	{
 		union()
 		{
-			cylinder(h=GenericDriveBeltWidth()+BearingPlasticWidth(), r=PulleyInnerDiam()/2);
-			cylinder(h=BearingPlasticWidth()/2, r=PulleyInnerDiam()/2+BearingPlasticWidth()/2);
+			cylinder(h=GenericDriveBeltWidth()+BearingPlasticWidth(), r=608BallBearingDiam()/2);
+			cylinder(h=BearingPlasticWidth(), r=PulleyInnerDiam()/2+BearingPlasticWidth());
 			translate([0,0,GenericDriveBeltWidth()+BearingPlasticWidth()])
 			{
-				cylinder(h=BearingPlasticWidth()/2, r=PulleyInnerDiam()/2+BearingPlasticWidth()/2);
+				cylinder(h=BearingPlasticWidth(), r=PulleyInnerDiam()/2+BearingPlasticWidth());
 			}
 		}
 		union()
@@ -30,7 +33,7 @@ module IdlerBearingClip()
 			}
 			translate([0,0,-1])
 			{
-				cylinder(h=GenericDriveBeltWidth()+BearingPlasticWidth()+2, r=608BallBearingDiam(.04)/2-BearingPlasticWidth()/2);		
+				cylinder(h=GenericDriveBeltWidth()+BearingPlasticWidth()+2, r=608BallBearingDiam(.04)/2-BearingPlasticWidth());		
 			}		
 		}
 	}
