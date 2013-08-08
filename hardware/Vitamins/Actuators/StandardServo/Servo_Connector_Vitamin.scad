@@ -1,8 +1,8 @@
 $fn=50;
 
 function ConnectorLength() = 14;
-function ConnectorWidth() = 8; 
-function ConnectorHeight() = 2.85;
+function ConnectorWidth() = 8.25; 
+function ConnectorHeight() = 3;
 
 //Note: each pin is approximately 2.25mm wide.  this is a 3 pin connector.
 

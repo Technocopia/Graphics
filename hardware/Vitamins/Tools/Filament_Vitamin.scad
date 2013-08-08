@@ -1,4 +1,4 @@
-function FilamentDiam(3dPrinterTolerance=.4)=1.75+3dPrinterTolerance;
+function FilamentDiam(3dPrinterTolerance=.4)=1.75+(3dPrinterTolerance/2);
 function FilamentHeight()=100;
 module Filament()
 {
