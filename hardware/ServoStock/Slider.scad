@@ -75,11 +75,11 @@ module LinearBearingGrip()
 
 module BeltClip()
 {
-	translate([-PulleyInnerDiam()/2-2XLBeltGripHeight(),BeltClipLength()/2,SliderHeight()/2])
+	translate([-PulleyInnerDiam()/2-2XLBeltGripHeight()+2XLBeltGripHeight()/2,BeltClipLength()/2,SliderHeight()/2])
 	{
 		difference()
 		{
-			cube([2XLBeltGripHeight()*3, BeltClipLength(), SliderHeight()], center=true);
+			cube([2XLBeltGripHeight()*3.5, BeltClipLength(), SliderHeight()], center=true);
 			translate([0,BeltClipLength()/2-2XLBeltSlotWidth()+.12,SliderHeight()+1])
 			{
 				rotate([0,90,0])
