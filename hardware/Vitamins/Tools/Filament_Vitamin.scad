@@ -1,5 +1,5 @@
 function FilamentDiam()=1.75;
-function FilamentHeight()=70;
+function FilamentHeight()=100;
 module Filament(3DPrinterTolerance=.4)
 {
 	$fn=50;
