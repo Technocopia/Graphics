@@ -4,9 +4,9 @@ use <../Vitamins/Kinematics/Pulleys/Pulley_Vitamin.scad>
 
 //when using the 608 ball bearing, outside 
 
-function BearingPlasticWidth()= (PulleyInnerDiam()-608BallBearingDiam())/2-.3;
+function BearingPlasticWidth()= (PulleyInnerDiam()-608BallBearingDiam(.04))/2;
 
-function BearingClipDiam()= 608BallBearingDiam()+ BearingPlasticWidth()*2;
+function BearingClipDiam()= 608BallBearingDiam(.04)+ BearingPlasticWidth()*2;
 
 echo(BearingClipDiam());
 echo(BearingPlasticWidth());
