@@ -28,7 +28,7 @@ echo(ZrodSpacing());
 
 //tolerances
 //function LaserCutTolerance() = .02;
-//function 3dPrinterTolerance() = .4;
+function 3dPrinterTolerance() = .4;
 
 
 

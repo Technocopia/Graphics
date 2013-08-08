@@ -3,6 +3,7 @@ use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 use <../Vitamins/Sensors/Encoders/EncoderMagnet_Vitamin.scad>
 use <../Vitamins/Kinematics/Belts/OneFifthinXLTimingBelt.scad>
 
+use <Parameters.scad>
 
 ///THIS, LIKE EVERYTHING ELSE, REALLY NEEDS TO GET TIDIED UP, BUT I DON'T FEEL LIKE DEALING WITH THAT JUST NOW (ALL THE DIMENSIONS ETC SHOULD BE PERFECT)
 
@@ -16,7 +17,7 @@ $fn = 60;
 shaftDiameter = 608BallBearingInnerDiam(); 
 flanges = 2; // the rims that keep the belt from going anywhere
 flangeHeight = 2;
-numTeeth = 22; // usually 16 // this value together with the pitch determines the pulley diameter
+numTeeth = 20; // usually 16 // this value together with the pitch determines the pulley diameter
 toothType = 3; // 1 = slightly rounded, 2 = oval sharp, 3 = square. For square, set the toothWith a little low.
 splineToPulleyHeight = 4;	//Clearance for servo spline from x-y plane
 
@@ -55,11 +56,11 @@ function StressReliefOffsetHeight()= splineToPulleyHeight+toothHeight+flangeHeig
 ////////////////////////
 /////Belt Properties/////
 ////////////////////////
-pitch = 2XLBeltPitch(); // distance between the teeth
+pitch = 5.35; // distance between the teeth
 beltWidth = 2XLBeltWidth(); // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
 beltThickness = 2XLBeltBaseHeight(); // thickness of the part excluding the notch depth!
 notchDepth = 2XLBeltGripHeight(1); // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
-toothWidth = 2XLBeltSpaceWidth()/2; // Teeth of the PULLEY, that is.
+toothWidth = 2XLBeltSpaceWidth()-3dPrinterTolerance(); // Teeth of the PULLEY, that is.
 toothHeight = beltWidth+flangeHeight*1.5;
 
 ////////////////////////
@@ -274,6 +275,20 @@ module servo_pulley(MagnetType=true, MotorType=true){
 		
 	}
 }
-
-//true creates a round magnet hole, false creates a square magnet hole.
 servo_pulley(true,true);
+
+//true creates a round magnet hole, false creates a square magnet hole
+
+//to test belt fit (prints only belt part)
+//difference()
+//{
+	//servo_pulley(true,true);
+	//translate([0,0,-15.5])
+	//{
+	//	cube([40,40,40], center=true);
+	//}
+	//translate([0,0,30.5])
+	//{
+	//	cube([40,40,40], center=true);
+	//}
+//}
