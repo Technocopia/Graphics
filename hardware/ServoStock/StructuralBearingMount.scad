@@ -26,14 +26,18 @@ module StructuralBearingMount()
 			Clips(false);
 
 			//This adds the cylindrical peice, which itself maintains friction against the inside of the bearing allowing the outside to spin
-			translate([PlasticWidth(),0,BearingBracketHeight()/2])
+			union()
 			{
-				rotate([0,90,0])
+				translate([PlasticWidth(),0,BearingBracketHeight()/2])
 				{
-					cylinder(StandardServoOutcrop()+PulleyBaseHeight(), BearingBracketHeight()/2, (608BallBearingDiam()/2+608BallBearingInnerDiam()/2)/2);
+					rotate([0,90,0])
+					{
+						cylinder(StandardServoOutcrop()+PulleyBaseHeight(), BearingBracketHeight()/2, (608BallBearingDiam()/2+608BallBearingInnerDiam()/2)/2);
+					}
 				}
-			}
-			
+				translate([PlasticWidth(),-(608BallBearingDiam()/2+608BallBearingInnerDiam()/2)/2,0])
+				cube([StandardServoOutcrop()+PulleyBaseHeight(),(608BallBearingDiam()/2+608BallBearingInnerDiam()/2), BearingBracketHeight()/2]);
+			}			
 		}	
 		//this cuts the bolthole out of the mount
 		translate([M8x30BoltHeadHeight()/2+608BallBearingHeight()+PlasticWidth()+ StandardServoOutcrop(),0,BearingBracketHeight()/2])
