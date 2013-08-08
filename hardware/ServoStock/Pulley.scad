@@ -17,7 +17,7 @@ $fn = 60;
 shaftDiameter = 608BallBearingInnerDiam(); 
 flanges = 2; // the rims that keep the belt from going anywhere
 flangeHeight = 2;
-numTeeth = 17; // usually 16 // this value together with the pitch determines the pulley diameter
+numTeeth = 20; // usually 16 // this value together with the pitch determines the pulley diameter
 toothType = 3; // 1 = slightly rounded, 2 = oval sharp, 3 = square. For square, set the toothWith a little low.
 splineToPulleyHeight = 4;	//Clearance for servo spline from x-y plane
 
@@ -275,17 +275,20 @@ module servo_pulley(MagnetType=true, MotorType=true){
 		
 	}
 }
+servo_pulley(true,true);
 
-//true creates a round magnet hole, false creates a square magnet hole.
-difference()
-{
-	servo_pulley(true,true);
-	translate([0,0,-15.5])
-	{
-		cube([40,40,40], center=true);
-	}
-	translate([0,0,30.5])
-	{
-		cube([40,40,40], center=true);
-	}
-}
+//true creates a round magnet hole, false creates a square magnet hole
+
+//to test belt fit (prints only belt part)
+//difference()
+//{
+	//servo_pulley(true,true);
+	//translate([0,0,-15.5])
+	//{
+	//	cube([40,40,40], center=true);
+	//}
+	//translate([0,0,30.5])
+	//{
+	//	cube([40,40,40], center=true);
+	//}
+//}
