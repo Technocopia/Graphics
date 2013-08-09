@@ -22,7 +22,8 @@ module ExtruderBlock()
 {
 	cube([ExtruderLength(),ExtruderWidth(),ExtruderHeight()]);
 }
-
+//counterbore module:
+module Counterbore(3dPrinterTolerance=.4){cylinder(h=HiLoScrewLength()/4, r=HiLoScrewHeadDiameter(3dPrinterTolerance)/2+.5);}
 //ExtruderBlock(.4);
 
 //Removing feature elements from block. The boolean creates either a servo side or an encoder side.
@@ -31,29 +32,48 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 {
 	if(servo==true){
 		difference(){
-			translate([-ExtruderLength()/2,-ExtruderWidth()/2,0]){ExtruderBlock(.4);}
+			translate([-ExtruderLength()/2,-ExtruderWidth()/1.8,0]){ExtruderBlock(.4);}
 		//the hot end:
 			translate([ExtruderWidth()/2,0,ExtruderHeight()]){rotate([0,90,0]){HotEnd(true,.4);}}
 		//the servo:
-			translate([ExtruderIdlerWheelDiam()/2.5,StandardServoNubDiam()/2+FilamentDiam(3dPrinterTolerance)/4,StandardServoHeightAbvWings()*1.75]){rotate([0,0,-90]){StandardServoMotor(true,2,true,.4);}}
+			translate([ExtruderIdlerWheelDiam()/2.5,StandardServoNubDiam()/2+FilamentDiam()/4,StandardServoHeightAbvWings()*1.75]){rotate([0,0,-90]){StandardServoMotor(true,2,true,.4);}}
 		//the filament channel:
 			rotate([0,90,0]){translate([-ExtruderHeight(),0,-ExtruderLength()/2-2]){Filament();}}
+			rotate([0,90,0]){translate([-ExtruderHeight(),0,-ExtruderLength()/2-2]){cylinder(FilamentHeight()/4,FilamentDiam()*2,FilamentDiam()/2);}}
 		//The Idler Wheel Recess:
 			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,ExtruderHeight(3dPrinterTolerance)/2-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){IdlerWheelKeepaway(.4);}
-		//The Idler Wheel (for adjusting the filament and servo locations):
-			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,ExtruderHeight(3dPrinterTolerance)/2-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){%IdlerWheel(.4);}
+		//The Idler Wheel (use for adjusting the filament and servo locations):
+			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,ExtruderHeight(3dPrinterTolerance)/2-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){IdlerWheel(.4);}
 		//The thru hole for the idler wheel:
 			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,-ExtruderHeight()+(ExtruderHeight()-1)]){cylinder(h=MagnetLength(3dPrinterTolerance)*2, r=608BallBearingInnerDiam(-3dPrinterTolerance)/2);}
-		//The 608 Bearing:
-			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,-ExtruderHeight()+(ExtruderHeight()-1)]){#608BallBearing(3dPrinterTolerance);}
+		//The 608 Bearing.  commented out cube is for cross-section examination
+			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,MagnetLength()-ExtruderIdlerWheelThickness()*3+1]){cylinder(h=608BallBearingHeight(3dPrinterTolerance)+ExtruderIdlerWheelThickness(),r=(608BallBearingDiam()+.04)/2);}
+			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,ExtruderHeight()/2-ExtruderIdlerWheelThickness()*2.25]){608BallBearing();}
+			//translate([0,-ExtruderWidth()/2-608BallBearingDiam(3dPrinterTolerance)/2,-ExtruderHeight()]){cube([100,20,100]);}
 		//The hole for the servo connector:
-			translate([-ExtruderIdlerWheelDiam(3dPrinterTolerance)/4-1,-StandardServoThickness()/2-1,ConnectorLength()/2]){rotate([0,90,90]){#ServoConnector(.4);}}
-		//Screw Holes 
+			translate([-ExtruderIdlerWheelDiam(3dPrinterTolerance)/4-1,-StandardServoThickness()/2-1,ConnectorLength()/2]){rotate([0,90,90]){ServoConnector(.4);}}
+		//Platform connector Screws:
+			//translate([ExtruderLength()/2+HiLoScrewLength()/2,-ExtruderWidth()/2+HotEndDiam()/2,ExtruderHeight()]){rotate([0,90,0]){#HiLoScrew();}}
+			//translate([ExtruderLength()/2+HiLoScrewLength()/2,StandardExtruderSpacing()-HiLoScrewLength(),ExtruderHeight()]){rotate([0,90,0]){#HiLoScrew();}}
+		//Counterbores and their respective screw holes:
+			translate([ExtruderLength()/2-HiLoScrewLength(.4),ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*1.5,-.1]){Counterbore(.4);}
+			translate([ExtruderLength()/2-HiLoScrewLength(.4),ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*1.5,-.1]){rotate([0,180,0]){HiLoScrew();}}
+			translate([ExtruderLength()/2-ExtruderIdlerWheelDiam(.4)/3,-ExtruderWidth()/2+HiLoScrewHeadDiameter(.4)/3,-.1]){Counterbore(.4);}
+			translate([ExtruderLength()/2-ExtruderIdlerWheelDiam(.4)/3,-ExtruderWidth()/2+HiLoScrewHeadDiameter(.4)/3,-.1]){rotate([0,180,0]){HiLoScrew();}}
+			translate([-ExtruderLength()/2+StandardServoBaseLength()/2,ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*1.5,-.1]){Counterbore(.4);}
+			translate([-ExtruderLength()/2+StandardServoBaseLength()/2,ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*1.5,-.1]){rotate([0,180,0]){HiLoScrew();}}
+			translate([-ExtruderLength()/2+ExtruderIdlerWheelDiam(),-ExtruderWidth()/2+StandardServoThickness()/1.5,-.1]){Counterbore(.4);}
+			translate([-ExtruderLength()/2+ExtruderIdlerWheelDiam(),-ExtruderWidth()/2+StandardServoThickness()/1.5,-.1]){rotate([0,180,0]){HiLoScrew();}}
+		//weight reduction and pizazz: 
+			translate([-ExtruderHeight()-ExtruderIdlerWheelDiam(),-ExtruderIdlerWheelDiam()-FilamentDiam()*2-2,-1]){cylinder(h=ExtruderHeight()+2,r=ExtruderIdlerWheelDiam());}
+			
 		}
 	}else{
 	}
 }
 Extruder(true,.4);
+
+//mirror([1,0,0]){Extruder(true,.4);};
 				
 			
 
