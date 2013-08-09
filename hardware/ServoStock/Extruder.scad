@@ -53,7 +53,8 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 		//The hole for the servo connector:
 			translate([-ExtruderIdlerWheelDiam(3dPrinterTolerance)/4-1,-StandardServoThickness()/2-1,ConnectorLength()/2]){rotate([0,90,90]){ServoConnector(.4);}}
 		//Platform connector Screws:
-			//translate([ExtruderLength()/2+HiLoScrewLength()/2,-ExtruderWidth()/2+HotEndDiam()/2,ExtruderHeight()]){rotate([0,90,0]){#HiLoScrew();}}
+			translate([ExtruderLength()/2+HiLoScrewLength()/2,-ExtruderWidth()/2+HotEndDiam()/2,ExtruderHeight()]){rotate([0,90,0]){#HiLoScrew();}}
+			mirror([0,0,1]){translate([ExtruderLength()/2+HiLoScrewLength()/2,StandardExtruderSpacing()/2,-ExtruderHeight()]){rotate([0,90,0]){#HiLoScrew();}}}
 			//translate([ExtruderLength()/2+HiLoScrewLength()/2,StandardExtruderSpacing()-HiLoScrewLength(),ExtruderHeight()]){rotate([0,90,0]){#HiLoScrew();}}
 		//Counterbores and their respective screw holes:
 			translate([ExtruderLength()/2-HiLoScrewLength(.4),ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*1.5,-.1]){Counterbore(.4);}
