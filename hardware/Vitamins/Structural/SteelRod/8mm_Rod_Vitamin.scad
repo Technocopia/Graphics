@@ -5,7 +5,7 @@ function 8mmRodRadius(3dPrinterTolerance=.4)=8mmRodDiameter()/2;
 module 8mmRod(3dPrinterTolerance=.4)
 {
 color("Silver")
-cylinder(8mmRodLength(3dPrinterTolerance), 8mmRodRadius(3dPrinterTolerance), 8mmRodRadius(3dPrinterTolerance));
+cylinder(h=8mmRodLength(3dPrinterTolerance), r=8mmRodRadius(3dPrinterTolerance), $fn=100);
 }
 
 8mmRod(.4);

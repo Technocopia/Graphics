@@ -47,7 +47,7 @@ module BearingCap()
 						}
 					}
 				}
-			translate([-PulleyHubHeight(),0,0])
+			translate([-PulleyHubHeight(),0,-.01])
 			{
 				rotate([0,0,180])
 				{
@@ -65,7 +65,7 @@ rotate([0,90,0])
 	BearingCap();
 }
 
-module SubtractiveBearingCap(SubtractiveBearingCapTolerance=.4)
+module SubtractiveBearingCap(SubtractiveBearingCapTolerance=.8)
 {
 	union()
 	{
@@ -73,17 +73,13 @@ module SubtractiveBearingCap(SubtractiveBearingCapTolerance=.4)
 		{
 			cube([EncoderShelfWidth()-PlasticWidth()*3, EncoderMountWidth(), EncoderHeight()+PlasticWidth()*2-EncoderMountHeight()]);
 		}
-		BearingCapFlare(SubtractiveBearingCapTolerance);
-		mirror([0,1,0])
+	translate([SubtractiveBearingCapTolerance/2,0,0])
 		{
 			BearingCapFlare(SubtractiveBearingCapTolerance);
-		}	
-		translate([-PulleyHubHeight(),0,0])
-		{
-			rotate([0,0,180])
+			mirror([0,1,0])
 			{
-				BearingCutout();
-			}
+				BearingCapFlare(SubtractiveBearingCapTolerance);
+			}	
 		}
 	}	
 }

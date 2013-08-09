@@ -2,7 +2,8 @@
 
 //THIS IS FOR IF YOU USE OTHER KINDS OF MOTORS, MOTOROUTCROP IS THE DISTANCE FROM THE MOUNTING PLATE TO THE BUISNESS END OF YOUR MOTOR, IF YOU EVER NEED TO SWITCH TO ANOTHER JUST CHANGE THIS VALUE TO THE ACTUAL VALUE
 
-function StandardServoHeightAbvWings()=(StandardServoHeight()-(StandardServoWingsHeight()+StandardServoWingsDist()))-StandardServoTolerance();
+function StandardServoHeightAbvWings(tolerance=.6)=(StandardServoHeight()-(StandardServoWingsHeight()+StandardServoWingsDist()+tolerance*2));
+
 
 function StandardServoOutcrop()= StandardServoCylinderHeight()+StandardServoHeightAbvWings();
 
@@ -14,7 +15,7 @@ function StandardServoWingLength()= (StandardServoLength()-StandardServoBaseLeng
 function StandardServoCenterDist()=(StandardServoCylinderDiam()/2) + ((StandardServoLength()-StandardServoBaseLength())/2-StandardServoTolerance()*2); 
 
 //basic motor shape
-function StandardServoHeight()=40.5;
+function StandardServoHeight()=42;
 function StandardServoBaseLength()=42;
 function StandardServoThickness()=21;
 
@@ -35,10 +36,11 @@ function StandardServoNubDiam(3dPrinterTolerance=.4)=6+3dPrinterTolerance;
 
 //all bolts
 function StandardServoBoltHeight()=13.5;
-function StandardServoBoltDiam()=2.25;
+function StandardServoBoltDiam()=2.5;
 
 //body bolts
-function StandardServoBoltDist()=4.35;
+function StandardServoBoltSideDist()=4.35;
+function StandardServoBoltEdgeDist()=4.85;
 
 //cylinder bolts
 function StandardServoCylBoltDist()=7.62;
@@ -62,22 +64,22 @@ module StandardServoBolt(ServoTolerance=StandardServoTolerance())
 
 module bodyBolts(boltPlacementZ,ServoTolerance=StandardServoTolerance())
 {
-		translate([StandardServoBoltDist(),-StandardServoBoltDist(),boltPlacementZ])
+		translate([StandardServoBoltEdgeDist(),-StandardServoBoltSideDist(),boltPlacementZ])
 		{
 			StandardServoBolt(ServoTolerance);
 		}
 		
-		translate([(StandardServoThickness()-StandardServoBoltDist()),-StandardServoBoltDist(),boltPlacementZ])
+		translate([(StandardServoThickness()-StandardServoBoltEdgeDist()),-StandardServoBoltSideDist(),boltPlacementZ])
 		{
 			StandardServoBolt(ServoTolerance);
 		}
 
-		translate([StandardServoBoltDist(),(StandardServoBaseLength()+StandardServoBoltDist()),boltPlacementZ])
+		translate([StandardServoBoltEdgeDist(),(StandardServoBaseLength()+StandardServoBoltSideDist()),boltPlacementZ])
 		{
 			StandardServoBolt(ServoTolerance);
 		}
 		
-		translate([(StandardServoThickness()-StandardServoBoltDist()),(StandardServoBaseLength()+StandardServoBoltDist()),boltPlacementZ])
+		translate([(StandardServoThickness()-StandardServoBoltEdgeDist()),(StandardServoBaseLength()+StandardServoBoltSideDist()),boltPlacementZ])
 		{
 			StandardServoBolt(ServoTolerance);
 		}
