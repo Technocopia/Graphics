@@ -10,6 +10,7 @@ use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 function MotorBracketHeight()= StandardServoLength()+StandardServoTolerance()*4+PlasticWidth()*2;
 function BearingBracketHeight()=608BallBearingDiam()*1.5;
 function SlotWidth()= PlasticWidth()/2;
+function ClipWidth()=StandardServoHeightAbvWings()-1.5;
 
 //This makes a single clip
 module clip(Height = MotorBracketHeight())
@@ -31,13 +32,13 @@ module clip(Height = MotorBracketHeight())
 				}
 
 				//This makes the holes for the structural rod
-				translate([PlasticWidth()+8mmRodDiameter()/4,SideWidth()/2,-1])
+				translate([PlasticWidth()+8mmRodDiameter(.6)/4,SideWidth()/2,-1])
 				{
-					cylinder(h=Height+2, r=8mmRodDiameter()/2);
+					cylinder(h=Height+2, r=8mmRodDiameter(.6)/2);
 				}
 
 				//This makes the slot for the clip
-				translate([8mmRodDiameter()/2+8mmRodDiameter()/4+1,SideWidth()/2-PlasticWidth()/4,-1])
+				translate([8mmRodDiameter()/2+8mmRodDiameter(.6)/4+1,SideWidth()/2-PlasticWidth()/4,-1])
 				{
 					cube([SideWidth()*2-SideWidth()/2+PlasticWidth(),SlotWidth(),Height+2]);
 				}
@@ -111,7 +112,7 @@ module Clips(MotorHeight=true)
 
 
 	//This centers everything
-		translate([0,-ZrodSpacing()/2, 0])
+		translate([-ClipWidth(),-ZrodSpacing()/2, 0])
 		{
 			difference()
 			{
@@ -123,10 +124,10 @@ module Clips(MotorHeight=true)
 					{
 						clip(MotorBracketHeight());
 					}
-						translate([0,8mmRodDiameter()/2, 0])
+						translate([0,8mmRodDiameter(.6)/2, 0])
 	//this draws the box between the clips
 					{
-						cube([PlasticWidth(), ZrodSpacing()-8mmRodDiameter(),MotorBracketHeight()]);
+						cube([ClipWidth(), ZrodSpacing()-8mmRodDiameter(.6),MotorBracketHeight()]);
 					}
 				}
 				bolts(MotorBracketHeight());
@@ -136,7 +137,7 @@ module Clips(MotorHeight=true)
 
 	//this is same as above, except it makes the top clips	
 	}else{
-		translate([0,-ZrodSpacing()/2, 0])
+		translate([-ClipWidth(),-ZrodSpacing()/2, 0])
 		{
 			difference()
 			{
@@ -148,10 +149,10 @@ module Clips(MotorHeight=true)
 					{
 						clip(BearingBracketHeight());
 					}
-						translate([0,8mmRodDiameter()/2, 0])
+						translate([0,8mmRodDiameter(.6)/2, 0])
 	//this draws the box between the clips
 					{
-						cube([PlasticWidth(), ZrodSpacing()-8mmRodDiameter(),BearingBracketHeight()]);
+						cube([ClipWidth(), ZrodSpacing()-8mmRodDiameter(.6),BearingBracketHeight()]);
 					}
 				}
 				bolts(BearingBracketHeight());
@@ -162,4 +163,4 @@ module Clips(MotorHeight=true)
 
 
 
-Clips(false);
+Clips(true);

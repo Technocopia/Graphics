@@ -11,7 +11,7 @@ use <Clips.scad>
 
 
 function EncoderShelfWidth() = PlasticWidth()*3+608BallBearingHeight()+EncoderThickness();
-function EncoderShelfDistance() = StandardServoOutcrop()-PlasticWidth()+WorkingPulleyHeight();
+function EncoderShelfDistance() = StandardServoOutcrop()-PlasticWidth()*2+WorkingPulleyHeight();
 function EncoderShelfLength() = ZrodSpacing()-SideWidth()+SlotWidth();
 function EncoderShelfOffset() = -ZrodSpacing()/2+PlasticWidth()+SlotWidth()/2;
 function EncoderCutoutLength()= PulleyDiam()+PlasticWidth()*2;
@@ -27,7 +27,7 @@ module wing()
 	difference()
 	{		
 		//This makes the wings for the bed mount
-		translate([-SideWidth()*3-PlasticWidth(),-ZrodSpacing()/2-PlasticWidth()/2,0])
+		translate([-SideWidth()*3-PlasticWidth()-ClipWidth(),-ZrodSpacing()/2-PlasticWidth()/2,0])
 		{
 			union()
 			{	
@@ -52,7 +52,7 @@ module wing()
 		}
 		
 		//This makes the screwholes on the wings of the bed mount
-		translate([-SideWidth()*3-PlasticWidth(),-ZrodSpacing()/2,MotorBracketHeight()-HiLoScrewLength()-PlasticWidth()*2+2])
+		translate([-SideWidth()*3-PlasticWidth()-ClipWidth(),-ZrodSpacing()/2,MotorBracketHeight()-HiLoScrewLength()-PlasticWidth()*2+2])
 		{
 			cylinder(h=HiLoScrewLength()+PlasticWidth()*2, r=HiLoScrewDiameter()/2);
 				
@@ -80,6 +80,7 @@ module BearingCutout()
 		union()
 		{
 			608BallBearing();
+			
 			translate([0,0,-EncoderShelfDistance()+608BallBearingHeight()/2])
 			{
 				cylinder(h=EncoderShelfDistance(), r=608BallBearingDiam()/2-PlasticWidth()/2);
@@ -94,6 +95,8 @@ module BearingCutout()
 
 
 
+
+
 module EncoderMount()
 {
 	union()
@@ -101,11 +104,11 @@ module EncoderMount()
 		//this makes the shelf that the encoder/bearing mount sits on
 		difference()
 		{
-			translate([PlasticWidth(),EncoderShelfOffset(),MotorBracketHeight()-PlasticWidth()*3])
+			translate([0,EncoderShelfOffset(),MotorBracketHeight()-PlasticWidth()*3])
 			{
 				cube([EncoderShelfWidth()+EncoderShelfDistance(),EncoderShelfLength(), PlasticWidth()*3]);
 			}
-			translate([PlasticWidth()-1,-EncoderCutoutLength()/2,MotorBracketHeight()-PlasticWidth()*3-1])
+			translate([-1,-EncoderCutoutLength()/2,MotorBracketHeight()-PlasticWidth()*3-1])
 			{
 				cube([EncoderShelfDistance()+1,EncoderCutoutLength(), PlasticWidth()*3+2]);
 			}
@@ -113,12 +116,12 @@ module EncoderMount()
 		difference()
 		{
 			//this makes the basic shape of the encoder/bearing mount
-			translate([PlasticWidth()+EncoderShelfDistance(),-EncoderShelfLength()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()]) 
+			translate([EncoderShelfDistance(),-EncoderShelfLength()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()]) 
 			{
 				cube([EncoderShelfWidth(), EncoderShelfLength(), EncoderMountHeight()]);
 			}
 		}
-		translate([EncoderShelfWidth()+EncoderShelfDistance()-PlasticWidth()*2,-EncoderMountWidth()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()*4.5]) 
+		translate([EncoderShelfWidth()+EncoderShelfDistance()-PlasticWidth()*3,-EncoderMountWidth()/2,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()*4.5]) 
 		{
 			cube([PlasticWidth()*3, EncoderMountWidth(), EncoderHeight()+PlasticWidth()*2.5]);
 		}
@@ -136,8 +139,8 @@ module StructuralFeet()
 		{
 			difference()
 			{
-				Clips(true);
-				translate([-.5,-StandardServoThickness()/2,PlasticWidth()])
+			 	Clips(true);
+				translate([-ClipWidth()-1,-StandardServoThickness()/2,PlasticWidth()])
 				rotate([0,0,90])
 				{
 					rotate([90,0,0])
@@ -150,7 +153,7 @@ module StructuralFeet()
 			difference()
 			{
 				EncoderMount();
-				translate([EncoderShelfDistance()+PlasticWidth(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
+				translate([EncoderShelfDistance(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()-1])
 				{
 					rotate([0,0,180])
 					{
@@ -162,9 +165,16 @@ module StructuralFeet()
 				}
 			}
 		}
-		translate([EncoderShelfDistance()+PlasticWidth()+PulleyHubHeight(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
+		translate([EncoderShelfDistance()+PulleyHubHeight(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
 		{
-			BearingCutout();
+			union()
+			{
+				BearingCutout();
+				translate([0, -608BallBearingDiam()/2, -608BallBearingDiam()+1])
+				{
+					cube([608BallBearingHeight(), 608BallBearingDiam(), 608BallBearingDiam()]);
+				}
+			}
 			translate([608BallBearingHeight()*1.5,0,0])
 			{
 				rotate([0,90,0])
@@ -173,8 +183,8 @@ module StructuralFeet()
 					{
 						union()
 						{
-							Encoder_Keepaway();
-							#Encoder(false);			
+							Encoder_Keepaway(.8);
+							#Encoder(false,.8);			
 						}					
 					}
 				}
@@ -201,8 +211,10 @@ translate([0,0, MotorBracketHeight()])
 
 //check it out the pulley fits and everything
 
-//translate([-StandardServoCylinderHeight()-PlasticWidth(),0,EncoderMountHeight()+PlasticWidth()])
-//	rotate([0,-90,0])
-//		{
-//		#servo_pulley(true);
-//		}
+translate([-StandardServoCylinderHeight(),0,EncoderMountHeight()+PlasticWidth()])
+rotate([0,-90,0])
+{		
+	//servo_pulley(true);
+}
+
+

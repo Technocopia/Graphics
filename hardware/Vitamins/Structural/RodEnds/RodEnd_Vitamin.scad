@@ -57,7 +57,7 @@ module RodEndSlot(3dPrinterTolerance=.4)
 			translate([0,0,-BallSwivelFlangeHeight(3dPrinterTolerance)/2])
 			{
 				cylinder(BallSwivelFlangeHeight(3dPrinterTolerance), BallSwivelFlangeDiam(3dPrinterTolerance)/2, BallSwivelFlangeDiam(3dPrinterTolerance)/2);
-		translate
+		
 			}
 		}
 	}
