@@ -1,6 +1,6 @@
 use <../../Fasteners/Screws/High_Low_Screw_Vitamin.scad>
 
-function EncoderWidth(3dPrinterTolerance=.4)=35+ 3dPrinterTolerance;
+function EncoderWidth(3dPrinterTolerance=.4)=37+ 3dPrinterTolerance;
 function EncoderHeight(3dPrinterTolerance=.4)=25+ 3dPrinterTolerance;
 function EncoderThickness(3dPrinterTolerance=.4)=3+ 3dPrinterTolerance;
 
