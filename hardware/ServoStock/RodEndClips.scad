@@ -10,9 +10,13 @@ module RodEndClip()
 		difference()
 		{
 			cube([RodEndClipWidth(), RodEndTopWidth(),  RodEndTopWidth()], center=true);
-			translate([RodEndRodInset(),0,0])
+			translate([RodEndRodInset()*1.1,0,0])
 			{
+				union()
+				{
+				#RodEnd();
 				RodEndSlot();
+				}
 			}
 		}
 	}

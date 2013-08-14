@@ -23,25 +23,25 @@ module RodEnd(3dPrinterTolerance=.4)
 		{
 			union()
 			{
-				cylinder(h=RodEndThickness(3dPrinterTolerance), r=RodEndTopWidth(3dPrinterTolerance)/2);
+				cylinder(h=RodEndThickness(3dPrinterTolerance), r=RodEndTopWidth(3dPrinterTolerance)/2, $fn=50);
 				translate([0,-RodEndTopWidth(3dPrinterTolerance)/2,0])	
 				{	
 					cube([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2,RodEndTopWidth(3dPrinterTolerance), RodEndThickness(3dPrinterTolerance)]);
 				}
 				translate([0,0,(RodEndThickness(3dPrinterTolerance)-RodEndBallSwivelFlangeHeight(3dPrinterTolerance))/2])
 				{
-					cylinder(RodEndBallSwivelFlangeHeight(3dPrinterTolerance), RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2, RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2);
+					cylinder(h=RodEndBallSwivelFlangeHeight(3dPrinterTolerance), r=RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2, $fn=50);
 				}
 				translate([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2-RodEndRodInset(),0,RodEndThickness(3dPrinterTolerance)/2])
 				rotate([0,90,0])
 				{
-					cylinder(h=RodEndRodLength(3dPrinterTolerance)*1.25,r=RodEndRodDiam(3dPrinterTolerance)/2);
+					cylinder(h=RodEndRodLength(3dPrinterTolerance)*1.25,r=RodEndRodDiam(3dPrinterTolerance)/2, $fn=50);
 				
 				}			
 			}	
 		translate([0,0,-RodEndThickness(3dPrinterTolerance)/2-1])
 				{
-					cylinder(h=RodEndBallSwivelFlangeHeight(3dPrinterTolerance)+2, r=RodEndHoleDiam(3dPrinterTolerance)/2);
+					cylinder(h=RodEndBallSwivelFlangeHeight(3dPrinterTolerance)+2, r=RodEndHoleDiam(3dPrinterTolerance)/2, $fn=50);
 				}
 		}
 	}
@@ -75,6 +75,10 @@ module RodEndSlot(3dPrinterTolerance=.4)
 			{
 				MotorScrewBolt();
 			}
+		}
+		translate([-RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2,-RodEndTopWidth(3dPrinterTolerance),.4])
+		{
+			cube([RodEndBallSwivelFlangeDiam(3dPrinterTolerance), RodEndTopWidth(3dPrinterTolerance), RodEndBallSwivelFlangeHeight(3dPrinterTolerance)-.8]);
 		}
 		
 			}

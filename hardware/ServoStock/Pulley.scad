@@ -57,6 +57,7 @@ function StressReliefOffsetHeight()= splineToPulleyHeight+toothHeight+flangeHeig
 /////Belt Properties/////
 ////////////////////////
 pitch = 5.35; // distance between the teeth
+//NOTE THAT PULLEY PITCH IS NOT THE SAME AS BELT  PITCH!!! IF YOU GET A DIFFERENT PITCH BELT YOU'LL JUST HAVE TO MANUALLY CHANGE THE PITCH FOR THE PULLEY
 beltWidth = 2XLBeltWidth(); // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
 beltThickness = 2XLBeltBaseHeight(); // thickness of the part excluding the notch depth!
 notchDepth = 2XLBeltGripHeight(1); // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
