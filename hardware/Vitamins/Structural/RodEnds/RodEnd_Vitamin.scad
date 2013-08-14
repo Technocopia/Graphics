@@ -12,6 +12,9 @@ function RodEndBallSwivelFlangeHeight(3dPrinterTolerance=.4)= 7+3dPrinterToleran
 
 function RodEndRodInset(3dPrinterTolerance=.4)= 3+3dPrinterTolerance;
 
+function RodEndRodHoleDiam(3dPrinterTolerance=.4)= 3.4-3dPrinterTolerance;
+
+
 
 module RodEnd(3dPrinterTolerance=.4)
 {	
@@ -35,7 +38,14 @@ module RodEnd(3dPrinterTolerance=.4)
 				translate([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2-RodEndRodInset(),0,RodEndThickness(3dPrinterTolerance)/2])
 				rotate([0,90,0])
 				{
-					cylinder(h=RodEndRodLength(3dPrinterTolerance)*1.25,r=RodEndRodDiam(3dPrinterTolerance)/2, $fn=50);
+					difference()
+					{
+						cylinder(h=RodEndRodLength(3dPrinterTolerance)*1.25,r=RodEndRodDiam(3dPrinterTolerance)/2, $fn=50);
+						translate([0,0,1])
+						{
+							cylinder(h=RodEndRodLength(3dPrinterTolerance)*1.25,r=RodEndRodHoleDiam(3dPrinterTolerance)/2, $fn=50);
+						}
+					}
 				
 				}			
 			}	
