@@ -28,14 +28,14 @@ module StructuralBearingMount()
 			//This adds the cylindrical peice, which itself maintains friction against the inside of the bearing allowing the outside to spin
 			union()
 			{
-				translate([PlasticWidth(),0,BearingBracketHeight()/2])
+				translate([0,0,BearingBracketHeight()/2])
 				{
 					rotate([0,90,0])
 					{
 						cylinder(StandardServoOutcrop()+PulleyBaseHeight(), BearingBracketHeight()/2, (608BallBearingDiam()/2+608BallBearingInnerDiam()/2)/2);
 					}
 				}
-				translate([PlasticWidth(),-(608BallBearingDiam()/2+608BallBearingInnerDiam()/2)/2,0])
+				translate([0,-(608BallBearingDiam()/2+608BallBearingInnerDiam()/2)/2,0])
 				cube([StandardServoOutcrop()+PulleyBaseHeight(),(608BallBearingDiam()/2+608BallBearingInnerDiam()/2), BearingBracketHeight()/2]);
 			}			
 		}	
