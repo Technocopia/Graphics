@@ -1,7 +1,7 @@
 use <Parameters.scad>
 use <../Vitamins/Structural/RodEnds/RodEnd_Vitamin.scad>
 
-function RodEndClipWidth()=RodEndBallSwivelFlangeHeight()*2;
+function RodEndClipWidth()=RodEndBallSwivelFlangeHeight()*1.5;
 
 module RodEndClip()
 {
@@ -10,7 +10,7 @@ module RodEndClip()
 		difference()
 		{
 			cube([RodEndClipWidth(), RodEndTopWidth(),  RodEndTopWidth()], center=true);
-			translate([RodEndRodInset()*1.1,0,0])
+			translate([RodEndRodInset()/2,0,0])
 			{
 				union()
 				{

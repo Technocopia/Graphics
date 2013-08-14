@@ -3,6 +3,7 @@ use <../Vitamins/Structural/LinearBearings/LM8UU_Linear_Bearing_Vitamin.scad>
 use <../Vitamins/Fasteners/ScrewsAsBolts/High_Low_Screw_As_Bolt_Vitamin.scad>
 use <../Vitamins/Kinematics/Belts/OneFifthinXLTimingBelt.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
+use <../Vitamins/Structural/RodEnds/RodEnd_Vitamin.scad>
 
 use <RodEndClips.scad>
 use <Pulley.scad>
@@ -121,7 +122,7 @@ module Flare()
 {
 	translate([-LM8UULinearBearingDiam()/2-FlareLength()-PlasticWidth()/2-1,-PlasticWidth()/2,0])
 	{
-		cube([FlareLength()+PlasticWidth()/2,PlasticWidth(),SliderHeight()]);
+		cube([FlareLength()+PlasticWidth()/2,PlasticWidth()*1.5,RodEndTopWidth()]);
 	}
 }
 
