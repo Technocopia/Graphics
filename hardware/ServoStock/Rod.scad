@@ -85,7 +85,7 @@ module Rod(RodLength=100)
 
 //One more note, I think the rod ends are slightly kludged so DOUBLE CHECK if everything lines up right, otherwise the rod might be a few millimeters longer or shorter than expected
 
-Rod();
+//Rod();
 
 module AlternateRod(RodLength=100)
 {
@@ -98,9 +98,9 @@ module AlternateRod(RodLength=100)
 	}
 }
 
-translate([0,20,0])
-color("green")
-AlternateRod();
+//translate([0,20,0])
+//color("green")
+//AlternateRod();
 
 
 
@@ -119,7 +119,7 @@ module BoltSlot(RodLength=100)
 			{	
 				union()
 				{
-					#HiLoBolt(.2,(HiLoBoltLength()-RodEndRodLength())*.7);
+					#HiLoBolt(.2,(HiLoBoltLength()-RodEndRodLength())/2);
 					cylinder(h=RodChannelLength/5, r=HiLoBoltHeadDiameter()/2, $fn=30);
 				}
 			}

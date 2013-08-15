@@ -8,7 +8,7 @@ function RodEndRodLength(3dPrinterTolerance=.4)=12.2+3dPrinterTolerance;
 function RodEndHoleDiam(3dPrinterTolerance=.4) = 3+3dPrinterTolerance;
 function RodEndThickness(3dPrinterTolerance=.4) = 3+3dPrinterTolerance;
 function RodEndBallSwivelFlangeDiam(3dPrinterTolerance=.4)= 5+3dPrinterTolerance;
-function RodEndBallSwivelFlangeHeight(3dPrinterTolerance=.4)= 7+3dPrinterTolerance;
+function RodEndBallSwivelFlangeHeight(3dPrinterTolerance=.4)= 9+3dPrinterTolerance;
 
 function RodEndRodInset(3dPrinterTolerance=.4)= 3+3dPrinterTolerance;
 
@@ -71,9 +71,9 @@ module RodEndSlot(3dPrinterTolerance=.4)
 			translate([0,0,-RodEndBallSwivelFlangeHeight(3dPrinterTolerance)/2])
 			{
 				cylinder(RodEndBallSwivelFlangeHeight(3dPrinterTolerance), RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2, RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2);
-			translate([0,-RodEndTopWidth(3dPrinterTolerance),RodEndThickness(3dPrinterTolerance)/4+3dPrinterTolerance])	
+			translate([0,-RodEndTopWidth(3dPrinterTolerance),RodEndThickness(3dPrinterTolerance)/4+RodEndBallSwivelFlangeHeight(3dPrinterTolerance)/])	
 				{	
-					cube([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2,RodEndTopWidth(3dPrinterTolerance)*2, RodEndThickness(3dPrinterTolerance)*1.5]);
+					#cube([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2,RodEndTopWidth(3dPrinterTolerance)*2, RodEndThickness(3dPrinterTolerance)*1.5]);
 				}
 			translate([0,0,RodEndThickness(3dPrinterTolerance)/4+3dPrinterTolerance])	
 			{
