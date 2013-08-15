@@ -11,9 +11,9 @@ module M8x30Bolt(3dPrinterTolerance=.4)
 	{
 		translate([0,0,-M8x30BoltLength(3dPrinterTolerance)])
 		{
-			cylinder(M8x30BoltLength(3dPrinterTolerance), M8x30BoltDiameter(3dPrinterTolerance)/2,M8x30BoltDiameter(3dPrinterTolerance)/2);
+			cylinder(h=M8x30BoltLength(3dPrinterTolerance),r=M8x30BoltDiameter(3dPrinterTolerance)/2,$fn=30);
 		}
-		cylinder(M8x30BoltHeadHeight(3dPrinterTolerance), M8x30BoltHeadDiameter(3dPrinterTolerance)/2,M8x30BoltHeadDiameter(3dPrinterTolerance)/2);
+		cylinder(h=M8x30BoltHeadHeight(3dPrinterTolerance),r=M8x30BoltHeadDiameter(3dPrinterTolerance)/2,$fn=6);
 	}
 }
 

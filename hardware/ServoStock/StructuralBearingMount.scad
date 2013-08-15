@@ -1,7 +1,9 @@
 use <Parameters.scad>
 use <../Vitamins/Structural/SteelRod/8mm_Rod_Vitamin.scad>
 use <../Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
+use <../Vitamins/Fasteners/Bolts/M8x50_Vitamin.scad>
 use <../Vitamins/Fasteners/Bolts/M8x30_Vitamin.scad>
+use <../Vitamins/Fasteners/Bolts/M8_Nut_Vitamin.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 
 
@@ -17,7 +19,7 @@ use <Pulley.scad>
 
 
 //This makes the structual bearing mount, in its entirety
-module StructuralBearingMount()
+module StructuralBearingMount(50mmBolt=true)
 {
 	difference()
 	{
@@ -40,15 +42,33 @@ module StructuralBearingMount()
 			}			
 		}	
 		//this cuts the bolthole out of the mount
-		translate([M8x30BoltHeadHeight()/2+608BallBearingHeight()+PlasticWidth()+ StandardServoOutcrop(),0,BearingBracketHeight()/2])
+		if(50mmBolt==true)
 		{
-			rotate([0,90,0])
+			translate([M8x50BoltHeadHeight()/2+608BallBearingHeight()+PlasticWidth()+ StandardServoOutcrop(),0,BearingBracketHeight()/2])
 			{
-				#M8x30Bolt();
+				rotate([0,90,0])
+				{
+					#M8x50Bolt();
+				}
 			}
-		}
+		}else{
+			translate([M8x30BoltHeadHeight()/2+608BallBearingHeight()+PlasticWidth()+ StandardServoOutcrop(),0,BearingBracketHeight()/2])
+			{
+				rotate([0,90,0])
+				{
+					union()
+					{
+					M8x30Bolt();
+					translate([0,0,-M8x30BoltLength()])
+					{
+						M8NutSlot();
+					}
+					}
+				}
+			}
+		}			
 	}
 }
 
 
-StructuralBearingMount();
+StructuralBearingMount(true);

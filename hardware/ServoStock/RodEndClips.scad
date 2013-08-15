@@ -31,13 +31,13 @@ module RodEndClips()
 		union()
 		{
 			RodEndClip();
-			rotate([0,0,0])
+			
+			translate([RodEndSpacing(),0,0])
 			{
-				translate([RodEndSpacing(),0,0])
+				mirror([1,0,0])
 				{
-					RodEndClip();
-					
-				}
+					RodEndClip();	
+				}				
 			}	
 		}
 	}

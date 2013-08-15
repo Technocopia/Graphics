@@ -71,11 +71,11 @@ module RodEndSlot(3dPrinterTolerance=.4)
 			translate([0,0,-RodEndBallSwivelFlangeHeight(3dPrinterTolerance)/2])
 			{
 				cylinder(RodEndBallSwivelFlangeHeight(3dPrinterTolerance), RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2, RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2);
-			translate([0,-RodEndTopWidth(3dPrinterTolerance),RodEndThickness(3dPrinterTolerance)/4+RodEndBallSwivelFlangeHeight(3dPrinterTolerance)/])	
+			translate([0,-RodEndTopWidth(3dPrinterTolerance),RodEndLength(3dPrinterTolerance)/4-RodEndTopWidth(3dPrinterTolerance)/8])	
 				{	
-					#cube([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2,RodEndTopWidth(3dPrinterTolerance)*2, RodEndThickness(3dPrinterTolerance)*1.5]);
+					cube([RodEndLength(3dPrinterTolerance)-RodEndTopWidth(3dPrinterTolerance)/2,RodEndTopWidth(3dPrinterTolerance)*2, RodEndThickness(3dPrinterTolerance)*1.5]);
 				}
-			translate([0,0,RodEndThickness(3dPrinterTolerance)/4+3dPrinterTolerance])	
+			translate([0,0,RodEndBallSwivelFlangeHeight(3dPrinterTolerance)/2-(RodEndThickness(3dPrinterTolerance)*1.5)/2])	
 			{
 				cylinder(h=RodEndThickness(3dPrinterTolerance)*1.5, r=RodEndTopWidth(3dPrinterTolerance)/1.5);
 			}
@@ -83,7 +83,7 @@ module RodEndSlot(3dPrinterTolerance=.4)
 		{
 			rotate([0,180,0])
 			{
-				MotorScrewBolt();
+				#MotorScrewBolt();
 			}
 		}
 		translate([-RodEndBallSwivelFlangeDiam(3dPrinterTolerance)/2,-RodEndTopWidth(3dPrinterTolerance),.4])

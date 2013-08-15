@@ -9,7 +9,7 @@ use <RodEndClips.scad>
 use <Pulley.scad>
 
 function BearingGripDiam()= LM8UULinearBearingDiam()+PlasticWidth()*2;
-function SliderHeight()= LM8UULinearBearingHeight()+PlasticWidth()*2;
+function SliderHeight()= LM8UULinearBearingHeight()-.01;
 function GripWidth()= PlasticWidth();
 function FlareLength()= (RodEndSpacing()-ZrodSpacing())/2-LM8UULinearBearingDiam()/2+PlasticWidth()/2; 
 
@@ -19,9 +19,11 @@ $fn=100;
 
 module TaperedCylinder()
 {
-	cylinder(PlasticWidth()+2, LM8UULinearBearingDiam()/2.2, LM8UULinearBearingDiam()/1.9);	
+	cylinder(LM8UULinearBearingRidgeOffset()+2, LM8UULinearBearingDiam()/2.2, LM8UULinearBearingDiam()/1.9);	
 }
 
+//MINOR ADJUSTMENT THAT I DON'T HAVE TIME TO MAKE.
+	//DO YOU SEE THE HILO BOLTS GOING INTO THE BEARING GRIPS? SEE THE ONE ON THE SIDE WITH THE BELT GRIP? IT NEEDS A SMALL HOLE TO ACCOMODATE IT IN THE BELT GRIP BECAUSE AS OF RIGHT NOW IT ONLY CUTS THROUGH THE BEARING PART, AND AS YOU CAN SEE ON THE OTHER SIDE THEY STICK OUT A LITTLE BIT BEYOND THAT, SO THERE NEEDS TO BE A HOLE IN THE SIDE OF THE BELT GRIP TOO
 
 module LinearBearingGrip()
 {
@@ -30,15 +32,15 @@ module LinearBearingGrip()
 		difference()
 		{
 			cylinder(SliderHeight(), BearingGripDiam()/2, BearingGripDiam()/2);
-			translate([0,0,PlasticWidth()])
+			translate([0,0,LM8UULinearBearingRidgeOffset()])
 			{
-				#LM8UUBearing();
+				cylinder(h=LM8UULinearBearingHeight()-LM8UULinearBearingRidgeOffset()*2+1, r=LM8UULinearBearingDiam()/2);
 			}
-			translate([0,0,PlasticWidth()+LM8UULinearBearingHeight()-1])
+			translate([0,0,LM8UULinearBearingHeight()-LM8UULinearBearingRidgeOffset()])
 			{
 				TaperedCylinder();
 			}
-			translate([0,0,PlasticWidth()+1])
+			translate([0,0,LM8UULinearBearingRidgeOffset()+1])
 			{
 				mirror([0,0,1])
 				{
@@ -74,18 +76,33 @@ module LinearBearingGrip()
 	}
 }
 
+//THIS GOT A LITTLE WEIRD AND KLUDGY
+
 module BeltClip()
 {
-	translate([-PulleyInnerDiam()/2-2XLBeltGripHeight()+2XLBeltGripHeight()/2,BeltClipLength()/2,SliderHeight()/2])
+	translate([-PulleyInnerDiam()/2-2XLBeltGripHeight()/2,BeltClipLength()/2,SliderHeight()/2])
 	{
-		difference()
+		union()
 		{
-			cube([2XLBeltGripHeight()*3.5, BeltClipLength(), SliderHeight()], center=true);
-			translate([0,BeltClipLength()/2-2XLBeltSlotWidth()+.12,SliderHeight()+1])
+			difference()
 			{
-				rotate([0,90,0])
+				translate([0,BeltClipLength()*.15,0])
 				{
-					2XLTimingBeltSlot();
+					cube([2XLBeltGripHeight()*3.5, BeltClipLength()*1.3, SliderHeight()], center=true);
+				}
+				translate([0,BeltClipLength()/2-2XLBeltSlotWidth()+.12,SliderHeight()+1])
+				{
+					rotate([0,90,0])
+					{
+						2XLTimingBeltSlot();
+					}
+				}
+				translate([-2XLBeltGripHeight()*2,BeltClipLength()*.65,0])
+				{
+					rotate([0,-90,0])
+					{
+						HiLoBolt();
+					}
 				}
 			}
 		}
