@@ -18,22 +18,22 @@ module IdlerBearingClip()
 	{
 		union()
 		{
-			cylinder(h=GenericDriveBeltWidth()+SideWidth(), r=BearingClipDiam()/2);
+			cylinder(h=GenericDriveBeltWidth(.8)+SideWidth(), r=BearingClipDiam()/2);
 			cylinder(h=SideWidth(), r=PulleyInnerDiam()/2+SideWidth());
-			translate([0,0,GenericDriveBeltWidth()+SideWidth()])
+			translate([0,0,GenericDriveBeltWidth(.8)+SideWidth()])
 			{
 				cylinder(h=SideWidth(), r=PulleyInnerDiam()/2+SideWidth());
 			}
 		}
 		union()
 		{
-			translate([0,0,SideWidth()/2])
+			translate([0,0,SideWidth()])
 			{
-				cylinder(h=GenericDriveBeltWidth()+SideWidth()+1, r=608BallBearingDiam(.04)/2);
+				cylinder(h=GenericDriveBeltWidth(.8)+SideWidth()+1, r=608BallBearingDiam(.04)/2);
 			}
 			translate([0,0,-1])
 			{
-				cylinder(h=GenericDriveBeltWidth()+SideWidth()+2, r=608BallBearingDiam(.04)/2-SideWidth());		
+				cylinder(h=GenericDriveBeltWidth(.8)+SideWidth()+2, r=608BallBearingDiam(.04)/2-SideWidth());		
 			}		
 		}
 	}
