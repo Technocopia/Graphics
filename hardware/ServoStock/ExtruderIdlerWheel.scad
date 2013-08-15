@@ -19,8 +19,11 @@ module IdlerWheel(3dPrinterTolerance=.4){
 	//the idler wheel:				
 					cylinder(ExtruderIdlerWheelThickness(3dPrinterTolerance),ExtruderIdlerWheelDiam(3dPrinterTolerance)/2,ExtruderIdlerWheelInnerDiam(3dPrinterTolerance)/2);
 				}
-	//the bearing 
-				translate([0,0,MagnetLength()-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);}			
+	//the bearing offset spacer:
+				translate([0,0,MagnetLength()-ExtruderIdlerWheelThickness(3dPrinterTolerance)])
+				{
+					#cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);
+				}			
 		}
 		translate([0,0,MagnetLength(3dPrinterTolerance)-.25]){rotate([0,180,0]){MagnetDraft(.4);}}
 	}
@@ -37,12 +40,15 @@ module IdlerWheelKeepaway(3dPrinterTolerance=.4){
 				{
 					cylinder(h=ExtruderIdlerWheelThickness(3dPrinterTolerance),r=(ExtruderIdlerWheelDiam(3dPrinterTolerance)/2)+.5);
 				}
-				translate([0,0,MagnetLength()-ExtruderIdlerWheelThickness(3dPrinterTolerance)]){cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);}			
+				translate([0,0,MagnetLength()-ExtruderIdlerWheelThickness(3dPrinterTolerance)])
+				{
+					cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);
+				}			
 		}
 		translate([0,0,MagnetLength(3dPrinterTolerance)-.25]){rotate([0,180,0]){MagnetDraft(.4);}}
 	}
 }
 
 
-//translate([0,0,MagnetLength()+ExtruderIdlerWheelThickness()/2]){rotate([0,180,0]){IdlerWheel(.4);}}
-IdlerWheelKeepaway(.4);
+translate([0,0,MagnetLength()+ExtruderIdlerWheelThickness()/2]){rotate([0,180,0]){IdlerWheel(.4);}}
+//IdlerWheelKeepaway(.4);

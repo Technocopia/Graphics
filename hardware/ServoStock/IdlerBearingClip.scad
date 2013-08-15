@@ -10,6 +10,7 @@ function BearingClipDiam()= 608BallBearingDiam(.04)+ SideWidth()*2;
 echo(BearingClipDiam());
 echo(SideWidth());
 
+$fn=100;
 
 module IdlerBearingClip()
 {
@@ -17,11 +18,11 @@ module IdlerBearingClip()
 	{
 		union()
 		{
-			cylinder(h=GenericDriveBeltWidth()+SideWidth(), r=608BallBearingDiam()/2);
+			cylinder(h=GenericDriveBeltWidth()+SideWidth(), r=BearingClipDiam()/2);
 			cylinder(h=SideWidth(), r=PulleyInnerDiam()/2+SideWidth());
 			translate([0,0,GenericDriveBeltWidth()+SideWidth()])
 			{
-				cylinder(h=BearingPlasticWidth(), r=PulleyInnerDiam()/2+SideWidth());
+				cylinder(h=SideWidth(), r=PulleyInnerDiam()/2+SideWidth());
 			}
 		}
 		union()

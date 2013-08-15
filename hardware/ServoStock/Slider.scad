@@ -3,14 +3,15 @@ use <../Vitamins/Structural/LinearBearings/LM8UU_Linear_Bearing_Vitamin.scad>
 use <../Vitamins/Fasteners/ScrewsAsBolts/High_Low_Screw_As_Bolt_Vitamin.scad>
 use <../Vitamins/Kinematics/Belts/OneFifthinXLTimingBelt.scad>
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
+use <../Vitamins/Structural/RodEnds/RodEnd_Vitamin.scad>
 
+use <RodEndClips.scad>
 use <Pulley.scad>
 
 function BearingGripDiam()= LM8UULinearBearingDiam()+PlasticWidth()*2;
 function SliderHeight()= LM8UULinearBearingHeight()+PlasticWidth()*2;
 function GripWidth()= PlasticWidth();
-function FlareLength()= (RodEndSpacing()-ZrodSpacing())/2; 
-function FlareWidth()= BallBearingDiam()/2-PlasticWidth();
+function FlareLength()= (RodEndSpacing()-ZrodSpacing())/2-LM8UULinearBearingDiam()/2+PlasticWidth()/2; 
 
 function BeltClipLength()=StandardServoCylinderHeight()+PulleyBeltOffset()+2XLBeltWidth();
 
@@ -117,13 +118,13 @@ module SliderBase()
 	}
 }
 
-//module Flare()
-//{
-//	translate([-LM8UULinearBearingDiam()/2-FlareLength()-PlasticWidth()/2-1,-GripWidth()*1.5,0])
-//	{
-//		cube([FlareLength()+PlasticWidth()/2,GripWidth()*2-1,SliderHeight()]);
-//	}
-//}
+module Flare()
+{
+	translate([-LM8UULinearBearingDiam()/2-FlareLength()-PlasticWidth()/2-1,-PlasticWidth()/2,0])
+	{
+		cube([FlareLength()+PlasticWidth()/2,PlasticWidth()*1.5,RodEndTopWidth()]);
+	}
+}
 
 
 
@@ -138,16 +139,20 @@ module Slider()
 		translate([-ZrodSpacing()/2,-PlasticWidth()/2,0])
 		{
 			SliderBase();			
-			//Flare();
-			//mirror([1,0,0])
-			//{
-				//translate([-ZrodSpacing(),0,0])
-				//{
-				//	Flare();
-				//}
-			//}
+			Flare();
+			mirror([1,0,0])
+			{
+				translate([-ZrodSpacing(),0,0])
+				{
+					Flare();
+				}
+			}
 		}
 	BeltClip();
+	translate([0,-PlasticWidth(),0])
+	{
+		RodEndClips();
+	}
 	}
 }
 
