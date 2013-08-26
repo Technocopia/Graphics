@@ -36,7 +36,7 @@ module Encoder(Bolts=false)
 	//chip
 			translate([EncoderWidth()/2-EncoderChipSide()/2, EncoderChipOffset(), -EncoderChipHeight()])
 			{
-			cube([EncoderChipSide(), EncoderChipSide(),EncoderChipHeight()]);
+			#cube([EncoderChipSide(), EncoderChipSide(),EncoderChipHeight()]);
 			}
 	//boxes
 			translate([EncoderShortBoxInset()+EncoderShortBoxWidth(),0,0])

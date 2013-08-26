@@ -1,5 +1,5 @@
-use<Vitamins/Zrod.scad>
-use<Vitamins/LinearBearing.scad>
+use <../Vitamins/Structural/SteelRod/8mm_Rod_Vitamin.scad>
+use<../Vitamins/Structural/LinearBearings/LM8UU_Linear_Bearing_Vitamin.scad>
 
 function mm(i) = i*25.4; 
 
@@ -10,7 +10,7 @@ function mm(i) = i*25.4;
 
 
 function RodEndSpacing()= 105;
-function ZrodSpacing()=RodEndSpacing()-LinearBearingDiam()*2-PlasticWidth()*4;
+function ZrodSpacing()=RodEndSpacing()-LM8UULinearBearingDiam()*2-PlasticWidth()*4;
 echo(ZrodSpacing());
 
 //parametric of which hotend is being used (printerbot or bucha nozzle)
@@ -28,11 +28,11 @@ echo(ZrodSpacing());
 
 //tolerances
 //function LaserCutTolerance() = .02;
-//function 3dPrinterTolerance() = .4;
+function 3dPrinterTolerance() = .4;
 
 
 
 //the equation used for plastic width, it can of course be changed
-function PlasticWidth()= (ZrodDiameter()/2);
-function SideWidth() = (ZrodDiameter()+PlasticWidth());
+function PlasticWidth()= (8mmRodDiameter()/2);
+function SideWidth() = (8mmRodDiameter()+PlasticWidth());
 echo(PlasticWidth());

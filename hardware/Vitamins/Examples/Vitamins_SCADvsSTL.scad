@@ -23,7 +23,7 @@ use <../Actuators/StandardServo/StandardServo_Vitamin.scad>
 translate([0,75,0])
 {
 	color("Green")
-	toleranceMotor(true,true);
+	ServoMotor(true,true,true);
 }
 
 //To make your cut just treat the module as you would any other (The translates and rotates and such are just to make everything easily visible for this example)
@@ -36,7 +36,7 @@ module test1()
 		{
 			cube([25, 60, 15]);
 		}
-	toleranceMotor(true,true);
+	ServoMotor(true,true,true);
 	}
 }
 

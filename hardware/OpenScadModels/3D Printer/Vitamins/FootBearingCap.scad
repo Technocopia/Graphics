@@ -3,6 +3,9 @@ use <../Slider.scad>
 use <BallBearing.scad>
 use <PlasticScrew.scad>
 
+function BearingPlasticWidth()= BallBearingHeight()*.6;
+//PlasticWidth();
+
 
 ///this is identical to subtractive sliding bearing cap except that it's centered differently, make this into a boolean at some point
 
@@ -16,43 +19,43 @@ module RawBearingCap()
 			{
 				translate([0,0,1])
 				{
-					cube([BallBearingHeight()+PlasticWidth(), PlasticWidth(), SliderHeight()+PlasticWidth()]);
+					cube([BallBearingHeight()+BearingPlasticWidth(), BearingPlasticWidth(), SliderHeight()+BearingPlasticWidth()]);
 				}
-				translate([0,PlasticWidth(),1])
+				translate([0,BearingPlasticWidth(),1])
 				{
-					cube([BallBearingHeight()+PlasticWidth(), PlasticWidth()*2,PlasticWidth()]);
+					cube([BallBearingHeight()+BearingPlasticWidth(), BearingPlasticWidth()*2,BearingPlasticWidth()]);
 				}
-				translate([0,-BallBearingHeight()/2,PlasticWidth()*.25])
+				translate([0,-BallBearingHeight()/2,BearingPlasticWidth()*.25])
 				{
-					cube([BallBearingHeight()+PlasticWidth(), BallBearingDiam()/4+PlasticWidth()*2,BallBearingDiam()+PlasticWidth()]);
+					cube([BallBearingHeight()+BearingPlasticWidth(), BallBearingDiam()/4+BearingPlasticWidth()*2,BallBearingDiam()+BearingPlasticWidth()]);
 				}
-				translate([0,-PlasticWidth(),BallBearingDiam()/2+PlasticWidth()*1.25])
+				translate([0,-BearingPlasticWidth(),BallBearingDiam()/2+BearingPlasticWidth()*1.25])
 				{
 					rotate([0,90,0])
 					{
-						cylinder(BallBearingHeight()+PlasticWidth(), BallBearingDiam()/2+PlasticWidth(), BallBearingDiam()/2+PlasticWidth());
+						cylinder(BallBearingHeight()+BearingPlasticWidth(), BallBearingDiam()/2+BearingPlasticWidth(), BallBearingDiam()/2+BearingPlasticWidth());
 					}
 				}
 			}
-			translate([-1,-BallBearingHeight()/2,PlasticWidth()*1.25+1])
+			translate([-1,-BallBearingHeight()/2,BearingPlasticWidth()*1.25+1])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()-PlasticWidth()/4-1]);
+				cube([BallBearingHeight()+BearingPlasticWidth()+2, BallBearingDiam()/2+BearingPlasticWidth(),BallBearingDiam()-BearingPlasticWidth()/4-1]);
 			}
-			translate([-1,-BallBearingHeight()/2+PlasticWidth()*2-1,BallBearingDiam()])
+			translate([-1,-BallBearingHeight()/2+BearingPlasticWidth()*2-1,BallBearingDiam()])
 			{
-				cube([BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2+PlasticWidth(),BallBearingDiam()-PlasticWidth()/4-1]);
+				cube([BallBearingHeight()+BearingPlasticWidth()+2, BallBearingDiam()/2+BearingPlasticWidth(),BallBearingDiam()-BearingPlasticWidth()/4-1]);
 			}
-			translate([-1,-PlasticWidth(),SliderHeight()/2])
+			translate([-1,-BearingPlasticWidth(),SliderHeight()/2])
 			{                                                                                                                                   
 				rotate([0,90,0])
 				{
-					cylinder(BallBearingHeight()+PlasticWidth()+2, BallBearingDiam()/2-PlasticWidth()/6, BallBearingDiam()/2-PlasticWidth()/6);
+					cylinder(BallBearingHeight()+BearingPlasticWidth()+2, BallBearingDiam()/2-BearingPlasticWidth()/6, BallBearingDiam()/2-BearingPlasticWidth()/6);
 				}
 			}
 		}
-		translate([0,PlasticWidth()*2,PlasticWidth()])
+		translate([0,BearingPlasticWidth()*2,BearingPlasticWidth()])
 		{
-			cube([BallBearingHeight()+PlasticWidth(), PlasticWidth(),PlasticWidth()*2]);
+			cube([BallBearingHeight()+BearingPlasticWidth(), BearingPlasticWidth(),BearingPlasticWidth()*2]);
 		}
 			
 	}
@@ -63,14 +66,14 @@ module UnPositionedBearingCap()
 	difference()
 	{
 		RawBearingCap();
-		translate([PlasticWidth()/2,-BallBearingDiam()/2+PlasticWidth(),SliderHeight()/2])
+		translate([BearingPlasticWidth()/2,-BallBearingDiam()/2+BearingPlasticWidth(),SliderHeight()/2])
 		{
 			rotate([0,90,0])
 			{
 				BallBearing();
 			}
 		}
-		translate([PlasticWidth()/2+ScrewHeadDiameter()/2,-1, SliderHeight()+PlasticWidth()/4])
+		translate([BearingPlasticWidth()/2+ScrewHeadDiameter()/2,-1, SliderHeight()+BearingPlasticWidth()/4])
 		{
 			rotate([90,0,0])
 			{
@@ -93,7 +96,7 @@ module BearingCap(Print=true,Foot=true)
 {
 	if(Print==true)
 	{
-		translate([-BallBearingDiam()/2-PlasticWidth(),0,BallBearingHeight()+PlasticWidth()])
+		translate([-BallBearingDiam()/2-BearingPlasticWidth(),0,BallBearingHeight()+BearingPlasticWidth()])
 		{
 			rotate([0,90,0])
 				{
@@ -103,7 +106,7 @@ module BearingCap(Print=true,Foot=true)
 	}else{
 			if(Foot==true)
 			{
-				translate([-PlasticWidth()/2-BallBearingHeight()/2,-1-PlasticWidth()*1.25-BallBearingDiam()/2,-PlasticWidth()])
+				translate([-BearingPlasticWidth()/2-BallBearingHeight()/2,-1-BearingPlasticWidth()*1.25-BallBearingDiam()/2,-BearingPlasticWidth()])
 				{
 					rotate([-90,0,0])
 					{
@@ -111,7 +114,7 @@ module BearingCap(Print=true,Foot=true)
 					}
 				}
 			}else{
-					translate([-PlasticWidth()/2-BallBearingHeight()/2,-PlasticWidth()/2,-PlasticWidth()*1.25-1.5])
+					translate([-BearingPlasticWidth()/2-BallBearingHeight()/2,-BearingPlasticWidth()/2,-BearingPlasticWidth()*1.25-1.5])
 					{
 						UnPositionedBearingCap(false);
 					}

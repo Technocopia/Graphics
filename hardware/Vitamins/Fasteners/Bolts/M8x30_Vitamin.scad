@@ -1,20 +1,20 @@
-function BoltDiameter()= 7;
-function BoltLength()= 38;
-function BoltHeadDiameter()= 13;
-function BoltHeadHeight()= 8;
+function M8x30BoltDiameter(3dPrinterTolerance=.4)= 7+3dPrinterTolerance;
+function M8x30BoltLength(3dPrinterTolerance=.4)= 38+3dPrinterTolerance;
+function M8x30BoltHeadDiameter(3dPrinterTolerance=.4)= 13+3dPrinterTolerance;
+function M8x30BoltHeadHeight(3dPrinterTolerance=.4)= 8+3dPrinterTolerance;
 
 //err on the side of larger tolerances for bolts
 
-module LargeBolt(3dPrinterTolerance=.4)
+module M8x30Bolt(3dPrinterTolerance=.4)
 {
 	union()
 	{
-		translate([0,0,-BoltLength()])
+		translate([0,0,-M8x30BoltLength(3dPrinterTolerance)])
 		{
-			cylinder(BoltLength()+3dPrinterTolerance, (BoltDiameter()+3dPrinterTolerance)/2,(BoltDiameter()+ 3dPrinterTolerance)/2);
+			cylinder(h=M8x30BoltLength(3dPrinterTolerance),r=M8x30BoltDiameter(3dPrinterTolerance)/2,$fn=30);
 		}
-		cylinder(BoltHeadHeight()+3dPrinterTolerance, (BoltHeadDiameter()+3dPrinterTolerance)/2,(BoltHeadDiameter()+3dPrinterTolerance)/2);
+		cylinder(h=M8x30BoltHeadHeight(3dPrinterTolerance),r=M8x30BoltHeadDiameter(3dPrinterTolerance)/2,$fn=6);
 	}
 }
 
-LargeBolt();
+M8x30Bolt();

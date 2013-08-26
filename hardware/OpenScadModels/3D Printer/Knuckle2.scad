@@ -35,21 +35,29 @@ module BearingRecess(){
 
 
 module KnuckleShaft(){
-	
-	difference()	{	
-		translate([0,height/2-2,0]){
+	union(){	
+		difference()	{	
 			rotate([90,0,0]){
-				cylinder(height,BallBearingInnerDiam()/2,BallBearingInnerDiam()/2);
+				cylinder(height*2,BallBearingInnerDiam()/2,BallBearingInnerDiam()/2);
+			}
+		
+			translate([-height/2,-height*2-2,-height]){
+				cube([height,height*2+4,height]);
+			}
+			translate	([0,-height/3,-Bdiam/4]){
+				hole();
+			}
+			translate	([0,-height,-Bdiam/4]){
+				hole();
+			}
+			translate([0,-height*2+BallBearingDiam(),-Bdiam/4]){
+				#hole();
 			}
 		}
-		translate([-height/2,-height/2-4,-height]){
-			cube([height,height+4,height]);
-		}
-		translate	([0,-height/4,-Bdiam/4]){
-			hole();
-		}
-		translate([0,height/4,-Bdiam/4]){
-			hole();
+		translate([0,-height*2-BallBearingDiam()/2.9,0]){
+			rotate([0,0,45]){
+				cube([BallBearingInnerDiam()*1.25,BallBearingInnerDiam()*1.25,BallBearingInnerDiam()/2]);
+			}	
 		}
 	}
 }
@@ -60,11 +68,11 @@ module Knuckle(){
 	difference(){	
 		union(){
 			KnuckleShaft();
-			translate([0,-height/2-Bdiam/2-BallBearingInnerDiam()/2,0]){
+			translate([0,-height*2-cupOD()/1.05,0]){
 				BearingRecess();
 			}
 		}
-		translate([0,-height/2-Bdiam/2-BallBearingInnerDiam()/2,BallBearingInnerDiam()/2+1]){
+		translate([0,-height*2-cupOD()/1.05,BallBearingInnerDiam()/2+1]){
 			CapTop(false);
 		}		
 	}

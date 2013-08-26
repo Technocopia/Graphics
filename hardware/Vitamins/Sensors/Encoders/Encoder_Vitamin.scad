@@ -1,90 +1,116 @@
-function EncoderWidth()=35;
-function EncoderHeight()=25;
-function EncoderThickness()=3;
+use <../../Fasteners/Screws/High_Low_Screw_Vitamin.scad>
 
-function EncoderBoltWidth()=3;
-function EncoderBoltLength()=20;
-function EncoderBoltInset()=2.2;
+function EncoderWidth(3dPrinterTolerance=.4)=35.5+ 3dPrinterTolerance;
+function EncoderHeight(3dPrinterTolerance=.4)=25+ 3dPrinterTolerance;
+function EncoderThickness(3dPrinterTolerance=.4)=3+ 3dPrinterTolerance;
 
-function EncoderLongBoxWidth()=9;
+function EncoderBoltWidth(3dPrinterTolerance=.4)=3+ 3dPrinterTolerance;
+function EncoderBoltLength(3dPrinterTolerance=.4)=20+ 3dPrinterTolerance;
+function EncoderBoltInset(3dPrinterTolerance=.4)=2.2+ 3dPrinterTolerance/2;
 
-function EncoderShortBoxWidth()=10;
-function EncoderShortBoxLength()=13.5;
-function EncoderShortBoxInset()=7;
+function EncoderLongBoxWidth(3dPrinterTolerance=.4)=9+ 3dPrinterTolerance;
 
-function EncoderBoxHeight()=9+EncoderThickness();
+function EncoderShortBoxWidth(3dPrinterTolerance=.4)=10+ 3dPrinterTolerance;
+function EncoderShortBoxLength(3dPrinterTolerance=.4)=13.5+ 3dPrinterTolerance;
+function EncoderShortBoxInset(3dPrinterTolerance=.4)=7+ 3dPrinterTolerance/2;
 
-function EncoderChipSide()=4.25;
-function EncoderChipHeight()= 1;
-function EncoderChipOffset()=4;
+function EncoderBoxHeight(3dPrinterTolerance=.4)=9+EncoderThickness()+ 3dPrinterTolerance;
 
-3dPrinterTolerance=.4;
+function EncoderChipSide(3dPrinterTolerance=.4)=4.25+ 3dPrinterTolerance;
+function EncoderChipHeight(3dPrinterTolerance=.4)= 1+ 3dPrinterTolerance;
+function EncoderChipOffset(3dPrinterTolerance=.4)=4+ 3dPrinterTolerance/2;
 
 
-module Encoder(3dPrinterTolerance=.4)
+
+module Encoder(Bolts=true, 3dPrinterTolerance=.4)
 {
-
-EncoderWidth=EncoderWidth() + 3dPrinterTolerance;
-EncoderHeight=EncoderHeight() + 3dPrinterTolerance;
-EncoderThickness=EncoderThickness() + 3dPrinterTolerance;
-
-EncoderBoltWidth=EncoderBoltWidth() + 3dPrinterTolerance;
-EncoderBoltLength=EncoderBoltLength() + 3dPrinterTolerance;
-EncoderBoltInset=EncoderBoltInset() + 3dPrinterTolerance/2;
-
-EncoderLongBoxWidth=EncoderLongBoxWidth() + 3dPrinterTolerance;
-
-EncoderShortBoxWidth=EncoderShortBoxWidth() + 3dPrinterTolerance;
-EncoderShortBoxLength=EncoderShortBoxLength() + 3dPrinterTolerance;
-EncoderShortBoxInset=EncoderShortBoxInset() + 3dPrinterTolerance/2;
-
-EncoderBoxHeight=EncoderBoxHeight()+EncoderThickness + 3dPrinterTolerance;
-
-EncoderChipSide=EncoderChipSide() + 3dPrinterTolerance;
-EncoderChipHeight=EncoderChipHeight() + 3dPrinterTolerance;
-EncoderChipOffset=EncoderChipOffset() + 3dPrinterTolerance/2;
-
 	//centers the encoder on the chip, which is the important part
-	translate([-EncoderWidth/2,-EncoderChipOffset-EncoderChipSide/2,0])
+	translate([-EncoderWidth(3dPrinterTolerance)/2,-EncoderChipOffset(3dPrinterTolerance)-EncoderChipSide(3dPrinterTolerance)/2,0])
 	{
 		union()
 		{
 	//base
-			cube([EncoderWidth, EncoderHeight, EncoderThickness]);
+			cube([EncoderWidth(3dPrinterTolerance), EncoderHeight(3dPrinterTolerance), EncoderThickness(3dPrinterTolerance)]);
 	//chip
-			translate([EncoderWidth/2-EncoderChipSide/2, EncoderChipOffset, -EncoderChipHeight])
+			translate([EncoderWidth(3dPrinterTolerance)/2-EncoderChipSide(3dPrinterTolerance)/2, EncoderChipOffset(3dPrinterTolerance), -EncoderChipHeight(3dPrinterTolerance)])
 			{
-				cube([EncoderChipSide, EncoderChipSide,EncoderChipHeight]);
+				#cube([EncoderChipSide(3dPrinterTolerance), EncoderChipSide(3dPrinterTolerance),EncoderChipHeight(3dPrinterTolerance)]);
 			}
 	//boxes
-			translate([EncoderShortBoxInset+EncoderShortBoxWidth,0,0])
+			translate([EncoderShortBoxInset(3dPrinterTolerance)+EncoderShortBoxWidth(3dPrinterTolerance),0,0])
 			{
-				cube([EncoderLongBoxWidth, EncoderHeight, EncoderBoxHeight]);
+				cube([EncoderLongBoxWidth(3dPrinterTolerance), EncoderHeight(3dPrinterTolerance), EncoderBoxHeight(3dPrinterTolerance)]);
 			}
-			translate([EncoderShortBoxInset,EncoderHeight-EncoderShortBoxLength,0])
+			translate([EncoderShortBoxInset(3dPrinterTolerance),EncoderHeight(3dPrinterTolerance)-EncoderShortBoxLength(3dPrinterTolerance),0])
 			{ 
-				cube([EncoderShortBoxWidth, EncoderShortBoxLength, EncoderBoxHeight]);
+				cube([EncoderShortBoxWidth(3dPrinterTolerance), EncoderShortBoxLength(3dPrinterTolerance), EncoderBoxHeight(3dPrinterTolerance)]);
 			}
+if(Bolts==true)
+	{
 	//screws
-			translate([EncoderBoltInset,EncoderBoltInset,-EncoderBoltLength/2])
+			translate([EncoderBoltInset(3dPrinterTolerance),EncoderBoltInset(3dPrinterTolerance),-EncoderBoltLength(3dPrinterTolerance)/2])
 			{
-				cylinder(EncoderBoltLength, EncoderBoltWidth/2, EncoderBoltWidth/2);
+				cylinder(EncoderBoltLength(3dPrinterTolerance), EncoderBoltWidth(3dPrinterTolerance)/2, EncoderBoltWidth(3dPrinterTolerance)/2);
 			}
-			translate([EncoderWidth-EncoderBoltInset,EncoderBoltInset,-EncoderBoltLength/2])
+			translate([EncoderWidth(3dPrinterTolerance)-EncoderBoltInset(3dPrinterTolerance),EncoderBoltInset(3dPrinterTolerance),-EncoderBoltLength(3dPrinterTolerance)/2])
 			{
-				cylinder(EncoderBoltLength, EncoderBoltWidth/2, EncoderBoltWidth/2);
+				cylinder(EncoderBoltLength(3dPrinterTolerance), EncoderBoltWidth(3dPrinterTolerance)/2, EncoderBoltWidth(3dPrinterTolerance)/2);
 			}
-			translate([EncoderBoltInset,EncoderHeight-EncoderBoltInset,-EncoderBoltLength/2])
+			translate([EncoderBoltInset(3dPrinterTolerance),EncoderHeight(3dPrinterTolerance)-EncoderBoltInset(3dPrinterTolerance),-EncoderBoltLength(3dPrinterTolerance)/2])
 			{
-				cylinder(EncoderBoltLength, EncoderBoltWidth/2, EncoderBoltWidth/2);
+				cylinder(EncoderBoltLength(3dPrinterTolerance), EncoderBoltWidth(3dPrinterTolerance)/2, EncoderBoltWidth(3dPrinterTolerance)/2);
 			}
-			translate([EncoderWidth-EncoderBoltInset,EncoderHeight-EncoderBoltInset,-EncoderBoltLength/2])
+			translate([EncoderWidth(3dPrinterTolerance)-EncoderBoltInset(3dPrinterTolerance),EncoderHeight(3dPrinterTolerance)-EncoderBoltInset(3dPrinterTolerance),-EncoderBoltLength(3dPrinterTolerance)/2])
 			{
-				cylinder(EncoderBoltLength, EncoderBoltWidth/2, EncoderBoltWidth/2);
+				cylinder(EncoderBoltLength(3dPrinterTolerance), EncoderBoltWidth(3dPrinterTolerance)/2, EncoderBoltWidth(3dPrinterTolerance)/2);
 			}
+	}else{}
 		}
 	}
 }
 
-Encoder();
+//This is the encoder, complete with its encoder bolts (though bolts can be removed by changing the boolean to "false". It is shown in red.
+translate([-50,0,0])
+{
+	color("Red")
+	Encoder(true);
+}
+
+
+module Encoder_Keepaway(3dPrinterTolerance=.4)
+{
+	union()
+	{
+		Encoder(3dPrinterTolerance);
+		translate([-EncoderWidth(3dPrinterTolerance)/2, -EncoderHeight(3dPrinterTolerance)+EncoderChipOffset(3dPrinterTolerance), 0])
+		{
+			cube([EncoderWidth(3dPrinterTolerance),EncoderThickness(3dPrinterTolerance)*8, EncoderThickness(3dPrinterTolerance)]);
+		}
+		translate([-(EncoderLongBoxWidth(3dPrinterTolerance)+EncoderShortBoxWidth(3dPrinterTolerance))/2-1,-(EncoderHeight(3dPrinterTolerance)+EncoderThickness(3dPrinterTolerance)*8)/2-1,0])
+		{
+			cube([EncoderLongBoxWidth(3dPrinterTolerance)+EncoderShortBoxWidth(3dPrinterTolerance)+1,EncoderHeight(3dPrinterTolerance)+EncoderThickness(3dPrinterTolerance)*16,EncoderHeight(3dPrinterTolerance)]);
+		}
+		//screws
+		translate([-EncoderWidth()/2+EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])
+
+		{
+			#HiLoScrew(3dPrinterTolerance);
+		}
+translate([EncoderWidth()/2-EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])		
+		{
+			#HiLoScrew(3dPrinterTolerance);
+		}
+	}
+}
+
+//This is the encoder with a keepaway, this is done so that you can fit the encoder into a slot, and use HiLo screws to hold it in, rather than purchasing the specific encoder bolts.
+translate([50,0,0])
+{
+	union()
+	{
+		Encoder(false);
+		%Encoder_Keepaway();
+	}
+}
+
 
