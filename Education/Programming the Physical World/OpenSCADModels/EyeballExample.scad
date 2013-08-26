@@ -42,7 +42,7 @@ module eyeLid(size=100,upper=true,angle=0){
 }
 
 module cartoonEye(size=100,
-upperEyeLidAngle=10,lowerEyeLidAngle=15, 
+upperEyeLidAngle=20,lowerEyeLidAngle=10, 
 eyeOrentationX=30,eyeOrentationY=0)
 {
 	eye(size,eyeOrentationX,eyeOrentationY);	

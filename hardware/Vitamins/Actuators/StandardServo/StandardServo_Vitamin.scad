@@ -158,7 +158,7 @@ module servoToleranceValueMotor(boltsUp=true,hornCentered=false,servoToleranceVa
 }
 
 
-servoToleranceValueMotor(true,true);
+servoToleranceValueMotor(false,false);
 
 
 
