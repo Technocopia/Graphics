@@ -22,7 +22,7 @@ module IdlerWheel(3dPrinterTolerance=.4){
 	//the bearing offset spacer:
 				translate([0,0,MagnetLength()-ExtruderIdlerWheelThickness(3dPrinterTolerance)])
 				{
-					#cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);
+					cylinder(h=ExtruderIdlerWheelThickness(),r=(608BallBearingDiam(3dPrinterTolerance)/2+608BallBearingInnerDiam(3dPrinterTolerance)/2)/2);
 				}			
 		}
 		translate([0,0,MagnetLength(3dPrinterTolerance)-.25]){rotate([0,180,0]){MagnetDraft(.4);}}
