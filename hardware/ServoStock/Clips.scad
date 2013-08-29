@@ -32,13 +32,13 @@ module clip(Height = MotorBracketHeight())
 				}
 
 				//This makes the holes for the structural rod
-				translate([PlasticWidth()+8mmRodDiameter(.6)/4,SideWidth()/2,-1])
+				translate([PlasticWidth()+8mmRodDiameter(.8)/4,SideWidth()/2,-1])
 				{
-					cylinder(h=Height+2, r=8mmRodDiameter(.6)/2);
+					cylinder(h=Height+2, r=8mmRodDiameter(.8)/2, $fn=50);
 				}
 
 				//This makes the slot for the clip
-				translate([8mmRodDiameter()/2+8mmRodDiameter(.6)/4+1,SideWidth()/2-PlasticWidth()/4,-1])
+				translate([8mmRodDiameter(.8)/2+8mmRodDiameter(.8)/4+1,SideWidth()/2-PlasticWidth()/4,-1])
 				{
 					cube([SideWidth()*2-SideWidth()/2+PlasticWidth(),SlotWidth(),Height+2]);
 				}
@@ -46,7 +46,7 @@ module clip(Height = MotorBracketHeight())
 				//This makes the screwholes for the bed mount
 				translate([-PlasticWidth()/2,SideWidth()/2,-1])
 				{
-					cylinder(h=Height+2, r=HiLoScrewDiameter()/2);
+					cylinder(h=Height+2, r=HiLoScrewDiameter(.6)/2, $fn=50);
 				}
 			} 	
 		}	
@@ -124,10 +124,10 @@ module Clips(MotorHeight=true)
 					{
 						clip(MotorBracketHeight());
 					}
-						translate([0,8mmRodDiameter(.6)/2, 0])
+						translate([0,8mmRodDiameter(.8)/2, 0])
 	//this draws the box between the clips
 					{
-						cube([ClipWidth(), ZrodSpacing()-8mmRodDiameter(.6),MotorBracketHeight()]);
+						cube([ClipWidth(), ZrodSpacing()-8mmRodDiameter(.8),MotorBracketHeight()]);
 					}
 				}
 				bolts(MotorBracketHeight());
@@ -149,10 +149,10 @@ module Clips(MotorHeight=true)
 					{
 						clip(BearingBracketHeight());
 					}
-						translate([0,8mmRodDiameter(.6)/2, 0])
+						translate([0,8mmRodDiameter(.8)/2, 0])
 	//this draws the box between the clips
 					{
-						cube([ClipWidth(), ZrodSpacing()-8mmRodDiameter(.6),BearingBracketHeight()]);
+						cube([ClipWidth(), ZrodSpacing()-8mmRodDiameter(.8),BearingBracketHeight()]);
 					}
 				}
 				bolts(BearingBracketHeight());

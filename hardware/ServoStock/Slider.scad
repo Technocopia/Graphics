@@ -11,7 +11,7 @@ use <Pulley.scad>
 function BearingGripDiam()= LM8UULinearBearingDiam()+PlasticWidth()*2;
 function SliderHeight()= LM8UULinearBearingHeight()-.01;
 function GripWidth()= PlasticWidth();
-function FlareLength()= (RodEndSpacing()-ZrodSpacing())/2-LM8UULinearBearingDiam()/2+PlasticWidth()/2; 
+function FlareLength()= (RodEndSpacing()-ZrodSpacing())/2-(LM8UULinearBearingDiam())/2-PlasticWidth()+RodEndClipWidth()/2-3dPrinterTolerance()/2;
 
 function BeltClipLength()=StandardServoCylinderHeight()+PulleyBeltOffset()+2XLBeltWidth();
 
@@ -25,7 +25,7 @@ module TaperedCylinder()
 //MINOR ADJUSTMENT THAT I DON'T HAVE TIME TO MAKE.
 	//DO YOU SEE THE HILO BOLTS GOING INTO THE BEARING GRIPS? SEE THE ONE ON THE SIDE WITH THE BELT GRIP? IT NEEDS A SMALL HOLE TO ACCOMODATE IT IN THE BELT GRIP BECAUSE AS OF RIGHT NOW IT ONLY CUTS THROUGH THE BEARING PART, AND AS YOU CAN SEE ON THE OTHER SIDE THEY STICK OUT A LITTLE BIT BEYOND THAT, SO THERE NEEDS TO BE A HOLE IN THE SIDE OF THE BELT GRIP TOO
 
-module LinearBearingGrip()
+module LinearBearingGrip(Style=2)
 {
 	union()
 	{
@@ -47,49 +47,88 @@ module LinearBearingGrip()
 					TaperedCylinder();
 				}
 			}
-			translate([-BearingGripDiam()/2+LM8UULinearBearingDiam()/4,LM8UULinearBearingDiam()/3,-1])
+			if(Style==3)
 			{
-				cube([LM8UULinearBearingDiam(), LM8UULinearBearingDiam(), SliderHeight()+2]);
+					translate([-BearingGripDiam()/2+LM8UULinearBearingDiam()/4+PlasticWidth()*1.25,LM8UULinearBearingDiam()/3,-1])
+				{
+					cube([LM8UULinearBearingDiam()-PlasticWidth()*2.5, LM8UULinearBearingDiam(), SliderHeight()+2]);
+				}
+					
+			}else{
+					translate([-BearingGripDiam()/2+LM8UULinearBearingDiam()/4+PlasticWidth()/2,LM8UULinearBearingDiam()/3,-1])
+				{
+					cube([LM8UULinearBearingDiam()-PlasticWidth(), LM8UULinearBearingDiam(), SliderHeight()+2]);
+				}
+			
 			}
 		}
-	difference()
+	if(Style==1)
 	{
-		union()
+		difference()
 		{
-			translate([LM8UULinearBearingDiam()/2.67,LM8UULinearBearingDiam()/3,0])
+			union()
 			{
-				cube([PlasticWidth(), LM8UULinearBearingDiam()/1.2, SliderHeight()]);
+				translate([LM8UULinearBearingDiam()/2.7-3dPrinterTolerance()/2,LM8UULinearBearingDiam()/3,0])
+				{
+					cube([PlasticWidth(), LM8UULinearBearingDiam()/2, SliderHeight()]);
+				}
+				translate([LM8UULinearBearingDiam()/2.7-3dPrinterTolerance()/2-PlasticWidth(),LM8UULinearBearingDiam()/3+LM8UULinearBearingDiam()/4,0])
+				{
+					cube([PlasticWidth(), LM8UULinearBearingDiam()/1.2, SliderHeight()]);
+				}
+				translate([-LM8UULinearBearingDiam()/2.7-PlasticWidth(),LM8UULinearBearingDiam()/3,0])
+				{
+					cube([PlasticWidth(), LM8UULinearBearingDiam()/2, SliderHeight()]);
+				}
+				translate([-LM8UULinearBearingDiam()/2.7,LM8UULinearBearingDiam()/3+LM8UULinearBearingDiam()/4,0])
+				{
+					cube([PlasticWidth(), LM8UULinearBearingDiam()/1.2, SliderHeight()]);
+				}
 			}
-			translate([-LM8UULinearBearingDiam()/1.55,LM8UULinearBearingDiam()/3,0])
+			translate([LM8UULinearBearingDiam()-HiLoBoltLength(), LM8UULinearBearingDiam()/1.2+PlasticWidth(),SliderHeight()/2])
 			{
-				cube([PlasticWidth(), LM8UULinearBearingDiam()/1.2, SliderHeight()]);
+				rotate([0,-90,0])
+				{
+					HiLoBolt(.3);
+				}
 			}
 		}
-		translate([LM8UULinearBearingDiam()-PlasticWidth()-HiLoBoltLength(), LM8UULinearBearingDiam()/2+PlasticWidth(),SliderHeight()/2])
-		{
-			rotate([0,-90,0])
-			{
-				#HiLoBolt();
-			}
-		}
-	}
-	}
+		}else{}
+	
+}
 }
 
 //THIS GOT A LITTLE WEIRD AND KLUDGY
 
-module BeltClip()
+module BeltClip(HiLo=false, Style=2)
 {
 	translate([-PulleyInnerDiam()/2-2XLBeltGripHeight()/2,BeltClipLength()/2,SliderHeight()/2])
 	{
 		union()
 		{
 			difference()
-			{
-				translate([0,BeltClipLength()*.15,0])
+			{	
+				if(HiLo==true)
 				{
-					cube([2XLBeltGripHeight()*3.5, BeltClipLength()*1.3, SliderHeight()], center=true);
+					translate([0,BeltClipLength()*.15,0])
+					{
+						cube([2XLBeltGripHeight()*3.5, BeltClipLength()*1.3, SliderHeight()], center=true);
+					}
+				}else{
+					{
+						cube([2XLBeltGripHeight()*3.5, BeltClipLength(), SliderHeight()], center=true);
+					}
 				}
+				if(Style==1)
+				{
+					translate([-HiLoBoltLength()-1,LM8UULinearBearingDiam()/2.4,0])
+					{
+						rotate([0,-90,0])
+						{
+							HiLoBolt(.4, HiLoBoltLength());
+						}
+					}
+				}else{}
 				translate([0,BeltClipLength()/2-2XLBeltSlotWidth()+.12,SliderHeight()+1])
 				{
 					rotate([0,90,0])
@@ -97,13 +136,16 @@ module BeltClip()
 						2XLTimingBeltSlot();
 					}
 				}
-				translate([-2XLBeltGripHeight()*2,BeltClipLength()*.65,0])
+				if(HiLo==true)
 				{
-					rotate([0,-90,0])
+					translate([-2XLBeltGripHeight()*2,BeltClipLength()*.65,0])
 					{
-						HiLoBolt();
+						rotate([0,-90,0])
+						{
+							HiLoBolt();
+						}
 					}
-				}
+				}else{}
 			}
 		}
 	}
@@ -113,7 +155,7 @@ module BeltClip()
 
 
 
-module SliderBase()
+module SliderBase(Style=2)
 {
 	union()
 	{
@@ -123,13 +165,13 @@ module SliderBase()
 		}
 		translate([0,PlasticWidth()/2,0])
 		{
-		LinearBearingGrip();				
+		LinearBearingGrip(Style);				
 		}
 		translate([ZrodSpacing(),PlasticWidth()/2,0])
 		{
 			mirror([1,0,0])
 			{
-				LinearBearingGrip();
+				LinearBearingGrip(Style);
 			}				
 		}
 	}
@@ -149,13 +191,13 @@ module Flare()
 //%cube(size=[RodEndSpacing(), RodEndSpacing(), 20,], center=true);
 
 
-module Slider()
+module Slider(HiLo=false, Style=2)
 {
 	union()
 	{
 		translate([-ZrodSpacing()/2,-PlasticWidth()/2,0])
 		{
-			SliderBase();			
+			SliderBase(Style);			
 			Flare();
 			mirror([1,0,0])
 			{
@@ -165,7 +207,7 @@ module Slider()
 				}
 			}
 		}
-	BeltClip();
+	BeltClip(HiLo, Style);
 	translate([0,-PlasticWidth(),0])
 	{
 		RodEndClips();
@@ -173,7 +215,7 @@ module Slider()
 	}
 }
 
-Slider();
+Slider(false, 1);
 
 //to check if pulley lines up
 //use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
