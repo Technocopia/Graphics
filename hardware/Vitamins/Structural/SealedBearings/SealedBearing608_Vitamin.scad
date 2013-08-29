@@ -1,6 +1,8 @@
 function 608BallBearingDiam(3dPrinterTolerance=.4) = 22+3dPrinterTolerance;
 function 608BallBearingHeight(3dPrinterTolerance=.4) = 7+3dPrinterTolerance;
-function 608BallBearingInnerDiam(3dPrinterTolerance=.04)= 8-3dPrinterTolerance*2;
+function 608BallBearingInnerDiam(3dPrinterTolerance=.4)= 8-3dPrinterTolerance;
+
+function 608BallBearingAvgDiam(3dPrinterTolerance=.4)= (608BallBearingDiam(3dPrinterTolerance)+608BallBearingInnerDiam(3dPrinterTolerance))/2;
 
 
 module 608BallBearing(3dPrinterTolerance=.4)

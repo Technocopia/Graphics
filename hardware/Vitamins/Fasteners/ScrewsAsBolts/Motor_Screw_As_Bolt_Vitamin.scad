@@ -1,7 +1,7 @@
 //This is modelling a motor screw being used as a bolt, and it's got a thicker bit so that it can slide through one side of the grip and then grab onto the other
 
 function MotorScrewBoltOuterDiameter(3dPrinterTolerance=.4) = 2.65 + 3dPrinterTolerance*2;
-function MotorScrewBoltDiameter(3dPrinterTolerance=.4)= 2.2 + 3dPrinterTolerance*2;
+function MotorScrewBoltDiameter(3dPrinterTolerance=.4)= 1.9 + 3dPrinterTolerance*2;
 function MotorScrewBoltLength(3dPrinterTolerance=.4)= 16.4 + 3dPrinterTolerance;
 function MotorScrewBoltHeadDiameter(3dPrinterTolerance=.4)= 6.7 + 3dPrinterTolerance*2;
 function MotorScrewBoltHeadHeight(3dPrinterTolerance=.4)= 1.7 + 3dPrinterTolerance;

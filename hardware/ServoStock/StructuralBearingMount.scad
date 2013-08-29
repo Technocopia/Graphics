@@ -9,6 +9,7 @@ use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 
 use <Clips.scad>
 use <Pulley.scad>
+use <IdlerBearingClip.scad>
 
 
 
@@ -38,7 +39,7 @@ module StructuralBearingMount(50mmBolt=true)
 					}
 				}
 				translate([0,-(608BallBearingDiam()/2+608BallBearingInnerDiam()/2)/2,0])
-				cube([StandardServoOutcrop()+PulleyBaseHeight(),(608BallBearingDiam()/2+608BallBearingInnerDiam()/2), BearingBracketHeight()/2]);
+				cube([StandardServoOutcrop()+PulleyBaseHeight()-BearingClipSideWidth()*2,(608BallBearingDiam()/2+608BallBearingInnerDiam()/2), BearingBracketHeight()/2]);
 			}			
 		}	
 		//this cuts the bolthole out of the mount

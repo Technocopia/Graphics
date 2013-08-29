@@ -3,12 +3,12 @@ use <../Vitamins/Kinematics/Belts/Generic_Drive_Belt_Vitamin.scad>
 use <../Vitamins/Kinematics/Pulleys/Pulley_Vitamin.scad>
 
 
-function SideWidth()= (PulleyInnerDiam()-608BallBearingDiam(.08))/2;
+function BearingClipSideWidth()= (PulleyInnerDiam()-608BallBearingDiam(.3))/2;
 
-function BearingClipDiam()= 608BallBearingDiam(.08)+ SideWidth()*2;
+function BearingClipDiam()= 608BallBearingDiam(.3)+ BearingClipSideWidth()*2;
 
 echo(BearingClipDiam());
-echo(SideWidth());
+echo(BearingClipSideWidth());
 
 $fn=100;
 
@@ -18,22 +18,22 @@ module IdlerBearingClip()
 	{
 		union()
 		{
-			cylinder(h=GenericDriveBeltWidth(.8)+SideWidth(), r=BearingClipDiam()/2);
-			cylinder(h=SideWidth(), r=PulleyInnerDiam()/2+SideWidth());
-			translate([0,0,GenericDriveBeltWidth(.8)+SideWidth()])
+			cylinder(h=GenericDriveBeltWidth(.8)+BearingClipSideWidth(), r=BearingClipDiam()/2);
+			cylinder(h=BearingClipSideWidth(), r=PulleyInnerDiam()/2+BearingClipSideWidth());
+			translate([0,0,GenericDriveBeltWidth(.8)+BearingClipSideWidth()])
 			{
-				cylinder(h=SideWidth(), r=PulleyInnerDiam()/2+SideWidth());
+				cylinder(h=BearingClipSideWidth(), r=PulleyInnerDiam()/2+BearingClipSideWidth());
 			}
 		}
 		union()
 		{
-			translate([0,0,SideWidth()])
+			translate([0,0,BearingClipSideWidth()])
 			{
-				cylinder(h=GenericDriveBeltWidth(.8)+SideWidth()+1, r=608BallBearingDiam(.08)/2);
+				cylinder(h=GenericDriveBeltWidth(.8)+BearingClipSideWidth()+1, r=608BallBearingDiam(.3)/2);
 			}
 			translate([0,0,-1])
 			{
-				cylinder(h=GenericDriveBeltWidth(.8)+SideWidth()+2, r=608BallBearingDiam(.08)/2-SideWidth());		
+				cylinder(h=GenericDriveBeltWidth(.8)+BearingClipSideWidth()+2, r=608BallBearingDiam(.3)/2-BearingClipSideWidth());		
 			}		
 		}
 	}

@@ -20,6 +20,8 @@ function EncoderChipSide(3dPrinterTolerance=.4)=4.25+ 3dPrinterTolerance;
 function EncoderChipHeight(3dPrinterTolerance=.4)= 1+ 3dPrinterTolerance;
 function EncoderChipOffset(3dPrinterTolerance=.4)=4+ 3dPrinterTolerance/2;
 
+//this sort of forces the HiLo screw down so it is closer to the encoder and the encoder doesn't wiggle as much, feel free to change to 0 if you don't want it.
+function HiLoOffset()=1.5;
 
 
 module Encoder(Bolts=true, 3dPrinterTolerance=.4)
@@ -77,7 +79,7 @@ translate([-50,0,0])
 }
 
 
-module Encoder_Keepaway(3dPrinterTolerance=.4)
+module Encoder_Keepaway(HiLo=true, 3dPrinterTolerance=.4)
 {
 	union()
 	{
@@ -91,15 +93,18 @@ module Encoder_Keepaway(3dPrinterTolerance=.4)
 			cube([EncoderLongBoxWidth(3dPrinterTolerance)+EncoderShortBoxWidth(3dPrinterTolerance)+1,EncoderHeight(3dPrinterTolerance)+EncoderThickness(3dPrinterTolerance)*16,EncoderHeight(3dPrinterTolerance)]);
 		}
 		//screws
-		translate([-EncoderWidth()/2+EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])
+		if(HiLo==true)
+		{
+			translate([-EncoderWidth()/2+EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance+HiLoOffset(),EncoderBoltLength(3dPrinterTolerance)/2])
 
-		{
-			#HiLoScrew(3dPrinterTolerance);
-		}
-translate([EncoderWidth()/2-EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance,EncoderBoltLength(3dPrinterTolerance)/2])		
-		{
-			#HiLoScrew(3dPrinterTolerance);
-		}
+			{
+				#HiLoScrew(3dPrinterTolerance-.05);
+			}
+			translate([EncoderWidth()/2-EncoderThickness(),-EncoderChipOffset(3dPrinterTolerance)-EncoderThickness(3dPrinterTolerance)*1.2-3dPrinterTolerance+HiLoOffset(),EncoderBoltLength(3dPrinterTolerance)/2])		
+			{
+				#HiLoScrew(3dPrinterTolerance-.05);
+			}
+		}else{}
 	}
 }
 
@@ -109,7 +114,7 @@ translate([50,0,0])
 	union()
 	{
 		Encoder(false);
-		%Encoder_Keepaway();
+		%Encoder_Keepaway(true);
 	}
 }
 

@@ -11,7 +11,7 @@ use <Clips.scad>
 
 
 function EncoderShelfWidth() = PlasticWidth()*3+608BallBearingHeight()+EncoderThickness();
-function EncoderShelfDistance() = StandardServoOutcrop()-PlasticWidth()*2+WorkingPulleyHeight();
+function EncoderShelfDistance() = StandardServoOutcrop()-PlasticWidth()*2+WorkingPulleyHeight()+PulleyHubHeight()/2;
 function EncoderShelfLength() = ZrodSpacing()-SideWidth()+SlotWidth();
 function EncoderShelfOffset() = -ZrodSpacing()/2+PlasticWidth()+SlotWidth()/2;
 function EncoderCutoutLength()= PulleyDiam()+PlasticWidth()*2;
@@ -54,7 +54,7 @@ module wing()
 		//This makes the screwholes on the wings of the bed mount
 		translate([-SideWidth()*3-PlasticWidth()-ClipWidth(),-ZrodSpacing()/2,MotorBracketHeight()-HiLoScrewLength()-PlasticWidth()*2+2])
 		{
-			cylinder(h=HiLoScrewLength()+PlasticWidth()*2, r=HiLoScrewDiameter()/2);
+			cylinder(h=HiLoScrewLength()+PlasticWidth()*2, r=HiLoScrewDiameter(.66)/2);
 				
 		}
 	}	
@@ -131,7 +131,7 @@ module EncoderMount()
 
 
 //this is the actual module for the finished foot, it pulls down the clips and adds the wings to make a bed mount, and cuts holes to accomodate the motor
-module StructuralFeet()
+module StructuralFeet(EncoderScrews=false)
 {
 	difference()
 	{
@@ -150,22 +150,22 @@ module StructuralFeet()
 				}
 			}
 			wings();
-			difference()
-			{
+//			difference()
+//			{
 				EncoderMount();
-				translate([EncoderShelfDistance(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()-1])
-				{
-					rotate([0,0,180])
-					{
-						rotate([180,0,0])
-						{
-							SubtractiveBearingCap();	
-						}
-					}
-				}
-			}
+//				translate([EncoderShelfDistance(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()-1])
+//				{
+//					rotate([0,0,180])
+//					{
+//						rotate([180,0,0])
+//						{
+//							SubtractiveBearingCap();	
+//						}
+//					}
+//				}
+//			}
 		}
-		translate([EncoderShelfDistance()+PulleyHubHeight(),0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
+		translate([EncoderShelfDistance()+PulleyHubHeight()/2,0,MotorBracketHeight()-EncoderMountHeight()-PlasticWidth()])
 		{
 			union()
 			{
@@ -181,10 +181,19 @@ module StructuralFeet()
 				{
 					rotate([0,0,90])
 					{
-						union()
+						if (EncoderScrews==true)
 						{
-							Encoder_Keepaway(.8);
-							#Encoder(false,.8);			
+							union()
+							{
+								Encoder_Keepaway(false,.8);
+								#Encoder(true,.8);		
+							}
+						}else{
+							union()
+							{
+								Encoder_Keepaway(true, .8);
+								#Encoder(false,.8);		
+							}	
 						}					
 					}
 				}
@@ -215,6 +224,13 @@ translate([-StandardServoCylinderHeight(),0,EncoderMountHeight()+PlasticWidth()]
 rotate([0,-90,0])
 {		
 	//servo_pulley(true);
+}
+
+//check the bearing cap fit. It may look a little funny but having it float up top and simply use the existing screws for the encoder mount does two things: it negates the need for its own screw, and by floating, it ensures that you'll always be able to wiggle it around to make it fit. If the two parts touch and there's a minor misaligment for whatever reason (which is likely), then you may not be able to get the screwholes to line up properly.
+
+translate([-EncoderShelfDistance(),0,29])
+{	
+//	#BearingCap();		
 }
 
 
