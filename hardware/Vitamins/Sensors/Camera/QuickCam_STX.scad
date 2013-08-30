@@ -4,6 +4,7 @@ function getNubRadius() =1.3;
 function getPinHeight() = 7.5;
 function getFlangeWidth(tolerance)= 2.3 + tolerance;
 function getFlangeLength(tolerance)= 6.64 + tolerance;
+function getQuickCamRadius(tolerance)= 55.93 +tolerance;
 
 module CameraMount( 3dPrinterTolerance=.4)
 {
@@ -49,4 +50,24 @@ module CameraMount( 3dPrinterTolerance=.4)
 	
 }
 
-CameraMount();
+module cameraViewingCone(){
+
+}
+
+module QuickCam(3dPrinterTolerance=.4){
+	union(){
+		difference(){
+			translate([0,0,getQuickCamRadius(3dPrinterTolerance)]){		 
+				sphere(getQuickCamRadius(3dPrinterTolerance));
+			}	
+			
+			CameraMount( 3dPrinterTolerance);
+			
+		}
+		
+	}
+}
+
+QuickCam();
+
+//CameraMount();
