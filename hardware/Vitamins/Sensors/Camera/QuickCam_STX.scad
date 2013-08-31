@@ -1,10 +1,11 @@
 $fn = 60;
 
 function getNubRadius() =1.3;
-function getPinHeight() = 7.5;
+function getPinHeight() = 9;
 function getFlangeWidth(tolerance)= 2.3 + tolerance;
 function getFlangeLength(tolerance)= 6.64 + tolerance;
 function getQuickCamRadius(tolerance)= 55.93 +tolerance;
+function getLandingPadThickness() = 5;
 
 module CameraMount( 3dPrinterTolerance=.4)
 {
@@ -36,14 +37,14 @@ module CameraMount( 3dPrinterTolerance=.4)
 		translate([getFlangeWidth(3dPrinterTolerance)/-2,getFlangeLength(3dPrinterTolerance)/-2,0]){		 
 			cube([	getFlangeWidth(3dPrinterTolerance), 
 					getFlangeLength(3dPrinterTolerance), 
-					4
+					getPinHeight()-getFlangeWidth(3dPrinterTolerance)-1
 				]);
 		}		 
 		// Landing pad			 
-		translate([0,0,-5]){		 
-			cylinder(5,							// length of the landing pad
-					 15, 	// radius of the landing pad
-					 15, 	// radius of the landing pad
+		translate([0,0,-getLandingPadThickness()]){		 
+			cylinder(getLandingPadThickness(),	// length of the landing pad
+					 15, 						// radius of the landing pad
+					 15, 						// radius of the landing pad
 					 false);
 		}		 
 	}		 
@@ -68,6 +69,7 @@ module QuickCam(3dPrinterTolerance=.4){
 	}
 }
 
-QuickCam();
-
-//CameraMount();
+//QuickCam();
+translate([0,0,getLandingPadThickness()]){
+	CameraMount();
+}
