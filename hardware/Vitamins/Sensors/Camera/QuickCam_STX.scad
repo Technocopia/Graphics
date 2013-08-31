@@ -6,6 +6,8 @@ function getFlangeWidth(tolerance)= 2.3 + tolerance;
 function getFlangeLength(tolerance)= 6.64 + tolerance;
 function getQuickCamRadius(tolerance)= 55.93 +tolerance;
 function getLandingPadThickness() = 5;
+function getUsbWidth() = 8.5;
+function getUsbHeight()=16.5;
 
 module CameraMount( 3dPrinterTolerance=.4)
 {
@@ -63,13 +65,45 @@ module QuickCam(3dPrinterTolerance=.4){
 			}	
 			
 			CameraMount( 3dPrinterTolerance);
-			
+		}
+		color("red"){
+			translate([0,0,getQuickCamRadius(3dPrinterTolerance)]){	
+				rotate([90,0,0]){
+					cylinder(	getQuickCamRadius(3dPrinterTolerance)*2,	//
+								0, 						// 
+						 		50, 						// 
+						 		false);
+		 		}
+			}	
+		}
+		translate([0,0,getQuickCamRadius(3dPrinterTolerance)]){	
+			rotate([-125,0,0]){
+				translate([-getUsbHeight()/2,0,0]){	
+					cube([	getUsbHeight(),
+					 		getUsbWidth(),
+					 		getQuickCamRadius(3dPrinterTolerance)*1.5]);
+			 	}
+	 		}
 		}
 		
 	}
 }
 
-//QuickCam();
-translate([0,0,getLandingPadThickness()]){
-	CameraMount();
+module camInterface(){
+//translate([0,0,getLandingPadThickness()]){
+//	CameraMount();
+//}
+	difference(){	 
+		#cylinder(	55,	//
+					55, 						// 
+			 		55, 						// 
+			 		false);
+		translate([0,0,4]){	
+			QuickCam();
+		}
+	}
+
 }
+camInterface();
+//QuickCam();
+
