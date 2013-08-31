@@ -1,6 +1,3 @@
-
-			
-
 $fn=50;
 use <../Vitamins/Electronics/Hot_Ends/PrintrBotJHeadHotEnd_Vitamin.scad>;
 use <../Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>;
