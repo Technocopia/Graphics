@@ -1,4 +1,9 @@
-//When calling this module, use toleranceMotor(boolean,boolean,boolean, number); The first boolean determines the bolt direction(true is up, false is down) and the second determines where the module is centered (true centers at the hub, false centers at the motor mount), the third boolean determines whether to use the large cylindrical hub or the small metal nub. The number indicated the tolerance of the motor (default is .4 mm)
+// When calling this module, use toleranceMotor(boolean,boolean,boolean, number); 
+// The first boolean determines the bolt direction(true is up, false is down) and 
+// the second determines where the module is centered (true centers at the hub, 
+// false centers at the motor mount), the third boolean determines whether to use 
+// the large cylindrical hub or the small metal nub. The number indicated the 
+// tolerance of the motor (default is .4 mm)
 
 //THIS IS FOR IF YOU USE OTHER KINDS OF MOTORS, MOTOROUTCROP IS THE DISTANCE FROM THE MOUNTING PLATE TO THE BUISNESS END OF YOUR MOTOR, IF YOU EVER NEED TO SWITCH TO ANOTHER JUST CHANGE THIS VALUE TO THE ACTUAL VALUE
 
