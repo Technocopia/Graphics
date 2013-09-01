@@ -4,7 +4,7 @@ function getNubRadius() =1.3;
 function getPinHeight() = 9;
 function getFlangeWidth(tolerance)= 2.3 + tolerance;
 function getFlangeLength(tolerance)= 6.64 + tolerance;
-function getQuickCamRadius(tolerance)= 55.93 +tolerance;
+function getQuickCamRadius(tolerance)= 55.93/2 +tolerance;
 function getLandingPadThickness() = 5;
 function getUsbWidth() = 8.5;
 function getUsbHeight()=16.5;
@@ -94,9 +94,9 @@ module camInterface(){
 //	CameraMount();
 //}
 	difference(){	 
-		#cylinder(	55,	//
-					55, 						// 
-			 		55, 						// 
+		#cylinder(	getQuickCamRadius(0),	//
+					getQuickCamRadius(0), 						// 
+			 		getQuickCamRadius(0), 						// 
 			 		false);
 		translate([0,0,4]){	
 			QuickCam();
