@@ -1,14 +1,14 @@
 use <../../../hardware/Vitamins/Actuators/StandardServo/StandardServo_Vitamin.scad>
 use <../../../hardware/Vitamins/Sensors/Camera/QuickCam_STX.scad>
+use <../../../hardware/Vitamins/Structural/SealedBearings/SealedBearing608_Vitamin.scad>
 
 //QuickCam();
 
 //StandardServoMotor(true, 1, false, .4);
 
-function getCamerabarThickness()=15;
+function getCamerabarThickness()=20;
 
-
-module cameraTiltBar(3dPrinterTolerance=.4){
+module coreCameraBar(3dPrinterTolerance=.4){
 	union(){
 		difference(){
 			cylinder(	getCamerabarThickness(),				//
@@ -38,10 +38,44 @@ module cameraTiltBar(3dPrinterTolerance=.4){
 				}
 			}
 		}
-		
-		
+		translate([getQuickCamRadius(3dPrinterTolerance),0,0]){
+			cube([	getCamerabarThickness(),
+					getCamerabarThickness()/2,
+					getCamerabarThickness()]);
+		}
+		translate([-(getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness()),0,0]){
+			cube([	getCamerabarThickness(),
+					getCamerabarThickness()/2,
+					getCamerabarThickness()]);
+		}
+		translate([	getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness(),
+					0,
+					getCamerabarThickness()/2]){
+			rotate([0,90,0]){
+				cylinder(	608BallBearingHeight(3dPrinterTolerance)*2,
+							608BallBearingInnerDiam(3dPrinterTolerance)/2,
+							608BallBearingInnerDiam(3dPrinterTolerance)/2,
+							false
+							);
+			}
+		}
 	}
+}
 
+module cameraTiltBar(3dPrinterTolerance=.4){
+	difference(){
+		coreCameraBar(3dPrinterTolerance);
+		translate([	-(getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness()),
+					0,
+					getCamerabarThickness()/2]){
+			rotate([0,90,0]){
+				rotate([0,0,45]){
+					#StandardServoMotor(true, 1, true, .4);
+				}
+			}
+		}
+	}
+	
 }
 
 cameraTiltBar();
