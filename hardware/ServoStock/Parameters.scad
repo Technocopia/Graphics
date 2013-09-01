@@ -23,9 +23,6 @@ echo(ZrodSpacing());
 
 //distance between link arms will be calculable based on radius of toolplate
 
-
-
-
 //tolerances
 //function LaserCutTolerance() = .02;
 function 3dPrinterTolerance() = .4;
