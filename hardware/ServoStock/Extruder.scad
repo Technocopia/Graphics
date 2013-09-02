@@ -36,11 +36,10 @@ module ExtruderBlock(3dPrinterTolerance=.4)
 		translate([-ExtruderLength()/2-1,-ExtruderWidth()/2,-ExtruderHeight()/2+4]){cube([ExtruderHeight()+2,ExtruderWidth(),ExtruderHeight()+4]);}
 		translate([-ExtruderLength()/2-HiLoScrewLength()/1.5,ExtruderWidth()/2-ExtruderHeight()+2,-2]){cube([ExtruderLength(),ExtruderWidth()/4,ExtruderHeight()+4]);}
 //Counterbored screw holes:
-		translate([ExtruderLength()/2-ExtruderIdlerWheelDiam(.4)/3,ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*2,-.1]){CounterboreScrew(.4);}
-		translate([ExtruderLength(.4)/2-ExtruderIdlerWheelDiam(.4)/3,-ExtruderWidth()/2+HiLoScrewHeadDiameter(.4)/3,-.1]){CounterboreScrew(.4);}
+		translate([ExtruderLength()/2-ExtruderIdlerWheelDiam(.4)/5,ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*2,-.1]){#CounterboreScrew(.4);}
+		translate([ExtruderLength(.4)/2-ExtruderIdlerWheelDiam(.4)/5,-ExtruderWidth()/2+HiLoScrewHeadDiameter(.4)/3,-.1]){#CounterboreScrew(.4);}
 		translate([-ExtruderLength()/2+ExtruderIdlerWheelDiam(.4),ExtruderWidth()/2-HiLoScrewHeadDiameter(.4)*2,-.1]){CounterboreScrew(.4);}
 		translate([-ExtruderLength()/2+ExtruderIdlerWheelDiam(),-ExtruderWidth()/2+StandardServoThickness()/1.5,-.1]){CounterboreScrew(.4);}
-		echo((ExtruderLength()/2-ExtruderIdlerWheelDiam(.4)/3)-(-ExtruderLength()/2+ExtruderIdlerWheelDiam(.4)));
 //The 608 Bearing.  commented out cube is for cross-section examination
 		translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,MagnetLength()-ExtruderIdlerWheelThickness()*3+1]){cylinder(h=608BallBearingHeight(3dPrinterTolerance)+ExtruderIdlerWheelThickness(),r=(608BallBearingDiam()+.04)/2);}
 		translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,ExtruderHeight()/2-ExtruderIdlerWheelThickness()*2.25]){608BallBearing();}

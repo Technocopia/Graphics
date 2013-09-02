@@ -36,7 +36,7 @@ module Encoder(Bolts=true, 3dPrinterTolerance=.4)
 	//chip
 			translate([EncoderWidth(3dPrinterTolerance)/2-EncoderChipSide(3dPrinterTolerance)/2, EncoderChipOffset(3dPrinterTolerance), -EncoderChipHeight(3dPrinterTolerance)])
 			{
-				#cube([EncoderChipSide(3dPrinterTolerance), EncoderChipSide(3dPrinterTolerance),EncoderChipHeight(3dPrinterTolerance)]);
+				cube([EncoderChipSide(3dPrinterTolerance), EncoderChipSide(3dPrinterTolerance),EncoderChipHeight(3dPrinterTolerance)]);
 			}
 	//boxes
 			translate([EncoderShortBoxInset(3dPrinterTolerance)+EncoderShortBoxWidth(3dPrinterTolerance),0,0])
@@ -74,7 +74,7 @@ if(Bolts==true)
 //This is the encoder, complete with its encoder bolts (though bolts can be removed by changing the boolean to "false". It is shown in red.
 translate([-50,0,0])
 {
-	color("Red")
+	//color("Red")
 	Encoder(true);
 }
 
