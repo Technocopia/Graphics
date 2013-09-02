@@ -7,13 +7,14 @@ use <../../../hardware/Vitamins/Structural/SealedBearings/SealedBearing608_Vitam
 //StandardServoMotor(true, 1, false, .4);
 
 function getCamerabarThickness()=20;
+function getCamerabarWidth()=10;
 
 module coreCameraBar(3dPrinterTolerance=.4){
 	union(){
 		difference(){
 			cylinder(	getCamerabarThickness(),				//
-						getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness(), 	// 
-				 		getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness(), 	// 
+						getQuickCamRadius(3dPrinterTolerance)+getCamerabarWidth(), 	// 
+				 		getQuickCamRadius(3dPrinterTolerance)+getCamerabarWidth(), 	// 
 				 		false);
 			translate([0,-getQuickCamRadius(3dPrinterTolerance),getCamerabarThickness()/2]){
 				rotate([-90,0,0]){
@@ -38,17 +39,20 @@ module coreCameraBar(3dPrinterTolerance=.4){
 				}
 			}
 		}
+		//Bearing brick
 		translate([getQuickCamRadius(3dPrinterTolerance),0,0]){
-			cube([	getCamerabarThickness(),
+			cube([	getCamerabarWidth(),
 					getCamerabarThickness()/2,
 					getCamerabarThickness()]);
 		}
-		translate([-(getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness()),0,0]){
-			cube([	getCamerabarThickness(),
-					getCamerabarThickness()/2,
+		//Servo Brick
+		translate([-(getQuickCamRadius(3dPrinterTolerance)+getCamerabarWidth()),-getCamerabarThickness()/2,0]){
+			cube([	getCamerabarWidth(),
+					getCamerabarThickness(),
 					getCamerabarThickness()]);
 		}
-		translate([	getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness(),
+		// Bearing rod
+		translate([	getQuickCamRadius(3dPrinterTolerance)+getCamerabarWidth(),
 					0,
 					getCamerabarThickness()/2]){
 			rotate([0,90,0]){
@@ -65,7 +69,7 @@ module coreCameraBar(3dPrinterTolerance=.4){
 module cameraTiltBar(3dPrinterTolerance=.4){
 	difference(){
 		coreCameraBar(3dPrinterTolerance);
-		translate([	-(getQuickCamRadius(3dPrinterTolerance)+getCamerabarThickness()),
+		translate([	-(getQuickCamRadius(3dPrinterTolerance)+getCamerabarWidth()),
 					0,
 					getCamerabarThickness()/2]){
 			rotate([0,90,0]){
