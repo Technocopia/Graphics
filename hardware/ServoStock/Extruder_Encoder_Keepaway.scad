@@ -14,10 +14,10 @@ function GripSpacing(3dPrinterTolerance=.4)= EncoderWidth(3dPrinterTolerance)-Gr
 
 module ScrewRing(3dPrinterTolerance=.4)
 {
-	difference()
+	union()
 	{
 		cylinder(h=EncoderThickness(3dPrinterTolerance)*2, r=HiLoScrewDiameter(3dPrinterTolerance));
-		translate([0,0,HiLoScrewLength(3dPrinterTolerance)/2]){HiLoScrew();}
+		translate([0,0,HiLoScrewLength(3dPrinterTolerance)/1.65]){HiLoScrew();}
 	}
 }
 		
@@ -38,11 +38,11 @@ module EncoderGrip(3dPrinterTolerance=.4)
 				ScrewRing(.4);
 			}
 		}
-		translate([GripLength(.4)-HiLoScrewDiameter(.4)*2.12,-EncoderHeight(.4)/2,-.001])
+		translate([HiLoScrewDiameter(.4)/2-.5,-EncoderHeight(3dPrinterTolerance)/2,-.5])
 		{
-			rotate ([0,0,90])
+			rotate ([0,0,0])
 			{
-				Encoder(false);
+				cube([EncoderHeight(3dPrinterTolerance)+1,EncoderWidth(3dPrinterTolerance), EncoderThickness(3dPrinterTolerance)+.5]);
 			}
 		}
 	}				

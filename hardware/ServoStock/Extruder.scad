@@ -79,8 +79,8 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 	}else{
 		difference(){
 			ExtruderBlock(.4);
-			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,]){rotate([0,180,0]){#Encoder(false);}}
-			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,-15])rotate([180,0,90]){{#EncoderHousing();}}
+			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,]){rotate([0,180,0]){Encoder(false);}}
+			translate([ExtruderIdlerWheelDiam()/2.5-HiLoScrewDiameter(.4)/2,-GripLength(.4)/2+HiLoScrewDiameter(.4)/2,0]){rotate([180,0,90]){EncoderHousing();}}
 		}
 	}
 }
