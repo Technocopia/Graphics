@@ -47,16 +47,18 @@ module EncoderGrip(3dPrinterTolerance=.4)
 		}
 	}				
 }
-
-translate([-GripLength(.4)/2,GripSpacing(.4)/2,0])
+module EncoderHousing()
 {
-EncoderGrip(.4);
-}
+	translate([-GripLength(.4)/2,GripSpacing(.4)/2,0])
+	{
+		EncoderGrip(.4);
+	}
 
-translate([-GripLength(.4)/2,-GripSpacing(.4)/2,0])
-{
-	EncoderGrip(.4);
+	translate([-GripLength(.4)/2,-GripSpacing(.4)/2,0])
+	{
+		EncoderGrip(.4);
+	}
 }
-
+EncoderHousing();
 //translate([0,GripWidth(.4)/2,0]){rotate([0,0,90]){Encoder(.4);}}
 
