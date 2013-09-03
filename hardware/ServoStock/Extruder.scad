@@ -84,7 +84,7 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 //The Encoder
 			translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,-.001]){rotate([0,180,0]){Encoder(false);}}
 //The Support Housing
-			translate([ExtruderIdlerWheelDiam()/2.5-HiLoScrewDiameter(.4)/2,-GripLength(.4)/2+HiLoScrewDiameter(.4)/2,-.001]){rotate([180,0,90]){EncoderHousing();}}
+			translate([ExtruderIdlerWheelDiam()/2.5-HiLoScrewDiameter(.4)/2,-GripLength(.4)/2+HiLoScrewDiameter(.4)/2,-.001]){rotate([180,0,90]){EncoderHousing(false);}}
 //Extra space for the servo nub
 			translate([ExtruderIdlerWheelDiam()/2.5,StandardServoNubDiam()/2+FilamentDiam()/4,StandardServoNubHeight()]){rotate([0,180,-90]){StandardServoMotor(false,2,true,.4);}}
 		}
