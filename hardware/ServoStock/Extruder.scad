@@ -16,6 +16,7 @@ use <Extruder_Encoder_Keepaway.scad>;
 function ExtruderLength(3dPrinterTolerance=.4) = StandardServoLength(3dPrinterTolerance)+HiLoScrewLength(3dPrinterTolerance)/2+2*ConnectorLength(3dPrinterTolerance);
 function ExtruderHeight(3dPrinterTolerance=.4) = HiLoScrewLength(3dPrinterTolerance)/2;
 function ExtruderWidth(3dPrinterTolerance=.4) = StandardExtruderSpacing()+HotEndDiam(3dPrinterTolerance);
+function HEscrewvector(3dPrinterTolerance=.4) = [ExtruderWidth(.4)/2+HotEndRecessOffset()+HiLoScrewDiameter(.4)/2,-HotEndDiam()/2-HiLoScrewDiameter(.4)/4,-ExtruderHeight(.4)+HiLoScrewLength(.4)/2+HiLoScrewHeadHeight(.4)-.1];
 
 function CounterboreRad(3dPrinterTolerance=.4) = HiLoScrewHeadDiameter(3dPrinterTolerance)/2+.5;
 
@@ -45,8 +46,10 @@ module ExtruderBlock(3dPrinterTolerance=.4)
 		translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,MagnetLength()-ExtruderIdlerWheelThickness()*3+1]){cylinder(h=608BallBearingHeight(3dPrinterTolerance)+ExtruderIdlerWheelThickness(),r=(608BallBearingDiam()+.04)/2);}
 		translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,ExtruderHeight()/2-ExtruderIdlerWheelThickness()*2.25]){608BallBearing();}
 		//translate([0,-ExtruderWidth()/2-608BallBearingDiam(3dPrinterTolerance)/5,-ExtruderHeight()]){cube([100,20,100]);}
-//the hot end:
+//the hot end and its securing screws:
 		translate([ExtruderWidth()/2,0,ExtruderHeight()]){rotate([0,90,0]){HotEnd(true,.4);}}
+		translate(HEscrewvector(.4)){rotate([0,180,0]){#HiLoScrew(.4);}}
+		mirror ([0,1,0]){translate(HEscrewvector()){rotate([0,180,0]){#HiLoScrew(.4);}}}
 //the filament channel:
 		rotate([0,90,0]){translate([-ExtruderHeight(),0,-ExtruderLength()/2-2]){Filament();}}
 		rotate([0,90,0]){translate([-ExtruderHeight(),0,-ExtruderLength()/2-2]){cylinder(FilamentHeight()/4,FilamentDiam()*4,FilamentDiam()/2);}}
@@ -61,7 +64,6 @@ module ExtruderBlock(3dPrinterTolerance=.4)
 		translate([ExtruderIdlerWheelDiam()/2.5,-ExtruderIdlerWheelDiam()/2,-1]){cylinder(h=MagnetLength(3dPrinterTolerance)*2, r=608BallBearingInnerDiam(-3dPrinterTolerance)/2);}
 //The hole for the servo connector:
 		translate([-ExtruderIdlerWheelDiam(3dPrinterTolerance)/4-1,-StandardServoThickness()/2-1,ConnectorLength()/2]){rotate([0,90,90]){ServoConnector(.4);}}
-
 	}
 }
 
@@ -87,7 +89,7 @@ module Extruder(servo=true, 3dPrinterTolerance=.4)
 }
 Extruder(false,.4);
 
-translate([0,ExtruderWidth()*1.5,ExtruderHeight()]){mirror([0,0,90]){Extruder(true,.4);};}
+translate([0,ExtruderWidth()*1.25,ExtruderHeight()]){mirror([0,0,90]){Extruder(true,.4);};}
 				
 			
 
