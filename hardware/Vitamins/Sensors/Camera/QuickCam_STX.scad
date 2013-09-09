@@ -1,13 +1,13 @@
 $fn = 60;
 
 function getNubRadius() =1.3;
-function getPinHeight() = 9;
+function getPinHeight() = 11;
 function getFlangeWidth(tolerance)= 2.3 + tolerance;
 function getFlangeLength(tolerance)= 6.64 + tolerance;
 function getQuickCamRadius(tolerance)= 55.93/2 +tolerance;
 function getLandingPadThickness() = 5;
-function getUsbWidth() = 8.5;
-function getUsbHeight()=16.5;
+function getUsbWidth() = 9.5;
+function getUsbHeight()=17.5;
 
 module CameraMount( 3dPrinterTolerance=.4)
 {
