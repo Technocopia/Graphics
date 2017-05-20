@@ -35,6 +35,7 @@ CSG kc = simpleSyntax
 				.toZMin()
 				.movez(thickness/2)
 		)
+		.scale(1.1)
 		.hull()
 		.difference(stub.movez(1.5))
 		.difference(hole)
