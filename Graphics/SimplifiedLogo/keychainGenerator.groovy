@@ -21,7 +21,7 @@ simpleSyntax= simpleSyntax
 			.union(nub)
 			.hull()
 CSG hole =new Cylinder(holeRad,holeRad,thickness*3,(int)30).toCSG() // a one line Cylinder	
-			.movey(rad+holeRad/2+diff*2)
+			.movey((rad+holeRad/2+diff*2)*1.1)
 
 stub = stub
 		.movez(thickness/2)
