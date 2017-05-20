@@ -36,6 +36,6 @@ CSG kc = simpleSyntax
 				.movez(thickness/2)
 		)
 		.hull()
-		.union(stub.movez(0.3))
+		.union(stub.movez(1))
 		.difference(hole)
 return  kc 
