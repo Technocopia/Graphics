@@ -8,8 +8,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    viewBox="0 0 484.20076 673.01151"
-   height="717.87897"
-   width="516.48083"
+   height="189.93881mm"
+   width="136.65222mm"
    xml:space="preserve"
    id="svg2"
    version="1.1"
@@ -33,11 +33,13 @@
      inkscape:window-x="1200"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" /><metadata
+     fit-margin-bottom="0"
+     units="mm"
+     inkscape:document-units="mm" /><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
